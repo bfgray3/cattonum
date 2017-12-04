@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
+.Rprofile
+^cran-comments\.md$
+^README\.Rmd$
+^README-.*\.png$
+^codecov\.yml$
+^cran-comments\.md$
+^appveyor\.yml$
+^LICENSE\.md$

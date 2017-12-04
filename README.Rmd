@@ -1,0 +1,31 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+```
+
+# cattonum
+
+[![Build Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=master)](https://travis-ci.org/bfgray3/cattonum)
+
+`cattonum` (cat to num) TODO.
+
+## Installation
+
+You can install `cattonum` from GitHub.
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("bfgray3/cattonum")
+```
+
+## Example
+

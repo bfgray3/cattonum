@@ -1,0 +1,22 @@
+Type: Package
+Package: cattonum
+Version: 0.0.0.9000
+Title: TODO
+Description: TODO
+Authors@R: person("Bernie",
+                  "Gray",
+                  email = "bfgray3@gmail.com",
+                  role = c("aut", "cre"))
+URL: https://github.com/bfgray3/cattonum
+BugReports: https://github.com/bfgray3/cattonum/issues
+Encoding: UTF-8
+Depends: R (>= 3.2.0)
+Imports: 
+LazyData: true
+License: MIT + file LICENSE
+Suggests: testthat,
+    knitr,
+    rmarkdown,
+    covr
+RoxygenNote: 6.0.1
+VignetteBuilder: knitr
