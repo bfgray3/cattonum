@@ -3,7 +3,7 @@
 ####################
 
 colname_list <- function(.nms) {
-  paste(sQuote(.nms), collapse = ", ")
+  paste(paste0("'", .nms, "'"), collapse = ", ")
 }
 
 #################
@@ -31,8 +31,11 @@ pick_cols <- function(.df, ...) {
 ########################
 
 nonexistent_cols <- function(.nms, ...) {
-  supplied <- vapply(eval(substitute(alist(...))), as.character, character(1L))
-  setdiff(supplied, .nms)
+  supplied_symbols <- eval(substitute(alist(...)))
+  supplied_nms <- vapply(supplied_symbols,
+                         as.character,
+                         character(1L))
+  setdiff(supplied_nms, .nms)
 }
 
 ################
@@ -43,15 +46,6 @@ all_cats <- function(.df) {
   nms <- names(.df)
   cats <- vapply(.df, Negate(is.numeric), logical(1L))
   nms[cats]
-}
-
-#################
-### ignore_na ###
-#################
-
-ignore_na <- function(.f) {
-  if (! identical(.f, length)) function(...) .f(...,  na.rm = TRUE)
-  else .f
 }
 
 ###
