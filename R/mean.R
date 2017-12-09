@@ -4,11 +4,11 @@
 
 encode_no_new_cols <- function(fun = mean) {
 
-  function(df, response, ...) {
+  function(df, ..., response) {
     nms <- names(df)
 
     if (missing(response)) {
-      response <- nms[1]
+      response <- nms[1L]
       message("`response` not supplied; using first column '",
               response, "' as the response variable.")
     }

@@ -3,7 +3,7 @@
 #################
 
 pick_cols <- function(.df, ...) {
-  if (length(substitute(alist(...))) == 1) all_cats(.df)
+  if (length(substitute(alist(...))) == 1L) all_cats(.df)
   else tidyselect::vars_select(names(.df), ...)
 }
 
@@ -13,7 +13,7 @@ pick_cols <- function(.df, ...) {
 
 all_cats <- function(.df) {
   nms <- names(.df)
-  cats <- vapply(.df, Negate(is.numeric), logical(1))
+  cats <- vapply(.df, Negate(is.numeric), logical(1L))
   nms[cats]
 }
 
