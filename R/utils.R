@@ -4,7 +4,7 @@
 
 pick_cols <- function(.df, ...) {
   if (length(substitute(alist(...))) == 1) all_cats(.df)
-  else intersect(names(.df), tidyselect::vars_select(...))
+  else tidyselect::vars_select(names(.df), ...)
 }
 
 ################
@@ -21,9 +21,9 @@ all_cats <- function(.df) {
 ### ignore_na ###
 #################
 
-ignore_na <- function(f) {
-  if (! identical(f, length)) function(...) f(...,  na.rm = TRUE)
-  else f
+ignore_na <- function(.f) {
+  if (! identical(.f, length)) function(...) .f(...,  na.rm = TRUE)
+  else .f
 }
 
 ###
