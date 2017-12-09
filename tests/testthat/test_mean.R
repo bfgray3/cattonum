@@ -20,7 +20,7 @@ test_that("catto_mean works.", {
   ### ALL CATEGORICAL COLUMNS ###
 
   mean_fact <- catto_mean(df_fact, response = "y")
-  mean_char <- catto_mean(df_char, response = "y")
+  mean_char <- catto_mean(df_char, response = y)
 
   expected_df_both <- data.frame(y = y,
                                  x1 = c(7, 5, 7, 5, 7),

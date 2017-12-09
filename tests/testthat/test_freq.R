@@ -20,7 +20,7 @@ test_that("catto_freq works.", {
   ### ALL CATEGORICAL COLUMNS ###
 
   freq_fact <- catto_freq(df_fact, response = "y")
-  freq_char <- catto_freq(df_char, response = "y")
+  freq_char <- catto_freq(df_char, response = y)
 
   expected_df_both <- data.frame(y = y,
                                  x1 = c(3, 2, 3, 2, 3),
