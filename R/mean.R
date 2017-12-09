@@ -20,7 +20,10 @@ encode_no_new_cols <- function(fun = mean) {
     cats <- pick_cols(df, ...)
     df[cats] <- lapply(df[cats], f)
 
-    as.matrix(df)
+    all_numerics <- all(vapply(df, is.numeric, logical(1)))
+
+    if (all_numerics) as.matrix(df)
+    else df
 
     }
 
