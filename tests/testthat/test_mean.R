@@ -19,20 +19,25 @@ test_that("catto_mean works.", {
 
   ### ALL CATEGORICAL COLUMNS ###
 
-  mean_fact <- catto_mean(df_fact, response = "y")
-  mean_char <- catto_mean(df_char, response = y)
+  mean_fact1 <- catto_mean(df_fact, response = "y")
+  mean_fact2 <- catto_mean(df_fact, x1, x2, response = y)
+  mean_fact3 <- catto_mean(df_fact, c(x1, x2), response = y)
+  mean_fact4 <- catto_mean(df_fact, c("x1", "x2"), response = "y")
+  mean_char1 <- catto_mean(df_char, response = "y")
+  mean_char2 <- catto_mean(df_char, x1, x2, response = y)
+  mean_char3 <- catto_mean(df_char, c(x1, x2), response = y)
+  mean_char4 <- catto_mean(df_char, c("x1", "x2"), response = "y")
 
   expected_df_both <- data.frame(y = y,
                                  x1 = c(8.5, 5, NA, 5, 8.5),
                                  x2 = c(7 / 3, 7 / 3, 7 / 3, 12, 12))
   expected_both <- as.matrix(expected_df_both)
-  char_and_fact <- list(mean_fact, mean_char)
+  result_names <- c(paste0("mean_fact", seq_len(4)), paste0("mean_char", seq_len(4)))
+  char_and_fact <- mget(result_names)
 
   for (m in char_and_fact) {
 
     expect_is(m, "matrix")
-    expect_equal(dim(m), c(5, 3))
-    expect_identical(colnames(m), c("y", "x1", "x2"))
     expect_equal(m, expected_both)
 
   }
@@ -46,8 +51,6 @@ test_that("catto_mean works.", {
   for (result in char_and_bare) {
 
     expect_is(result, "data.frame")
-    expect_equal(dim(result), c(5, 3))
-    expect_identical(names(result), c("y", "x1", "x2"))
     expect_equal(result, expected_x1_only)
 
   }
@@ -56,8 +59,6 @@ test_that("catto_mean works.", {
   expect_message(no_response <- catto_mean(df_fact, x1),
                  paste("`response` not supplied; using first column",
                        "'y' as the response variable."))
-  expect_equal(dim(no_response), c(5, 3))
-  expect_identical(names(no_response), c("y", "x1", "x2"))
   expect_equal(no_response, expected_x1_only)
 
 })
