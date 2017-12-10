@@ -34,9 +34,7 @@ encode_no_new_cols <- function(.fun = function(...) mean(..., na.rm = TRUE)) {
     cats <- pick_cols(df, ...)
     df[cats] <- lapply(df[cats], ave_na, .x = df[[response]], .f = .fun)
 
-    all_numerics <- all(vapply(df, is.numeric, logical(1)))
-
-    if (all_numerics) as.matrix(df) else df
+    mat_or_df(df)
 
   }
 
