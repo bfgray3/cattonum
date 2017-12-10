@@ -1,3 +1,12 @@
+#################
+### mat_or_df ###
+#################
+
+mat_or_df <- function(.df) {
+  all_numerics <- all(vapply(.df, is.numeric, logical(1)))
+  if (all_numerics) as.matrix(.df) else .df
+}
+
 #####################
 ### validate_cols ###
 #####################
