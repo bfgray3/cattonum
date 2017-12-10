@@ -36,6 +36,7 @@ model_matrix <- function(.df, .cols = names(.df)) {
                             contrasts.arg = lapply(.df[.cols], contrasts, contrasts = FALSE))
   attr(mm, "contrasts") <- NULL
   attr(mm, "assign") <- NULL
+  rownames(mm) <- NULL
   mm
 }
 
