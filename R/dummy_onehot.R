@@ -44,16 +44,16 @@ model_matrix <- function(.df, .cols = names(.df)) {
 ### catto_onehot ###
 ####################
 
-catto_onehot <- function(df, ...) {
+catto_onehot <- function(dataframe, ...) {
 
-  validate_cols(df)
+  validate_col_types(dataframe)
 
-  cats <- pick_cols(df, ...)
+  cats <- pick_cols(dataframe, ...)
 
-  df_cat <- df[cats]
-  df_keep <- df[setdiff(names(df), cats)]
+  df_cat <- dataframe[cats]
+  df_keep <- dataframe[setdiff(names(dataframe), cats)]
 
-  rm(df)
+  rm(dataframe)
 
   df_cat <- model_matrix(df_cat)
 

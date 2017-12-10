@@ -14,11 +14,11 @@ ave_na <- function(.grouping, .x, .f) {
 
 encode_no_new_cols <- function(.fun = function(...) mean(..., na.rm = TRUE)) {
 
-  function(df, ..., response, verbose = TRUE) {
+  function(dataframe, ..., response, verbose = TRUE) {
 
-    validate_cols(df)
+    validate_col_types(dataframe)
 
-    nms <- names(df)
+    nms <- names(dataframe)
 
     if (missing(response)) {
       response <- nms[1L]
@@ -31,10 +31,13 @@ encode_no_new_cols <- function(.fun = function(...) mean(..., na.rm = TRUE)) {
       response <- if (is.name(subs_resp)) deparse(subs_resp) else subs_resp
     }
 
-    cats <- pick_cols(df, ...)
-    df[cats] <- lapply(df[cats], ave_na, .x = df[[response]], .f = .fun)
+    cats <- pick_cols(dataframe, ...)
+    dataframe[cats] <- lapply(dataframe[cats],
+                              ave_na,
+                              .x = dataframe[[response]],
+                              .f = .fun)
 
-    mat_or_df(df)
+    mat_or_df(dataframe)
 
   }
 
