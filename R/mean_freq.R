@@ -20,7 +20,9 @@ encode_no_new_cols <- function(fun = function(...) mean(..., na.rm = TRUE)) {
     }
 
     f <- function(column) {
-      stats::ave(df[[response]], column, FUN = fun)
+      nas <- is.na(column)
+      summarized <- stats::ave(df[[response]], column, FUN = fun)
+      replace(summarized, nas, NA_real_)
     }
 
     cats <- pick_cols(df, ...)

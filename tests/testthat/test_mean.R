@@ -5,7 +5,7 @@ context("mean encoding")
 #############
 
 y <- 2 ^ seq(from = 0, to = 4)
-x1 <- c("a", "b", "a", "b", "a")
+x1 <- c("a", "b", NA, "b", "a")
 x2 <- c("c", "c", "c", "d", "d")
 
 df_fact <- data.frame(y, x1, x2)
@@ -23,7 +23,7 @@ test_that("catto_mean works.", {
   mean_char <- catto_mean(df_char, response = y)
 
   expected_df_both <- data.frame(y = y,
-                                 x1 = c(7, 5, 7, 5, 7),
+                                 x1 = c(8.5, 5, NA, 5, 8.5),
                                  x2 = c(7 / 3, 7 / 3, 7 / 3, 12, 12))
   expected_both <- as.matrix(expected_df_both)
   char_and_fact <- list(mean_fact, mean_char)
@@ -39,9 +39,9 @@ test_that("catto_mean works.", {
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
 
-  expected_x1_only <- data.frame(y, x1 = c(7, 5, 7, 5, 7), x2)
+  expected_x1_only <- data.frame(y, x1 = c(8.5, 5, NA, 5, 8.5), x2)
   char_and_bare <- list(catto_mean(df_fact, "x1", response = "y"),
-                        catto_mean(df_fact, x1, response = "y"))
+                        catto_mean(df_fact, x1, response = y))
 
   for (result in char_and_bare) {
 

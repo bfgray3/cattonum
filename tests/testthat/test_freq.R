@@ -5,7 +5,7 @@ context("frequency encoding")
 #############
 
 y <- 2 ^ seq(from = 0, to = 4)
-x1 <- c("a", "b", "a", "b", "a")
+x1 <- c("a", "b", NA, "b", "a")
 x2 <- c("c", "c", "c", "d", "d")
 
 df_fact <- data.frame(y, x1, x2)
@@ -23,7 +23,7 @@ test_that("catto_freq works.", {
   freq_char <- catto_freq(df_char, response = y)
 
   expected_df_both <- data.frame(y = y,
-                                 x1 = c(3, 2, 3, 2, 3),
+                                 x1 = c(2, 2, NA, 2, 2),
                                  x2 = c(3, 3, 3, 2, 2))
   expected_both <- as.matrix(expected_df_both)
   char_and_fact <- list(freq_fact, freq_char)
@@ -39,9 +39,9 @@ test_that("catto_freq works.", {
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
 
-  expected_x1_only <- data.frame(y, x1 = c(3, 2, 3, 2, 3), x2)
+  expected_x1_only <- data.frame(y, x1 = c(2, 2, NA, 2, 2), x2)
   char_and_bare <- list(catto_freq(df_fact, "x1", response = "y"),
-                        catto_freq(df_fact, x1, response = "y"))
+                        catto_freq(df_fact, x1, response = y))
 
   for (result in char_and_bare) {
 
