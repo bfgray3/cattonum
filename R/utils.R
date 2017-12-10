@@ -1,3 +1,24 @@
+#####################
+### validate_cols ###
+#####################
+
+validate_cols <- function(.df) {
+  good_cols <- vapply(.df, good_col_type, logical(1L))
+  if (! all(good_cols)) {
+    bad_cols <- names(df)[! good_cols]
+    stop("All columns must be numeric, character, or factor. ",
+         colname_list(bad_cols), " are not", call. = FALSE)
+  }
+}
+
+#####################
+### good_col_type ###
+#####################
+
+good_col_type <- function(.column) {
+  is.numeric(.column) || is.factor(.column) || is.character(.column)
+}
+
 ####################
 ### colname_list ###
 ####################

@@ -1,10 +1,22 @@
+##############
+### ave_na ###
+##############
+
+ave_na <- function(.grouping, .x, .f) {
+  nas <- is.na(.grouping)
+  summarized <- stats::ave(.x, .grouping, FUN = .f)
+  replace(summarized, nas, NA)
+}
+
 ##########################
 ### encode_no_new_cols ###
 ##########################
 
-encode_no_new_cols <- function(fun = function(...) mean(..., na.rm = TRUE)) {
+encode_no_new_cols <- function(.fun = function(...) mean(..., na.rm = TRUE)) {
 
   function(df, ..., response, verbose = TRUE) {
+
+    validate_cols(df)
 
     nms <- names(df)
 
@@ -19,19 +31,12 @@ encode_no_new_cols <- function(fun = function(...) mean(..., na.rm = TRUE)) {
       response <- if (is.name(subs_resp)) deparse(subs_resp) else subs_resp
     }
 
-    f <- function(column) {
-      nas <- is.na(column)
-      summarized <- stats::ave(df[[response]], column, FUN = fun)
-      replace(summarized, nas, NA_real_)
-    }
-
     cats <- pick_cols(df, ...)
-    df[cats] <- lapply(df[cats], f)
+    df[cats] <- lapply(df[cats], ave_na, .x = df[[response]], .f = .fun)
 
     all_numerics <- all(vapply(df, is.numeric, logical(1)))
 
-    if (all_numerics) as.matrix(df)
-    else df
+    if (all_numerics) as.matrix(df) else df
 
   }
 
@@ -47,6 +52,6 @@ catto_mean <- encode_no_new_cols()
 ### catto_freq ###
 ##################
 
-catto_freq <- encode_no_new_cols(fun = length)
+catto_freq <- encode_no_new_cols(.fun = length)
 
 ###
