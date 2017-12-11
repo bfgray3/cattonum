@@ -24,8 +24,8 @@ validate_col_types <- function(.df) {
 ### good_col_type ###
 #####################
 
-good_col_type <- function(.column) {
-  is.numeric(.column) || is.factor(.column) || is.character(.column)
+good_col_type <- function(.x) {
+  is.numeric(.x) || is.factor(.x) || is.character(.x)
 }
 
 ####################
@@ -72,6 +72,14 @@ all_cats <- function(.df) {
   nms <- names(.df)
   cats <- vapply(.df, Negate(is.numeric), logical(1L))
   nms[cats]
+}
+
+#######################
+### ordered_by_freq ###
+#######################
+
+ordered_by_freq <- function(.x, .decr = FALSE) {
+  names(sort(table(.x), decreasing = .decr))
 }
 
 ###

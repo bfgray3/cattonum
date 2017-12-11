@@ -11,16 +11,16 @@ make_form <- function(.vars) {
 ### to_factor ###
 #################
 
-to_factor <- function(.column) {
-  if (is.factor(.column)) {
-    if (anyNA(.column)) {
-      levels(.column) <- append(levels(.column), "NA")
-      .column[is.na(.column)] <- "NA"
+to_factor <- function(.x) {
+  if (is.factor(.x)) {
+    if (anyNA(.x)) {
+      levels(.x) <- append(levels(.x), "NA")
+      .x[is.na(.x)] <- "NA"
     }
-    .column
+    .x
   } else {
-    .column[is.na(.column)] <- "NA"
-    factor(.column)
+    .x[is.na(.x)] <- "NA"
+    factor(.x)
   }
 }
 
