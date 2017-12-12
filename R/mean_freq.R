@@ -29,8 +29,7 @@ catto_mean <- function(dataframe,
               response, "' as the response variable.")
     }
   } else {
-    subs_resp <- substitute(response)
-    response <- if (is.name(subs_resp)) deparse(subs_resp) else subs_resp
+    response <- tidyselect::vars_select(nms, !! rlang::enquo(response))
   }
 
   cats <- pick_cols(dataframe, ...)

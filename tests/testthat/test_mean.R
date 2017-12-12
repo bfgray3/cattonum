@@ -4,6 +4,7 @@ context("mean encoding")
 ### SETUP ###
 #############
 
+resp_name <- "y"
 y <- 2 ^ seq(from = 0, to = 4)
 x1 <- c("a", "b", NA, "b", "a")
 x2 <- c("c", "c", "c", "d", "d")
@@ -22,7 +23,7 @@ test_that("catto_mean works.", {
   mean_fact1 <- catto_mean(df_fact, response = "y")
   mean_fact2 <- catto_mean(df_fact, x1, x2, response = y)
   mean_fact3 <- catto_mean(df_fact, c(x1, x2), response = y)
-  mean_fact4 <- catto_mean(df_fact, c("x1", "x2"), response = "y")
+  mean_fact4 <- catto_mean(df_fact, c("x1", "x2"), response = resp_name)
   mean_fact5 <- catto_mean(df_fact, tidyselect::one_of(c("x1", "x2")))
   mean_fact6 <- catto_mean(df_fact, tidyselect::one_of("x1", "x2"))
   mean_char1 <- catto_mean(df_char, response = "y")
