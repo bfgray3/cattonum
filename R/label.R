@@ -41,6 +41,7 @@ catto_label <- function(train,
                                      "decreasing",
                                      "observed",
                                      "random"),
+                        test,
                         verbose = TRUE) {
 
   validate_col_types(train)

@@ -44,7 +44,7 @@ model_matrix <- function(.df, .cols = names(.df)) {
 ### catto_onehot ###
 ####################
 
-catto_onehot <- function(train, ...) {
+catto_onehot <- function(train, ..., test) {
 
   validate_col_types(train)
 

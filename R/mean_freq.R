@@ -15,6 +15,7 @@ ave_na <- function(.grouping, .x, .f) {
 catto_mean <- function(train,
                        ...,
                        response,
+                       test,
                        rm_na = TRUE,
                        verbose = TRUE) {
 
@@ -46,7 +47,7 @@ catto_mean <- function(train,
 ### catto_freq ###
 ##################
 
-catto_freq <-  function(train, ..., verbose = TRUE) {
+catto_freq <-  function(train, ..., test, verbose = TRUE) {
 
   validate_col_types(train)
 
