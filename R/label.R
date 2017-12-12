@@ -7,8 +7,8 @@ ordering_fun <- function(.method) {
   switch(.method,
          increasing = function(...) ordered_by_freq(..., .decr = FALSE),
          decreasing = function(...) ordered_by_freq(..., .decr = TRUE),
-         observed = unique,
-         random = sample)
+         observed = function(...) unique(na.omit(...)),
+         random = function(...) sample(unique(na.omit(...))))
 
 }
 
