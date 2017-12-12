@@ -1,15 +1,28 @@
-# TODO: add support for reverse ordered, random, observed ordered labels
+####################
+### ordering_fun ###
+####################
+
+ordering_fun <- function(.method) {
+
+  switch(.method,
+         increasing = function(...) ordered_by_freq(..., .decr = FALSE),
+         decreasing = function(...) ordered_by_freq(..., .decr = TRUE),
+         observed = unique,
+         random = sample)
+
+}
 
 ######################
 ### ordered_labels ###
 ######################
 
-ordered_labels <- function(.decreasing) {
+ordered_labels <- function(.type) {
 
   function(.x) {
 
     if (is.factor(.x)) .x <- as.character(.x)
-    ordered_labs <- ordered_by_freq(.x, .decreasing)
+    order_fun <- ordering_fun(.type)
+    ordered_labs <- order_fun(.x)
     lkp <- data.frame(new_lab = seq_along(ordered_labs),
                       row.names = ordered_labs)
     lkp[.x, ]
@@ -17,46 +30,6 @@ ordered_labels <- function(.decreasing) {
   }
 
 }
-
-#####################
-### random_labels ###
-#####################
-
-random_labels <- function(.x, seed = 4444) {
-
-  if (is.factor(.x)) .x <- as.character(.x)
-  ordered_labs <- sample(.x)
-  lkp <- data.frame(new_lab = seq_along(ordered_labs),
-                    row.names = ordered_labs)
-  lkp[.x, ]
-
-}
-
-#########################
-### appearance_labels ###
-#########################
-
-random_labels <- function(.x) {
-
-  if (is.factor(.x)) .x <- as.character(.x)
-  ordered_labs <- unique(.x)
-  lkp <- data.frame(new_lab = seq_along(ordered_labs),
-                    row.names = ordered_labs)
-  lkp[.x, ]
-
-}
-
-###################
-### incr_labels ###
-###################
-
-incr_labels <- ordered_labels(FALSE)
-
-###################
-### decr_labels ###
-###################
-
-decr_labels <- ordered_labels(TRUE)
 
 ###################
 ### catto_label ###
@@ -76,14 +49,8 @@ catto_label <- function(train,
 
   ordering <- match.arg(ordering)
 
-  label_maker <- switch(ordering,
-                        increasing = incr_labels,
-                        decreasing = decr_labels,
-                        observed = appearance_labels,
-                        random = random_labels)
-
   cats <- pick_cols(train, ...)
-  train[cats] <- lapply(train[cats], label_maker)
+  train[cats] <- lapply(train[cats], ordered_labels(ordering))
 
   mat_or_df(train)
 
