@@ -62,7 +62,7 @@ decr_labels <- ordered_labels(TRUE)
 ### catto_label ###
 ###################
 
-catto_label <- function(dataframe,
+catto_label <- function(train,
                         ...,
                         ordering = c("increasing",
                                      "decreasing",
@@ -70,9 +70,9 @@ catto_label <- function(dataframe,
                                      "random"),
                         verbose = TRUE) {
 
-  validate_col_types(dataframe)
+  validate_col_types(train)
 
-  nms <- names(dataframe)
+  nms <- names(train)
 
   ordering <- match.arg(ordering)
 
@@ -82,10 +82,10 @@ catto_label <- function(dataframe,
                         observed = appearance_labels,
                         random = random_labels)
 
-  cats <- pick_cols(dataframe, ...)
-  dataframe[cats] <- lapply(dataframe[cats], label_maker)
+  cats <- pick_cols(train, ...)
+  train[cats] <- lapply(train[cats], label_maker)
 
-  mat_or_df(dataframe)
+  mat_or_df(train)
 
 }
 

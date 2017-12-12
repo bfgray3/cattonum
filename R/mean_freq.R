@@ -12,15 +12,15 @@ ave_na <- function(.grouping, .x, .f) {
 ### catto_mean ###
 ##################
 
-catto_mean <- function(dataframe,
+catto_mean <- function(train,
                        ...,
                        response,
                        rm_na = TRUE,
                        verbose = TRUE) {
 
-  validate_col_types(dataframe)
+  validate_col_types(train)
 
-  nms <- names(dataframe)
+  nms <- names(train)
 
   if (missing(response)) {
     response <- nms[1L]
@@ -32,13 +32,13 @@ catto_mean <- function(dataframe,
     response <- tidyselect::vars_select(nms, !! rlang::enquo(response))
   }
 
-  cats <- pick_cols(dataframe, ...)
-  dataframe[cats] <- lapply(dataframe[cats],
+  cats <- pick_cols(train, ...)
+  train[cats] <- lapply(train[cats],
                             ave_na,
-                            .x = dataframe[[response]],
+                            .x = train[[response]],
                             .f = function(...) mean(..., na.rm = rm_na))
 
-  mat_or_df(dataframe)
+  mat_or_df(train)
 
 }
 
@@ -46,19 +46,19 @@ catto_mean <- function(dataframe,
 ### catto_freq ###
 ##################
 
-catto_freq <-  function(dataframe, ..., verbose = TRUE) {
+catto_freq <-  function(train, ..., verbose = TRUE) {
 
-  validate_col_types(dataframe)
+  validate_col_types(train)
 
-  nms <- names(dataframe)
+  nms <- names(train)
 
-  cats <- pick_cols(dataframe, ...)
-  dataframe[cats] <- lapply(dataframe[cats],
+  cats <- pick_cols(train, ...)
+  train[cats] <- lapply(train[cats],
                             ave_na,
-                            .x = dataframe[[1L]],
+                            .x = train[[1L]],
                             .f = length)
 
-  mat_or_df(dataframe)
+  mat_or_df(train)
 
 }
 
