@@ -14,7 +14,7 @@ mat_or_df <- function(.df) {
 validate_col_types <- function(.df) {
   good_cols <- vapply(.df, good_col_type, logical(1L))
   if (! all(good_cols)) {
-    bad_cols <- names(df)[! good_cols]
+    bad_cols <- names(.df)[! good_cols]
     stop("All columns must be numeric, character, or factor. ",
          colname_list(bad_cols), " are not", call. = FALSE)
   }

@@ -37,15 +37,17 @@ catto_loo <- function(train,
 
   cats <- pick_cols(train, ...)
 
+  if (test_also) {
+    # unneccessarily encodes training data with means
+    test <- catto_mean(train, cats, response = response, test = test)[["test"]]
+  }
+
   train[cats] <- lapply(train[cats], loo_labeler, .y = train[[response]])
 
   if (! test_also) {
     mat_or_df(train)
   } else {
-    # unneccessarily encodes training data with means
-    test <- catto_mean(train, cats, response = response, test = train)[["test"]]
-    # unnecessarily recalls mat_or_df on test
-    lapply(list(train = train, test = test), mat_or_df)
+    list(train = mat_or_df(train), test = test)
   }
 
 }

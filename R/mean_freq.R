@@ -17,7 +17,6 @@ catto_mean <- function(train,
                        ...,
                        response,
                        test,
-                       rm_na = TRUE,
                        verbose = TRUE) {
 
   validate_col_types(train)

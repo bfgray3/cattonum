@@ -11,17 +11,14 @@ x2 <- c("c", "c", "c", "d", "d")
 df_fact <- data.frame(y, x1, x2)
 df_char <- data.frame(y, x1, x2, stringsAsFactors = FALSE)
 
-test_df <- data.frame(y = y,
-                      x1 = c(NA, NA, "a", "b", "b"),
-                      x2 = c("d", NA, NA, "c", "c"))
+expected_df_both <- data.frame(y = y,
+                               x1 = c(2, 2, NA, 2, 2),
+                               x2 = c(3, 3, 3, 2, 2))
+expected_both <- as.matrix(expected_df_both)
 
-encoded_test <- data.frame(y = y,
-                           x1 = c(NA, NA, 2, 2, 2),
-                           x2 = c(2, NA, NA, 3, 3))
-
-##########################
-### FREQUENCY ENCODING ###
-##########################
+##################
+### TRAIN DATA ###
+##################
 
 test_that("catto_freq correctly encodes train data.", {
 
@@ -40,16 +37,10 @@ test_that("catto_freq correctly encodes train data.", {
   freq_char5 <- catto_freq(df_fact, tidyselect::one_of(c("x1", "x2")))
   freq_char6 <- catto_freq(df_fact, tidyselect::one_of("x1", "x2"))
 
-  expected_df_both <- data.frame(y = y,
-                                 x1 = c(2, 2, NA, 2, 2),
-                                 x2 = c(3, 3, 3, 2, 2))
-  expected_both <- as.matrix(expected_df_both)
   result_names <- c(paste0("freq_fact", seq_len(6)), paste0("freq_char", seq_len(6)))
   char_and_fact <- mget(result_names)
 
-  for (m in char_and_fact) {
-    expect_equal(m, expected_both)
-  }
+  for (m in char_and_fact) expect_equal(m, expected_both)
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
 
@@ -59,18 +50,26 @@ test_that("catto_freq correctly encodes train data.", {
                         catto_freq(df_fact,
                                    tidyselect::one_of("x1")))
 
-  for (result in char_and_bare) {
-    expect_equal(result, expected_x1_only)
-  }
+  for (result in char_and_bare) expect_equal(result, expected_x1_only)
 
 })
 
+##################
+### TEST DATA ###
+##################
+
 test_that("catto_freq correctly encodes test data.", {
-  expected_df_both <- data.frame(y = y,
-                                 x1 = c(2, 2, NA, 2, 2),
-                                 x2 = c(3, 3, 3, 2, 2))
+
+  test_df <- data.frame(y = y,
+                        x1 = c(NA, NA, "a", "b", "b"),
+                        x2 = c("d", NA, NA, "c", "c"))
+
+  encoded_test <- data.frame(y = y,
+                             x1 = c(NA, NA, 2, 2, 2),
+                             x2 = c(2, NA, NA, 3, 3))
+
   expect_equal(catto_freq(df_fact, test = test_df),
-               list(train = as.matrix(expected_df_both), test = as.matrix(encoded_test)))
+               list(train = expected_both, test = as.matrix(encoded_test)))
 
 })
 
