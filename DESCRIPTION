@@ -19,6 +19,7 @@ License: MIT + file LICENSE
 Suggests: testthat,
     knitr,
     rmarkdown,
-    covr
+    covr,
+    styler
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
