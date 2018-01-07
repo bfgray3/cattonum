@@ -58,7 +58,7 @@ catto_label <- function(train,
     mat_or_df(train)
   } else {
     test[cats] <- encode_from_lkp(test[cats], encoding_lkps)
-    list(train = train, test = test)
+    lapply(list(train = train, test = test), mat_or_df)
   }
 
 }

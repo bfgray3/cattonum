@@ -12,6 +12,14 @@ x2 <- c("c", "c", "c", "d", "d")
 df_fact <- data.frame(y, x1, x2)
 df_char <- data.frame(y, x1, x2, stringsAsFactors = FALSE)
 
+test_df <- data.frame(y = y,
+                      x1 = c(NA, NA, "a", "b", "b"),
+                      x2 = c("d", NA, NA, "c", "c"))
+
+encoded_test <- data.frame(y = y,
+                           x1 = c(NA, NA, 8.5, 5, 5),
+                           x2 = c(12, NA, NA, 7 / 3, 7 / 3))
+
 #####################
 ### MEAN ENCODING ###
 #####################
@@ -72,4 +80,13 @@ test_that("catto_mean works.", {
 
 })
 
+
+test_that("catto_mean correctly encodes test data.", {
+  expected_df_both <- data.frame(y = y,
+                                 x1 = c(8.5, 5, NA, 5, 8.5),
+                                 x2 = c(7 / 3, 7 / 3, 7 / 3, 12, 12))
+  expect_equal(catto_mean(df_fact, test = test_df),
+               list(train = as.matrix(expected_df_both), test = as.matrix(encoded_test)))
+
+})
 ###

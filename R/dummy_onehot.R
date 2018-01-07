@@ -31,9 +31,9 @@ to_factor <- function(.x) {
 model_matrix <- function(.df, .cols = names(.df)) {
   .df[.cols] <- lapply(.df[.cols], to_factor)
   form <- make_form(.cols)
-  mm <- stats::model.matrix(form,
-                            stats::model.frame(form, data = .df),
-                            contrasts.arg = lapply(.df[.cols], contrasts, contrasts = FALSE))
+  mf <- stats::model.frame(form, data = .df)
+  cs <- lapply(.df[.cols], contrasts, contrasts = FALSE)
+  mm <- stats::model.matrix(form, mf, contrasts.arg = cs)
   attr(mm, "contrasts") <- NULL
   attr(mm, "assign") <- NULL
   rownames(mm) <- NULL
@@ -47,6 +47,8 @@ model_matrix <- function(.df, .cols = names(.df)) {
 catto_onehot <- function(train, ..., test) {
 
   validate_col_types(train)
+  test_also <- ! missing(test)
+  if (test_also) check_train_test(train, test)
 
   cats <- pick_cols(train, ...)
 

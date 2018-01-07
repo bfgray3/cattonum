@@ -35,7 +35,7 @@ order_df <- data.frame(y = y,
 ### LABEL ENCODING ###
 ######################
 
-test_that("catto_label works.", {
+test_that("catto_label correctly encodes train data.", {
 
   order_options <- c("increasing",
                      "decreasing",
@@ -112,7 +112,7 @@ test_that("catto_label works.", {
 test_that("catto_label correctly encodes test data.", {
 
   expect_equal(catto_label(df_fact, test = test_df),
-                 list(train = incr_df, test = encoded_test))
+                 list(train = as.matrix(incr_df), test = as.matrix(encoded_test)))
 })
 
 ###
