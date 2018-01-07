@@ -1,11 +1,12 @@
-##############
-### ave_na ###
-##############
+####################
+### mean_labeler ###
+####################
 
-ave_na <- function(.grouping, .x, .f) {
-  nas <- is.na(.grouping)
+mean_labeler <- function(.grouping, .x, .f) {
   summarized <- stats::ave(.x, .grouping, FUN = .f)
-  replace(summarized, nas, NA)
+  non_repeat <- ! (duplicated(.grouping) | is.na(.grouping))
+  data.frame(new_lab = summarized[non_repeat],
+             row.names = .grouping[non_repeat])
 }
 
 ##################
@@ -20,6 +21,8 @@ catto_mean <- function(train,
                        verbose = TRUE) {
 
   validate_col_types(train)
+  test_also <- ! missing(test)
+  if (test_also) check_train_test(train, test)
 
   nms <- names(train)
 
@@ -34,13 +37,31 @@ catto_mean <- function(train,
   }
 
   cats <- pick_cols(train, ...)
-  train[cats] <- lapply(train[cats],
-                            ave_na,
-                            .x = train[[response]],
-                            .f = function(...) mean(..., na.rm = rm_na))
 
-  mat_or_df(train)
+  mean_lkps <- lapply(train[cats],
+                      mean_labeler,
+                      .x = train[[response]],
+                      .f = function(...) mean(..., na.rm = TRUE))
 
+  train[cats] <- encode_from_lkp(train[cats], mean_lkps)
+
+  if (! test_also) {
+    mat_or_df(train)
+  } else {
+    test[cats] <- encode_from_lkp(test[cats], mean_lkps)
+    lapply(list(train = train, test = test), mat_or_df)
+  }
+
+}
+
+####################
+### freq_labeler ###
+####################
+
+freq_labeler <- function(.grouping) {
+  results <- as.data.frame(table(.grouping))
+  rownames(results) <- results[[".grouping"]]
+  results[names(results) != ".grouping"]
 }
 
 ##################
@@ -50,16 +71,23 @@ catto_mean <- function(train,
 catto_freq <-  function(train, ..., test, verbose = TRUE) {
 
   validate_col_types(train)
+  test_also <- ! missing(test)
+  if (test_also) check_train_test(train, test)
 
   nms <- names(train)
 
   cats <- pick_cols(train, ...)
-  train[cats] <- lapply(train[cats],
-                            ave_na,
-                            .x = train[[1L]],
-                            .f = length)
 
-  mat_or_df(train)
+  freq_lkps <- lapply(train[cats], freq_labeler)
+
+  train[cats] <- encode_from_lkp(train[cats], freq_lkps)
+
+  if (! test_also) {
+    mat_or_df(train)
+  } else {
+    test[cats] <- encode_from_lkp(test[cats], freq_lkps)
+    lapply(list(train = train, test = test), mat_or_df)
+  }
 
 }
 
