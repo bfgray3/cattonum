@@ -16,18 +16,13 @@ ordering_fun <- function(.method) {
 ### ordered_labels ###
 ######################
 
-ordered_labels <- function(.type) {
+ordered_labels <- function(.x, .type) {
 
-  function(.x) {
-
-    if (is.factor(.x)) .x <- as.character(.x)
-    order_fun <- ordering_fun(.type)
-    ordered_labs <- order_fun(.x)
-    lkp <- data.frame(new_lab = seq_along(ordered_labs),
-                      row.names = ordered_labs)
-    lkp[.x, ]
-
-  }
+  if (is.factor(.x)) .x <- as.character(.x)
+  order_fun <- ordering_fun(.type)
+  ordered_labs <- order_fun(.x)
+  data.frame(new_lab = seq_along(ordered_labs),
+             row.names = ordered_labs)
 
 }
 
@@ -42,18 +37,29 @@ catto_label <- function(train,
                                      "observed",
                                      "random"),
                         test,
+                        seed = 4444,
                         verbose = TRUE) {
 
   validate_col_types(train)
+  test_also <- ! missing(test)
+  if (test_also) check_train_test(train, test)
 
   nms <- names(train)
 
   ordering <- match.arg(ordering)
 
   cats <- pick_cols(train, ...)
-  train[cats] <- lapply(train[cats], ordered_labels(ordering))
 
-  mat_or_df(train)
+  encoding_lkps <- lapply(train[cats], ordered_labels, .type = ordering)
+
+  train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
+
+  if (! test_also) {
+    mat_or_df(train)
+  } else {
+    test[cats] <- encode_from_lkp(test[cats], encoding_lkps)
+    list(train = train, test = test)
+  }
 
 }
 

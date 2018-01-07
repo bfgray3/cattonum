@@ -82,4 +82,31 @@ ordered_by_freq <- function(.x, .decr = FALSE) {
   names(sort(table(.x), decreasing = .decr))
 }
 
+########################
+### check_train_test ###
+########################
+
+check_train_test <- function(.train, .test) {
+  if (!identical(names(.train), names(.test))) {
+    stop("`train` and `test` data frames must have the same names.",
+         call. = FALSE)
+  }
+}
+
+##################
+### expand_lkp ###
+##################
+
+expand_lkp <- function(.dat, .lookup_table) {
+  .lookup_table[as.character(.dat), ]
+}
+
+#######################
+### encode_from_lkp ###
+#######################
+
+encode_from_lkp <- function(.d, .l) {
+  Map(expand_lkp, .dat = .d, .lookup_table = .l)
+}
+
 ###

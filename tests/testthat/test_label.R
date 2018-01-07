@@ -11,6 +11,14 @@ x2 <- c("c", "c", "c", "c", "d", "d")
 df_fact <- data.frame(y = y, x1 = x1, x2 = x2)
 df_char <- data.frame(y = y, x1 = x1, x2 = x2, stringsAsFactors = FALSE)
 
+test_df <- data.frame(y = y,
+                      x1 = c(NA, NA, "a", "b", "b", "b"),
+                      x2 = c("d", NA, NA, "c", "c", "c"))
+
+encoded_test <- data.frame(y = y,
+                           x1 = c(NA, NA, 2, 1, 1, 1),
+                           x2 = c(1, NA, NA, 2, 2, 2))
+
 incr_df <- data.frame(y = y,
                       x1 = c(2, 1, NA, 1, 2, 2),
                       x2 = c(2, 2, 2, 2, 1, 1))
@@ -99,6 +107,12 @@ test_that("catto_label works.", {
 
   }
 
+})
+
+test_that("catto_label correctly encodes test data.", {
+
+  expect_equal(catto_label(df_fact, test = test_df),
+                 list(train = incr_df, test = encoded_test))
 })
 
 ###
