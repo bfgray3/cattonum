@@ -48,10 +48,7 @@ test_that("catto_freq correctly encodes train data.", {
   char_and_fact <- mget(result_names)
 
   for (m in char_and_fact) {
-
-    expect_is(m, "matrix")
     expect_equal(m, expected_both)
-
   }
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
@@ -63,10 +60,7 @@ test_that("catto_freq correctly encodes train data.", {
                                    tidyselect::one_of("x1")))
 
   for (result in char_and_bare) {
-
-    expect_is(result, "data.frame")
     expect_equal(result, expected_x1_only)
-
   }
 
 })

@@ -100,9 +100,7 @@ test_that("catto_label correctly encodes train data.", {
                           catto_label(df_fact, tidyselect::one_of("x1")))
 
     for (result in char_and_bare) {
-
       expect_equal(result, expected_x1_only)
-
     }
 
   }

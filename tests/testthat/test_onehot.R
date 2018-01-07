@@ -15,7 +15,7 @@ df_char <- data.frame(y, x1, x2, stringsAsFactors = FALSE)
 ### ONE-HOT ENCODING ###
 ########################
 
-test_that("catto_onehot works.", {
+test_that("catto_onehot correctly encodes train data.", {
 
   ### ALL CATEGORICAL COLUMNS ###
 
@@ -32,10 +32,7 @@ test_that("catto_onehot works.", {
   char_and_fact <- list(mean_fact, mean_char)
 
   for (m in char_and_fact) {
-
-    expect_is(m, "matrix")
     expect_equal(m, expected_both)
-
   }
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
@@ -49,10 +46,7 @@ test_that("catto_onehot works.", {
                         catto_onehot(df_fact, x1))
 
   for (result in char_and_bare) {
-
-    expect_is(result, "data.frame")
     expect_equal(result, expected_x1_only)
-
   }
 
 })

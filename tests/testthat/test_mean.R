@@ -24,7 +24,7 @@ encoded_test <- data.frame(y = y,
 ### MEAN ENCODING ###
 #####################
 
-test_that("catto_mean works.", {
+test_that("catto_mean correctly encodes train data.", {
 
   ### ALL CATEGORICAL COLUMNS ###
 
@@ -49,10 +49,7 @@ test_that("catto_mean works.", {
   char_and_fact <- mget(result_names)
 
   for (m in char_and_fact) {
-
-    expect_is(m, "matrix")
     expect_equal(m, expected_both)
-
   }
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
@@ -65,10 +62,7 @@ test_that("catto_mean works.", {
                                    response = "y"))
 
   for (result in char_and_bare) {
-
-    expect_is(result, "data.frame")
     expect_equal(result, expected_x1_only)
-
   }
 
   ### RESPONSE NOT SPECIFIED ###
