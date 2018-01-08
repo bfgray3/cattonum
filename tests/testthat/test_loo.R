@@ -51,9 +51,9 @@ test_that("catto_loo correctly encodes train data.", {
 
 })
 
-##################
+#################
 ### TEST DATA ###
-##################
+#################
 
 test_that("catto_loo correctly encodes test data.", {
 

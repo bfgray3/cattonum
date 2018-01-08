@@ -17,9 +17,9 @@ expected_df_both <- data.frame(y = y,
                                x2 = c(7 / 3, 7 / 3, 7 / 3, 12, 12))
 expected_both <- as.matrix(expected_df_both)
 
-#####################
-### MEAN ENCODING ###
-#####################
+##################
+### TRAIN DATA ###
+##################
 
 test_that("catto_mean correctly encodes train data.", {
 
@@ -38,12 +38,11 @@ test_that("catto_mean correctly encodes train data.", {
   mean_char5 <- catto_mean(df_char, tidyselect::one_of(c("x1", "x2")))
   mean_char6 <- catto_mean(df_char, tidyselect::one_of("x1", "x2"))
 
-  result_names <- c(paste0("mean_fact", seq_len(6)), paste0("mean_char", seq_len(6)))
+  result_names <- c(paste0("mean_fact", seq_len(6)),
+                    paste0("mean_char", seq_len(6)))
   char_and_fact <- mget(result_names)
 
-  for (m in char_and_fact) {
-    expect_equal(m, expected_both)
-  }
+  for (m in char_and_fact) expect_equal(m, expected_both)
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
 
@@ -54,9 +53,7 @@ test_that("catto_mean correctly encodes train data.", {
                                    tidyselect::one_of("x1"),
                                    response = "y"))
 
-  for (result in char_and_bare) {
-    expect_equal(result, expected_x1_only)
-  }
+  for (result in char_and_bare) expect_equal(result, expected_x1_only)
 
   ### RESPONSE NOT SPECIFIED ###
 
@@ -67,6 +64,9 @@ test_that("catto_mean correctly encodes train data.", {
 
 })
 
+#################
+### TEST DATA ###
+#################
 
 test_that("catto_mean correctly encodes test data.", {
 
@@ -82,4 +82,5 @@ test_that("catto_mean correctly encodes test data.", {
                list(train = expected_both, test = as.matrix(encoded_test)))
 
 })
+
 ###

@@ -37,7 +37,8 @@ test_that("catto_freq correctly encodes train data.", {
   freq_char5 <- catto_freq(df_fact, tidyselect::one_of(c("x1", "x2")))
   freq_char6 <- catto_freq(df_fact, tidyselect::one_of("x1", "x2"))
 
-  result_names <- c(paste0("freq_fact", seq_len(6)), paste0("freq_char", seq_len(6)))
+  result_names <- c(paste0("freq_fact", seq_len(6)),
+                    paste0("freq_char", seq_len(6)))
   char_and_fact <- mget(result_names)
 
   for (m in char_and_fact) expect_equal(m, expected_both)
