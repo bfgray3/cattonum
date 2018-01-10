@@ -34,9 +34,13 @@ model_matrix <- function(.df,
   }
   form <- make_form(.cols, .enc_type)
   mf <- stats::model.frame(form, data = .df, na.action = na.pass)
-  cs <- lapply(.df[.cols], stats::contrasts, contrasts = FALSE)
-  mm <- stats::model.matrix(form, mf, contrasts.arg = cs)
-  if (.enc_type == "dummy") mm <- mm[ , colnames(mm) != "(Intercept)"]
+  if (.enc_type == "onehot") {
+    cs <- lapply(.df[.cols], stats::contrasts, contrasts = FALSE)
+    mm <- stats::model.matrix(form, mf, contrasts.arg = cs)
+  } else {
+    mm <- stats::model.matrix(form, mf)
+    mm <- mm[ , colnames(mm) != "(Intercept)", drop = FALSE]
+  }
   attr(mm, "contrasts") <- NULL
   attr(mm, "assign") <- NULL
   rownames(mm) <- NULL
@@ -107,6 +111,6 @@ catto_onehot <- dummy_onehot("onehot")
 ### catto_dummy ###
 ###################
 
-catto_onehot <- dummy_onehot("dummy")
+catto_dummy <- dummy_onehot("dummy")
 
 ###
