@@ -5,6 +5,8 @@
 
 [![Build
 Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=master)](https://travis-ci.org/bfgray3/cattonum)
+[![Coverage
+status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=master)
 
 `cattonum` (cat to num) turns categorical features into numeric
 features. It is designed to provide a uniform API for various encodings
