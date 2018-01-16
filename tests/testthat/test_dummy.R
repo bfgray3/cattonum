@@ -4,60 +4,91 @@ context("dummy encoding")
 ### SETUP ###
 #############
 
-y <- 2 ^ seq(from = 0, to = 4)
-x1 <- c("a", "b", NA, "b", "a")
-x2 <- c("c", "c", "c", "d", "d")
+expected_df_both <- data.frame(y = y,
+                               x1b = c(0, 1, NA, 1, 0, 0),
+                               x2d = c(0, 0, 0, 1, 1, 0))
 
-df_fact <- data.frame(y, x1, x2)
-df_char <- data.frame(y, x1, x2, stringsAsFactors = FALSE)
+expected_both <- as.matrix(expected_df_both)
 
-expected_x1_only <- data.frame(y,
-                               x2,
-                               x1b = c(0, 1, NA, 1, 0))
+expected_x1_df_fact <- data.frame(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
-##################
-### TRAIN DATA ###
-##################
+expected_x1_df_char <- data.frame(y,
+                                  x2,
+                                  x1b = c(0, 1, NA, 1, 0, 0),
+                                  stringsAsFactors = FALSE)
 
-test_that("catto_dummy correctly encodes train data.", {
+expected_x1_tbl_char <- tibble(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
-  ### ALL CATEGORICAL COLUMNS ###
+expected_x1_tbl_fact <- tibble(y, x2 = factor(x2), x1b = c(0, 1, NA, 1, 0, 0))
 
-  dummy_fact <- catto_dummy(df_fact)
-  dummy_char <- catto_dummy(df_char)
+###################################
+### MULTIPLE TRAINING ENCODINGS ###
+###################################
 
-  expected_df_both <- data.frame(y = y,
-                                 x1b = c(0, 1, NA, 1, 0),
-                                 x2d = c(0, 0, 0, 1, 1))
-  expected_both <- as.matrix(expected_df_both)
+test_that("catto_dummy: multiple data.frame training columns.", {
 
-  expect_equal(dummy_fact, expected_both)
-  expect_equal(dummy_char, expected_both)
-
-  ### SUBSET OF CATEGORICAL COLUMNS ###
-
-  expect_equal(catto_dummy(df_fact, "x1"), expected_x1_only)
-  expect_equal(catto_dummy(df_fact, x1), expected_x1_only)
+  both_encoded <- check_x1_x2(catto_dummy, "data.frame")
+  for (m in both_encoded) expect_equal(m, expected_both)
 
 })
 
-##################
+test_that("catto_dummy: multiple tibble training columns.", {
+
+  both_encoded <- check_x1_x2(catto_dummy, "tibble")
+  for (m in both_encoded) expect_equal(m, expected_both)
+
+})
+
+##########################
+### ONE TRAIN ENCODING ###
+##########################
+
+test_that("catto_dummy: one data.frame training column.", {
+
+  one_encoded <- check_x1(catto_dummy, "data.frame")
+  num_tests <- length(one_encoded)
+
+  for (i in seq(from = 1, to = num_tests / 2)) {
+    expect_equal(one_encoded[[i]], expected_x1_df_fact)
+  }
+
+  for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
+    expect_equal(one_encoded[[i]], expected_x1_df_char)
+  }
+
+})
+
+test_that("catto_dummy: one tibble training column.", {
+
+  one_encoded <- check_x1(catto_dummy, "tibble")
+  num_tests <- length(one_encoded)
+
+  for (i in seq(from = 1, to = num_tests / 2)) {
+    expect_equal(one_encoded[[i]], expected_x1_df_fact)
+  }
+
+  for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
+    expect_equal(one_encoded[[i]], expected_x1_df_char)
+  }
+
+})
+#################
 ### TEST DATA ###
-##################
+#################
 
-test_that("catto_dummy correctly encodes test data.", {
+#test_that("catto_dummy correctly encodes test data.", {
 
-  test_df <- data.frame(y = seq_len(3),
-                        x1 = c("e", NA, "b"),
-                        x2 = c("c", "d","c"))
+#  test_df <- data.frame(y = seq_len(3),
+#                        x1 = c("e", NA, "b"),
+#                        x2 = c("c", "d","c"))
 
-  expected_test <- data.frame(y = seq_len(3),
-                              x2 = c("c", "d", "c"),
-                              x1b = c(NA, NA, 1))
+#  expected_test <- data.frame(y = seq_len(3),
+#                              x2 = c("c", "d", "c"),
+#                              x1b = c(NA, NA, 1))
 
-  expect_equal(catto_dummy(df_fact, x1, test = test_df),
-               list(train = expected_x1_only, test = expected_test))
+#  expect_equal(catto_dummy(df_fact, x1, test = test_df),
+#               list(train = expected_x1, test = expected_test))
 
-})
+#})
 
 ###

@@ -20,6 +20,7 @@ Suggests: testthat,
     knitr,
     rmarkdown,
     covr,
-    styler
+    styler,
+    tibble
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

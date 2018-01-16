@@ -4,50 +4,76 @@ context("leave-one-out encoding")
 ### SETUP ###
 #############
 
-resp_name <- "y"
-x1 <- c("a", "b", NA, "b", "a")
-x2 <- c("c", "c", "c", "d", "d")
-y <- seq_along(x1)
-
-df_fact <- data.frame(y, x1, x2)
-df_char <- data.frame(y, x1, x2, stringsAsFactors = FALSE)
-
 expected_df_both <- data.frame(y = y,
-                               x1 = c(5, 4, NA, 2, 1),
-                               x2 = c(2.5, 2, 1.5, 5, 4))
+                               x1 = c(24, 8, NA, 2, 16.5, 8.5),
+                               x2 = c(38 / 3, 37 / 3, 35 / 3, 16, 8, 7 / 3))
+
 expected_both <- as.matrix(expected_df_both)
 
-##################
-### TRAIN DATA ###
-##################
+expected_x1_df_fact <- data.frame(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2)
 
-test_that("catto_loo correctly encodes train data.", {
+expected_x1_df_char <- data.frame(y,
+                                  x1 = c(24, 8, NA, 2, 16.5, 8.5),
+                                  x2,
+                                  stringsAsFactors = FALSE)
 
-  ### ALL CATEGORICAL COLUMNS ###
+expected_x1_tbl_char <- tibble(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2)
 
-  loo_fact <- catto_loo(df_fact, response = resp_name)
-  loo_char <- catto_loo(df_char, response = resp_name)
+expected_x1_tbl_fact <- tibble(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2 = factor(x2))
 
-  expect_equal(loo_fact, expected_both)
-  expect_equal(loo_char, expected_both)
+encoded_test <- data.frame(y = y[seq_len(5)],
+                           x1 = c(NA, NA, 49 / 3, 5, 5),
+                           x2 = c(12, NA, NA, 39 / 4, 39 / 4))
 
-  ### SUBSET OF CATEGORICAL COLUMNS ###
+###################################
+### MULTIPLE TRAINING ENCODINGS ###
+###################################
 
-  expected_x1_only <- data.frame(y, x1 = c(5, 4, NA, 2, 1), x2)
-  char_and_bare <- list(catto_loo(df_fact, "x1", response = "y"),
-                        catto_loo(df_fact, x1, response = y),
-                        catto_loo(df_fact,
-                                   tidyselect::one_of("x1"),
-                                   response = "y"))
+test_that("catto_loo: multiple data.frame training columns.", {
 
-  for (result in char_and_bare) expect_equal(result, expected_x1_only)
+  both_encoded <- check_x1_x2_resp(catto_loo, "data.frame", .resp = resp_name)
+  for (m in both_encoded) expect_equal(m, expected_both)
 
-  ### RESPONSE NOT SPECIFIED ###
+})
 
-  expect_message(no_response <- catto_loo(df_fact, x1),
-                 paste("`response` not supplied; using first column",
-                       "'y' as the response variable."))
-  expect_equal(no_response, expected_x1_only)
+test_that("catto_loo: multiple tibble training columns.", {
+
+  both_encoded <- check_x1_x2_resp(catto_loo, "tibble", .resp = resp_name)
+  for (m in both_encoded) expect_equal(m, expected_both)
+
+})
+
+##########################
+### ONE TRAIN ENCODING ###
+##########################
+
+test_that("catto_loo: one data.frame training column.", {
+
+  one_encoded <- check_x1_resp(catto_loo, "data.frame", .resp = resp_name)
+  num_tests <- length(one_encoded)
+
+  for (i in seq(from = 1, to = num_tests / 2)) {
+    expect_equal(one_encoded[[i]], expected_x1_df_fact)
+  }
+
+  for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
+    expect_equal(one_encoded[[i]], expected_x1_df_char)
+  }
+
+})
+
+test_that("catto_loo: one tibble training column.", {
+
+  one_encoded <- check_x1_resp(catto_loo, "tibble", .resp = resp_name)
+  num_tests <- length(one_encoded)
+
+  for (i in seq(from = 1, to = num_tests / 2)) {
+    expect_equal(one_encoded[[i]], expected_x1_tbl_fact)
+  }
+
+  for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
+    expect_equal(one_encoded[[i]], expected_x1_tbl_char)
+  }
 
 })
 
@@ -57,16 +83,9 @@ test_that("catto_loo correctly encodes train data.", {
 
 test_that("catto_loo correctly encodes test data.", {
 
-  test_df <- data.frame(y = y,
-                        x1 = c(NA, NA, "a", "b", "b"),
-                        x2 = c("d", NA, NA, "c", "c"))
-
-  encoded_test <- data.frame(y = y,
-                             x1 = c(NA, NA, 3, 3, 3),
-                             x2 = c(4.5, NA, NA, 2, 2))
-
   expect_equal(catto_loo(df_fact, test = test_df),
                list(train = expected_both, test = as.matrix(encoded_test)))
 
 })
+
 ###

@@ -4,32 +4,21 @@ context("label encoding")
 ### SETUP ###
 #############
 
-y <- 2 ^ seq(from = 0, to = 5)
-x1 <- c("a", "b", NA, "b", "a", "a")
-x2 <- c("c", "c", "c", "c", "d", "d")
-
-df_fact <- data.frame(y = y, x1 = x1, x2 = x2)
-df_char <- data.frame(y = y, x1 = x1, x2 = x2, stringsAsFactors = FALSE)
-
-test_df <- data.frame(y = y,
-                      x1 = c(NA, NA, "a", "b", "b", "b"),
-                      x2 = c("d", NA, NA, "c", "c", "c"))
-
-encoded_test <- data.frame(y = y,
-                           x1 = c(NA, NA, 2, 1, 1, 1),
-                           x2 = c(1, NA, NA, 2, 2, 2))
-
 incr_df <- data.frame(y = y,
                       x1 = c(2, 1, NA, 1, 2, 2),
-                      x2 = c(2, 2, 2, 2, 1, 1))
+                      x2 = c(2, 2, 2, 1, 1, 2))
 
 decr_df <- data.frame(y = y,
                       x1 = c(1, 2, NA, 2, 1, 1),
-                      x2 = c(1, 1, 1, 1, 2, 2))
+                      x2 = c(1, 1, 1, 2, 2, 1))
 
 order_df <- data.frame(y = y,
                        x1 = c(1, 2, NA, 2, 1, 1),
-                       x2 = c(1, 1, 1, 1, 2, 2))
+                       x2 = c(1, 1, 1, 2, 2, 1))
+
+encoded_test <- data.frame(y = y[seq_len(5)],
+                           x1 = c(NA, NA, 2, 1, 1),
+                           x2 = c(1, NA, NA, 2, 2))
 
 ##################
 ### TRAIN DATA ###
@@ -112,6 +101,7 @@ test_that("catto_label correctly encodes test data.", {
 
   expected <- list(train = as.matrix(incr_df), test = as.matrix(encoded_test))
   expect_equal(catto_label(df_fact, test = test_df), expected)
+
 })
 
 ###
