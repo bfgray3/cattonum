@@ -10,38 +10,55 @@ Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?bran
 [![Coverage
 status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=master)
 
-`cattonum` (cat to num) turns categorical features into numeric
-features. It is designed to provide a uniform API for various encodings
-of categorical features and combines the best aspects of the several
-other existing packages with similar functionality. The following are
-hoped to eventually be included in the package:
+## Summary
 
-  - dummy encoding
-  - one-hot encoding
-  - label encoding
-  - frequency encoding
-  - leave-one-out encoding
-  - mean encoding
+`cattonum` (cat to num) provides different ways to encode categorical
+features as numerics. It includes the following:
+
+  - dummy encoding: `catto_dummy`
   - feature hashing (future)
+  - frequency encoding: `catto_freq`
+  - label encoding: `catto_label`
+  - leave-one-out encoding: `catto_loo`
+  - mean encoding: `catto_mean`
+  - one-hot encoding: `catto_onehot`
 
 There are many existing packages with which to encode categorical
 features, including (among
     others):
 
-  - [recipes](https://cran.r-project.org/web/packages/recipes/index.html)
   - [CatEncoders](https://cran.r-project.org/web/packages/CatEncoders/index.html)
   - [dummies](https://cran.r-project.org/web/packages/dummies/index.html)
   - [fastDummies](https://cran.r-project.org/web/packages/fastDummies/index.html)
-  - [makedummies](https://cran.r-project.org/web/packages/makedummies/index.html)
   - [h2o](https://cran.r-project.org/web/packages/h2o/index.html)
+  - [makedummies](https://cran.r-project.org/web/packages/makedummies/index.html)
+  - [recipes](https://cran.r-project.org/web/packages/recipes/index.html)
+
+The goal of `catto_num` is to be a one-stop shop for all categorical
+encoding needs. Nothing more, nothing less.
 
 ## Installation
 
-You can install `cattonum` from GitHub.
+`cattonum` can be installed from GitHub with `devtools`.
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("bfgray3/cattonum")
 ```
 
-## Example
+## Usage
+
+``` r
+library(cattonum)
+data(iris)
+encoded_iris <- catto_loo(iris)
+#> `response` not supplied; using first column 'Sepal.Length' as the response variable.
+head(encoded_iris)
+#>      Sepal.Length Sepal.Width Petal.Length Petal.Width  Species
+#> [1,]          5.1         3.5          1.4         0.2 5.004082
+#> [2,]          4.9         3.0          1.4         0.2 5.008163
+#> [3,]          4.7         3.2          1.3         0.2 5.012245
+#> [4,]          4.6         3.1          1.5         0.2 5.014286
+#> [5,]          5.0         3.6          1.4         0.2 5.006122
+#> [6,]          5.4         3.9          1.7         0.4 4.997959
+```
