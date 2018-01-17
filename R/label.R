@@ -30,6 +30,25 @@ ordered_labels <- function(.x, .type) {
 ### catto_label ###
 ###################
 
+#' Label encoding
+#'
+#' @param train The training data, in a \code{data.frame} or \code{tibble}.
+#' @param ... The columns to be encoded.  If none are specified, then
+#'   all character and factor columns are encoded.
+#' @param ordering How should labels be assigned to levels?  Options are
+#'   "increasing", "decreasing", "observed", and "random".
+#' @param test The test data, in a \code{data.frame} or \code{tibble}.
+#' @param seed To be used in the future.
+#' @param verbose Should informative messages be printed?  Defaults to
+#'   \code{TRUE}.
+#' @return The encoded dataset in a \code{matrix} if all character and
+#'   factor columns have been encoded, otherwise the encoded dataset in
+#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
+#'   dataset was provided, a named list is returned holding the encoded
+#'   training and test datasets.
+#' @examples
+#' catto_label(iris, response = Sepal.Length)
+#' @export
 catto_label <- function(train,
                         ...,
                         ordering = c("increasing",

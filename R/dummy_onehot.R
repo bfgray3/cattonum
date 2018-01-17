@@ -105,12 +105,40 @@ dummy_onehot <- function(.enc_type) {
 ### catto_onehot ###
 ####################
 
+#' One-hot encoding
+#'
+#' @param train The training data, in a \code{data.frame} or \code{tibble}.
+#' @param ... The columns to be encoded.  If none are specified, then
+#'   all character and factor columns are encoded.
+#' @param test The test data, in a \code{data.frame} or \code{tibble}.
+#' @return The encoded dataset in a \code{matrix} if all character and
+#'   factor columns have been encoded, otherwise the encoded dataset in
+#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
+#'   dataset was provided, a named list is returned holding the encoded
+#'   training and test datasets.
+#' @examples
+#' catto_onehot(iris, response = Sepal.Length)
+#' @export
 catto_onehot <- dummy_onehot("onehot")
 
 ###################
 ### catto_dummy ###
 ###################
 
+#' Dummy encoding
+#'
+#' @param train The training data, in a \code{data.frame} or \code{tibble}.
+#' @param ... The columns to be encoded.  If none are specified, then
+#'   all character and factor columns are encoded.
+#' @param test The test data, in a \code{data.frame} or \code{tibble}.
+#' @return The encoded dataset in a \code{matrix} if all character and
+#'   factor columns have been encoded, otherwise the encoded dataset in
+#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
+#'   dataset was provided, a named list is returned holding the encoded
+#'   training and test datasets.
+#' @examples
+#' catto_dummy(iris, response = Sepal.Length)
+#' @export
 catto_dummy <- dummy_onehot("dummy")
 
 ###
