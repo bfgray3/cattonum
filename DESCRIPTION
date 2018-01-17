@@ -1,8 +1,10 @@
 Type: Package
 Package: cattonum
-Version: 0.0.0.9000
-Title: TODO
-Description: TODO
+Version: 0.0.1
+Title: Encode Categorical Features
+Description: Functions for dummy encoding, frequency encoding,
+    label encoding, leave-one-out encoding, mean encoding,
+    and one-hot encoding.
 Authors@R: person("Bernie",
                   "Gray",
                   email = "bfgray3@gmail.com",
