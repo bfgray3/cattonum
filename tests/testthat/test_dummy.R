@@ -4,6 +4,8 @@ context("dummy encoding")
 ### SETUP ###
 #############
 
+library(tibble)
+
 expected_df_both <- data.frame(y = y,
                                x1b = c(0, 1, NA, 1, 0, 0),
                                x2d = c(0, 0, 0, 1, 1, 0))
