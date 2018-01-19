@@ -16,4 +16,123 @@ knitr::opts_chunk$set(
 )
 ```
 
-# TODO
+## Background
+
+## Case Study Setup
+
+Let's take a look at the `flights` dataset from the `nycflights13` package.  We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) using `xgboost`.
+
+```{r}
+library(nycflights13)
+library(xgboost)
+library(cattonum)
+suppressPackageStartupMessages(library(dplyr))
+
+set.seed(4444)
+
+data(flights)
+str(flights)
+```
+
+There are a lot of flights here and we don't want our model training to take forever, so let's only take a subset of these observations.  To simplify our analysis, we'll analyze only the three airlines with the most flights.
+
+```{r}
+airlines_to_keep <- flights %>%
+                      count(carrier) %>%
+                      top_n(3, n) %>%
+                      pull(carrier)
+```
+
+Furthermore, since all the flights are from 2013, we'll drop the `year` column.  For simplicity and to keep our problem simple, `dep_time`, `arr_time`, `sched_arr_time`, `arr_delay`, `flight`, `tailnum`, `sched_dep_time`, and `time_hour` will also be removed.  A negative delay time means that the flight left early, so we'll filter those out and predict the length of delay given that there is one.  Finally, the information in `sched_dep_time` is contained in `hour` and `minute`, so we'll get rid of that feature.
+
+```{r}
+flights <- flights %>%
+             filter(carrier %in% airlines_to_keep, dep_delay > 0) %>%
+             select(-c(year, flight, dep_time, arr_time, sched_arr_time,
+                       sched_dep_time, arr_delay, tailnum, time_hour))
+str(flights)
+```
+
+In order to get more out of our time features, we'll do a quick transformation using the technique described [here](https://ianlondon.github.io/blog/encoding-cyclical-features-24hour-time/).
+
+```{r}
+tot_mins <- 24 * 60
+
+flights <- flights %>%
+             mutate(min_of_day = 60 * hour + minute,
+                    cos_min_of_day = cos(2 * pi * min_of_day / tot_mins),
+                    sin_min_of_day = cos(2 * pi * min_of_day / tot_mins)) %>%
+             select(-c(min_of_day, hour, minute))
+             
+str(flights)
+```
+
+Notice that `month` and `day` are stored as integers, but they are really categorical, so we now turn them into characters (or factors, it doesn't matter for `cattonum`).
+
+```{r}
+flights <- flights %>%
+             mutate(month = as.character(month),
+                    day = as.character(day))
+```
+
+Perfect. Now we're ready to try out `cattonum`.  For our modeling purposes, let's split our data into training and test sets.
+
+```{r}
+n_flights <- nrow(flights)
+train_i <- sample(n_flights, n_flights * .75)
+
+train_flights <- slice(flights, train_i)
+test_flights <- slice(flights, -train_i)
+
+dim(train_flights)
+dim(test_flights)
+```
+
+Now that we have training and test sets, we'll finally encode our categorical features.  Consider a head-to-head competition for two encoding techniques: label encoding, and mean encoding.
+
+```{r}
+resp <- "dep_delay"
+preds <- setdiff(names(flights), resp)
+
+label_encoded <- catto_label(train_flights, test = test_flights)
+mean_encoded <- catto_mean(train_flights,
+                           response = resp,
+                           test = test_flights)
+```
+
+To build our `xgboost` models, we now put the data into the format preferred by the package.  Note that in general this step is not required, as this format is unique to `xgboost`.
+
+### Label encoding
+
+```{r}
+label_train_dm <- xgb.DMatrix(label_encoded$train[ , preds],
+                              label = label_encoded$train[ , resp])
+label_test_dm <- xgb.DMatrix(label_encoded$test[ , preds],
+                              label = label_encoded$test[ , resp])
+```
+
+### Mean encoding
+
+```{r}
+mean_train_dm <- xgb.DMatrix(mean_encoded$train[ , preds],
+                             label = mean_encoded$train[ , resp])
+mean_test_dm <- xgb.DMatrix(mean_encoded$test[ , preds],
+                            label = mean_encoded$test[ , resp])
+```
+
+Now we can finally build the models.
+
+```{r}
+watch_label <- list(train = label_train_dm, test = label_test_dm)
+watch_mean <- list(train = mean_train_dm, test = mean_test_dm)
+
+label_xgb <- xgb.train(data = label_train_dm,
+                       nrounds = 100,
+                       watchlist = watch_label,
+                       print_every_n = 50)
+
+mean_xgb <- xgb.train(data = mean_train_dm,
+                      nrounds = 100,
+                      watchlist = watch_mean,
+                      print_every_n = 50)
+```
