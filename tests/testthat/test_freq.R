@@ -4,6 +4,8 @@ context("frequency encoding")
 ### SETUP ###
 #############
 
+library(tibble)
+
 expected_df_both <- data.frame(y = y,
                                x1 = c(3, 2, NA, 2, 3, 3),
                                x2 = c(4, 4, 4, 2, 2, 4))

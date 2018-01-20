@@ -4,6 +4,8 @@ context("leave-one-out encoding")
 ### SETUP ###
 #############
 
+library(tibble)
+
 expected_df_both <- data.frame(y = y,
                                x1 = c(24, 8, NA, 2, 16.5, 8.5),
                                x2 = c(38 / 3, 37 / 3, 35 / 3, 16, 8, 7 / 3))

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 ## Case Study Setup
 
-We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) in the the `flights` dataset from the `nycflights13` package using random forests built with `ranger`.
+We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) in the the `flights` dataset using random forests built with `ranger`.
 
 ```{r}
 library(nycflights13)

@@ -4,6 +4,8 @@ context("mean encoding")
 ### SETUP ###
 #############
 
+library(tibble)
+
 expected_df_both <- data.frame(y = y,
                                x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),
                                x2 = c(39 / 4, 39 / 4, 39 / 4, 12, 12, 39 / 4))
