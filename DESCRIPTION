@@ -13,17 +13,19 @@ URL: https://github.com/bfgray3/cattonum
 BugReports: https://github.com/bfgray3/cattonum/issues
 Encoding: UTF-8
 Depends: R (>= 3.2.0)
-Imports: stats,
+Imports:
+    stats,
     tidyselect (>= 0.2.3),
     rlang (>= 0.1.6)
 LazyData: true
 License: MIT + file LICENSE
-Suggests: testthat,
+Suggests:
+    testthat,
     knitr,
     rmarkdown,
     covr,
     tibble,
     dplyr,
-    xgboost
+    ranger
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

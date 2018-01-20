@@ -20,11 +20,11 @@ knitr::opts_chunk$set(
 
 ## Case Study Setup
 
-Let's take a look at the `flights` dataset from the `nycflights13` package.  We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) using `xgboost`.
+We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) in the the `flights` dataset from the `nycflights13` package using random forests built with `ranger`.
 
 ```{r}
 library(nycflights13)
-library(xgboost)
+library(ranger)
 library(cattonum)
 suppressPackageStartupMessages(library(dplyr))
 
@@ -34,26 +34,22 @@ data(flights)
 str(flights)
 ```
 
-There are a lot of flights here and we don't want our model training to take forever, so let's only take a subset of these observations.  To simplify our analysis, we'll analyze only the three airlines with the most flights.
+There are a lot of flights here and we don't want our model training to take forever, so let's only take a subset of these observations.  To simplify our analysis, we'll analyze only the three airlines with the most flights, only consider flights that were delayed in taking off, and remove some features.
 
 ```{r}
 airlines_to_keep <- flights %>%
                       count(carrier) %>%
                       top_n(3, n) %>%
                       pull(carrier)
-```
 
-Furthermore, since all the flights are from 2013, we'll drop the `year` column.  For simplicity and to keep our problem simple, `dep_time`, `arr_time`, `sched_arr_time`, `arr_delay`, `flight`, `tailnum`, `sched_dep_time`, and `time_hour` will also be removed.  A negative delay time means that the flight left early, so we'll filter those out and predict the length of delay given that there is one.  Finally, the information in `sched_dep_time` is contained in `hour` and `minute`, so we'll get rid of that feature.
-
-```{r}
 flights <- flights %>%
              filter(carrier %in% airlines_to_keep, dep_delay > 0) %>%
-             select(-c(year, flight, dep_time, arr_time, sched_arr_time,
-                       sched_dep_time, arr_delay, tailnum, time_hour))
+             select(-c(year, dep_time, sched_dep_time, arr_time, sched_arr_time,
+                       arr_delay, flight, tailnum, time_hour))
 str(flights)
 ```
 
-In order to get more out of our time features, we'll do a quick transformation using the technique described [here](https://ianlondon.github.io/blog/encoding-cyclical-features-24hour-time/).
+In order to get more out of our time features, we'll do a quick transformation using the technique described [here](https://ianlondon.github.io/blog/encoding-cyclical-features-24hour-time/).  Also, `month` and `day` are currently integers, but they are really categorical, so we now turn them into characters (or factors, it doesn't matter for `cattonum`).
 
 ```{r}
 tot_mins <- 24 * 60
@@ -62,77 +58,58 @@ flights <- flights %>%
              mutate(min_of_day = 60 * hour + minute,
                     cos_min_of_day = cos(2 * pi * min_of_day / tot_mins),
                     sin_min_of_day = cos(2 * pi * min_of_day / tot_mins)) %>%
-             select(-c(min_of_day, hour, minute))
-             
+             select(-c(min_of_day, hour, minute)) %>%
+             mutate(month = as.character(month),
+                    day = as.character(day)) %>%
+             filter(complete.cases(.))
 str(flights)
 ```
 
-Notice that `month` and `day` are stored as integers, but they are really categorical, so we now turn them into characters (or factors, it doesn't matter for `cattonum`).
+Now we turn to encoding our categorical features.  Consider a comparison between label encoding, mean encoding, and a mix of frequency, label, and mean encoding.  There are a few key points to note about the `catto_*` functions.
 
-```{r}
-flights <- flights %>%
-             mutate(month = as.character(month),
-                    day = as.character(day))
+* They are designed to work in `dplyr`-style pipelines using `%>%` from `magrittr`.
+*   If the function has encoded all factor and character columns, it will return a `matrix`; otherwise it will return either a `data.frame` or a `tibble`.
+* They can handle data in a `data.frame` or `tibble`, and features can be specified in many different ways like in `dplyr`.  For example, the following are all equivalent for a data frame named `dat` with columns `x1` and `x2`.
+
+```{r, eval = FALSE}
+catto_label(dat)
+catto_label(dat, x1, x2)
+catto_label(dat, c(x1, x2))
+catto_label(dat, c("x1", "x2"))
+catto_label(dat, one_of(c("x1", "x2"))) # one_of is exported by dplyr
+catto_label(dat, one_of("x1", "x2"))
 ```
 
-Perfect. Now we're ready to try out `cattonum`.  For our modeling purposes, let's split our data into training and test sets.
+Here we make the encoded datasets.
 
 ```{r}
-n_flights <- nrow(flights)
-train_i <- sample(n_flights, n_flights * .75)
+label_encoded <- flights %>%
+                   catto_label() # result is a matrix
 
-train_flights <- slice(flights, train_i)
-test_flights <- slice(flights, -train_i)
+mean_encoded <- flights %>%
+                  catto_mean(response = dep_delay) # result is a matrix
 
-dim(train_flights)
-dim(test_flights)
+mix_encoded <- flights %>%
+                 catto_freq(dest) %>% # result is still a tibble
+                 catto_label(origin) %>% # result is still a tibble
+                 catto_mean(response = dep_delay) # result is a matrix
 ```
 
-Now that we have training and test sets, we'll finally encode our categorical features.  Consider a head-to-head competition for two encoding techniques: label encoding, and mean encoding.
+Now we can finally build the models.  We define a short function `get_oob_error` that builds an untuned random forest and returns the out-of-bag error.
 
 ```{r}
-resp <- "dep_delay"
-preds <- setdiff(names(flights), resp)
+encodings <- list(label = label_encoded,
+                  mean = mean_encoded,
+                  mix = mix_encoded)
 
-label_encoded <- catto_label(train_flights, test = test_flights)
-mean_encoded <- catto_mean(train_flights,
-                           response = resp,
-                           test = test_flights)
+get_oob_error <- function(dat) {
+  rf <- ranger(data = dat,
+               num.trees = 100,
+               dependent.variable.name = "dep_delay")
+  rf$prediction.error
+}
+
+lapply(encodings, get_oob_error)
 ```
 
-To build our `xgboost` models, we now put the data into the format preferred by the package.  Note that in general this step is not required, as this format is unique to `xgboost`.
-
-### Label encoding
-
-```{r}
-label_train_dm <- xgb.DMatrix(label_encoded$train[ , preds],
-                              label = label_encoded$train[ , resp])
-label_test_dm <- xgb.DMatrix(label_encoded$test[ , preds],
-                              label = label_encoded$test[ , resp])
-```
-
-### Mean encoding
-
-```{r}
-mean_train_dm <- xgb.DMatrix(mean_encoded$train[ , preds],
-                             label = mean_encoded$train[ , resp])
-mean_test_dm <- xgb.DMatrix(mean_encoded$test[ , preds],
-                            label = mean_encoded$test[ , resp])
-```
-
-Now we can finally build the models.
-
-```{r}
-watch_label <- list(train = label_train_dm, test = label_test_dm)
-watch_mean <- list(train = mean_train_dm, test = mean_test_dm)
-
-label_xgb <- xgb.train(data = label_train_dm,
-                       nrounds = 100,
-                       watchlist = watch_label,
-                       print_every_n = 50)
-
-mean_xgb <- xgb.train(data = mean_train_dm,
-                      nrounds = 100,
-                      watchlist = watch_mean,
-                      print_every_n = 50)
-```
+Mean encoding gives us the lowest OOB error, followed by the mixed encodings and label encoding.  This modeling setup of simply looking at OOB score on untuned random forests of 100 trees is not really a fair comparison, but it demonstrates the basic features of `cattonum`.
