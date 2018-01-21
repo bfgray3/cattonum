@@ -32,10 +32,9 @@ test_that("catto_onehot correctly encodes train data.", {
                                  x1b = c(0, 1, NA, 1, 0),
                                  x2c = c(1, 1, 1, 0, 0),
                                  x2d = c(0, 0, 0, 1, 1))
-  expected_both <- as.matrix(expected_df_both)
 
-  expect_equal(oh_fact, expected_both)
-  expect_equal(oh_char, expected_both)
+  expect_equal(oh_fact, expected_df_both)
+  expect_equal(oh_char, expected_df_both)
 
   ### SUBSET OF CATEGORICAL COLUMNS ###
 

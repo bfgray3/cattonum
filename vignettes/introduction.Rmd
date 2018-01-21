@@ -68,8 +68,8 @@ str(flights)
 Now we turn to encoding our categorical features.  Consider a comparison between label encoding, mean encoding, and a mix of frequency, label, and mean encoding.  First, note a few key facts about the `catto_*` functions.
 
 * They have three or four main parameters, depending on the function: `train`, `...`, `response`, and `test`.  `train` holds the training data, `...` is where the columns to be encoded are specified (if not supplied, all character and factor columns are encoded), `response` is the name of the response column for `catto_loo` and `catto_mean`, and `test` (if supplied) holds the test data.
-* If the functions are asked to encode all factor and character columns, the encoded data will be returned in a `matrix`; otherwise the data will remain in either a `data.frame` or a `tibble`, whichever was passed.
-* If `test` is not supplied, the functions return a `matrix`, `data.frame`, or `tibble`, as described above.  Otherwise, they return a length-two list holding the relevant encoded datasets with names `train` and `test`.
+* The encoded data will be returned in either a `data.frame` or a `tibble`, whichever was passed (except for `catto_dummy` and `catto_onehot`, which currently always return a `data.frame`; this will be fixed in the future).
+* If `test` is not supplied, the functions return a `data.frame` or `tibble`, as described above.  Otherwise, they return a length-two list holding the relevant encoded datasets with names `train` and `test`.
 * They are designed to work in `dplyr`-style pipelines using `%>%` from `magrittr`.
 * They can handle data in a `data.frame` or `tibble`, and features can be specified in many different ways like in `dplyr`.  For example, the following are all equivalent for a data frame named `dat` with columns `x1` and `x2`.
 
@@ -86,15 +86,15 @@ Here we make the encoded datasets.
 
 ```{r}
 label_encoded <- flights %>%
-                   catto_label() # result is a matrix
+                   catto_label()
 
 mean_encoded <- flights %>%
-                  catto_mean(response = dep_delay) # result is a matrix
+                  catto_mean(response = dep_delay)
 
 mix_encoded <- flights %>%
-                 catto_freq(dest) %>% # result is still a tibble
-                 catto_label(origin) %>% # result is still a tibble
-                 catto_mean(response = dep_delay) # result is a matrix
+                 catto_freq(dest) %>%
+                 catto_label(origin) %>%
+                 catto_mean(response = dep_delay)
 ```
 
 Now we can finally build the models.  We define a short function `get_oob_error` that builds an untuned random forest and returns the out-of-bag error.
@@ -105,7 +105,7 @@ encodings <- list(label = label_encoded,
                   mix = mix_encoded)
 
 get_oob_error <- function(dat) {
-  rf <- ranger(data = dat,
+  rf <- ranger(data = as.data.frame(dat), # ranger can't handle tibbles
                num.trees = 100,
                dependent.variable.name = "dep_delay")
   rf$prediction.error

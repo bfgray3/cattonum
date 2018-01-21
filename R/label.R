@@ -35,29 +35,27 @@ ordered_labels <- function(.x, .type) {
 #' @param train The training data, in a \code{data.frame} or \code{tibble}.
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
+#' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param ordering How should labels be assigned to levels?  Options are
 #'   "increasing", "decreasing", "observed", and "random".
-#' @param test The test data, in a \code{data.frame} or \code{tibble}.
-#' @param seed To be used in the future.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE}.
-#' @return The encoded dataset in a \code{matrix} if all character and
-#'   factor columns have been encoded, otherwise the encoded dataset in
-#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-#'   dataset was provided, a named list is returned holding the encoded
-#'   training and test datasets.
+#' @param seed To be used in the future.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_label(iris, response = Sepal.Length)
 #' @export
 catto_label <- function(train,
                         ...,
+                        test,
                         ordering = c("increasing",
                                      "decreasing",
                                      "observed",
                                      "random"),
-                        test,
-                        seed = 4444,
-                        verbose = TRUE) {
+                        verbose = TRUE,
+                        seed = 4444) {
 
   validate_col_types(train)
   test_also <- ! missing(test)
@@ -74,10 +72,10 @@ catto_label <- function(train,
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 
   if (! test_also) {
-    mat_or_df(train)
+    train
   } else {
     test[cats] <- encode_from_lkp(test[cats], encoding_lkps)
-    lapply(list(train = train, test = test), mat_or_df)
+    list(train = train, test = test)
   }
 
 }

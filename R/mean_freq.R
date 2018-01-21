@@ -22,11 +22,9 @@ mean_labeler <- function(.grouping, .x, .f) {
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE}.
-#' @return The encoded dataset in a \code{matrix} if all character and
-#'   factor columns have been encoded, otherwise the encoded dataset in
-#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-#'   dataset was provided, a named list is returned holding the encoded
-#'   training and test datasets.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
@@ -62,10 +60,10 @@ catto_mean <- function(train,
   train[cats] <- encode_from_lkp(train[cats], mean_lkps)
 
   if (! test_also) {
-    mat_or_df(train)
+    train
   } else {
     test[cats] <- encode_from_lkp(test[cats], mean_lkps)
-    lapply(list(train = train, test = test), mat_or_df)
+    list(train = train, test = test)
   }
 
 }
@@ -92,15 +90,16 @@ freq_labeler <- function(.grouping) {
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE}.
-#' @return The encoded dataset in a \code{matrix} if all character and
-#'   factor columns have been encoded, otherwise the encoded dataset in
-#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-#'   dataset was provided, a named list is returned holding the encoded
-#'   training and test datasets.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_freq(iris, response = Sepal.Length)
 #' @export
-catto_freq <-  function(train, ..., test, verbose = TRUE) {
+catto_freq <-  function(train,
+                        ...,
+                        test,
+                        verbose = TRUE) {
 
   validate_col_types(train)
   test_also <- ! missing(test)
@@ -115,10 +114,10 @@ catto_freq <-  function(train, ..., test, verbose = TRUE) {
   train[cats] <- encode_from_lkp(train[cats], freq_lkps)
 
   if (! test_also) {
-    mat_or_df(train)
+    train
   } else {
     test[cats] <- encode_from_lkp(test[cats], freq_lkps)
-    lapply(list(train = train, test = test), mat_or_df)
+    list(train = train, test = test)
   }
 
 }

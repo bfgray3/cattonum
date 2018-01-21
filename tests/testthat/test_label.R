@@ -66,17 +66,16 @@ test_that("catto_label correctly encodes train data.", {
                                observed = ,
                                random = order_df)
 
-    expected_both <- as.matrix(expected_df_both)
     result_names <- c(paste0("label_fact", seq_len(6)),
                       paste0("label_char", seq_len(6)))
     char_and_fact <- mget(result_names)
 
     if (ordering_method != "random") {
-      for (m in char_and_fact) expect_equal(m, expected_both)
+      for (m in char_and_fact) expect_equal(m, expected_df_both)
     } else {
-      for (j in seq_len(ncol(expected_both))) {
+      for (j in seq_len(ncol(expected_df_both))) {
         expect_equal(sort(m[ , 1], na.last = TRUE),
-                     sort(expected_both[ , 1], na.last = TRUE))
+                     sort(expected_df_both[ , 1], na.last = TRUE))
       }
     }
 
@@ -99,7 +98,7 @@ test_that("catto_label correctly encodes train data.", {
 
 test_that("catto_label correctly encodes test data.", {
 
-  expected <- list(train = as.matrix(incr_df), test = as.matrix(encoded_test))
+  expected <- list(train = incr_df, test = encoded_test)
   expect_equal(catto_label(df_fact, test = test_df), expected)
 
 })

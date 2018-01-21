@@ -8,9 +8,11 @@ expected_df_both <- data.frame(y = y,
                                x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),
                                x2 = c(39 / 4, 39 / 4, 39 / 4, 12, 12, 39 / 4))
 
-expected_both <- as.matrix(expected_df_both)
+expected_tbl_both <- tibble::as_tibble(expected_df_both)
 
-expected_x1_df_fact <- data.frame(y, x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3), x2)
+expected_x1_df_fact <- data.frame(y,
+                                  x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),
+                                  x2)
 
 expected_x1_df_char <- data.frame(y,
                                   x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),
@@ -36,14 +38,14 @@ encoded_test <- data.frame(y = y[seq_len(5)],
 test_that("catto_mean: multiple data.frame training columns.", {
 
   both_encoded <- check_x1_x2_resp(catto_mean, "data.frame", .resp = resp_name)
-  for (m in both_encoded) expect_equal(m, expected_both)
+  for (m in both_encoded) expect_equal(m, expected_df_both)
 
 })
 
 test_that("catto_mean: multiple tibble training columns.", {
 
   both_encoded <- check_x1_x2_resp(catto_mean, "tibble", .resp = resp_name)
-  for (m in both_encoded) expect_equal(m, expected_both)
+  for (m in both_encoded) expect_equal(m, expected_tbl_both)
 
 })
 
@@ -88,7 +90,7 @@ test_that("catto_mean: one tibble training column.", {
 test_that("catto_mean correctly encodes test data.", {
 
   expect_equal(catto_mean(df_fact, test = test_df),
-               list(train = expected_both, test = as.matrix(encoded_test)))
+               list(train = expected_df_both, test = encoded_test))
 
 })
 

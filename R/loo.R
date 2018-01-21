@@ -22,11 +22,9 @@ loo_labeler <- function(.grp, .y) {
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE}.
-#' @return The encoded dataset in a \code{matrix} if all character and
-#'   factor columns have been encoded, otherwise the encoded dataset in
-#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-#'   dataset was provided, a named list is returned holding the encoded
-#'   training and test datasets.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_loo(iris, response = Sepal.Length)
 #' @export
@@ -62,9 +60,9 @@ catto_loo <- function(train,
   train[cats] <- lapply(train[cats], loo_labeler, .y = train[[response]])
 
   if (! test_also) {
-    mat_or_df(train)
+    train
   } else {
-    list(train = mat_or_df(train), test = test)
+    list(train = train, test = test)
   }
 
 }

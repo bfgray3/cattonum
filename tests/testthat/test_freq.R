@@ -8,7 +8,7 @@ expected_df_both <- data.frame(y = y,
                                x1 = c(3, 2, NA, 2, 3, 3),
                                x2 = c(4, 4, 4, 2, 2, 4))
 
-expected_both <- as.matrix(expected_df_both)
+expected_tbl_both <- tibble::as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y, x1 = c(3, 2, NA, 2, 3, 3), x2)
 
@@ -38,14 +38,14 @@ encoded_test <- data.frame(y = y[seq_len(5)],
 test_that("catto_freq: multiple data.frame training columns.", {
 
   both_encoded <- check_x1_x2(catto_freq, "data.frame")
-  for (m in both_encoded) expect_equal(m, expected_both)
+  for (m in both_encoded) expect_equal(m, expected_df_both)
 
 })
 
 test_that("catto_freq: multiple tibble training columns.", {
 
   both_encoded <- check_x1_x2(catto_freq, "tibble")
-  for (m in both_encoded) expect_equal(m, expected_both)
+  for (m in both_encoded) expect_equal(m, expected_tbl_both)
 
 })
 
@@ -91,7 +91,7 @@ test_that("catto_freq: one tibble training column.", {
 test_that("catto_freq correctly encodes test data.", {
 
   expect_equal(catto_freq(df_fact, test = test_df),
-               list(train = expected_both, test = as.matrix(encoded_test)))
+               list(train = expected_df_both, test = encoded_test))
 
 })
 

@@ -73,7 +73,7 @@ df_to_binary <- function(.df, .enc, .cats, .levs = NULL) {
 
 dummy_onehot <- function(.enc_type) {
 
-  function(train, ..., test) {
+  function(train, ..., test, verbose = TRUE) {
 
     validate_col_types(train)
     test_also <- ! missing(test)
@@ -91,10 +91,11 @@ dummy_onehot <- function(.enc_type) {
       test_expanded <- df_to_binary(test, .enc_type, cats, train_levels)
     }
 
+    # TODO: make sure this returns a tibble if one was passed; doesn't now
     if (! test_also) {
-      mat_or_df(train_expanded)
+      train_expanded
     } else {
-      lapply(list(train = train_expanded, test = test_expanded), mat_or_df)
+      list(train = train_expanded, test = test_expanded)
     }
 
   }
@@ -111,11 +112,10 @@ dummy_onehot <- function(.enc_type) {
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
-#' @return The encoded dataset in a \code{matrix} if all character and
-#'   factor columns have been encoded, otherwise the encoded dataset in
-#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-#'   dataset was provided, a named list is returned holding the encoded
-#'   training and test datasets.
+#' @param verbose To be used in the future.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_onehot(iris, response = Sepal.Length)
 #' @export
@@ -131,11 +131,10 @@ catto_onehot <- dummy_onehot("onehot")
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
-#' @return The encoded dataset in a \code{matrix} if all character and
-#'   factor columns have been encoded, otherwise the encoded dataset in
-#'   a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-#'   dataset was provided, a named list is returned holding the encoded
-#'   training and test datasets.
+#' @param verbose To be used in the future.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_dummy(iris, response = Sepal.Length)
 #' @export

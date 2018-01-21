@@ -8,7 +8,7 @@ expected_df_both <- data.frame(y = y,
                                x1b = c(0, 1, NA, 1, 0, 0),
                                x2d = c(0, 0, 0, 1, 1, 0))
 
-expected_both <- as.matrix(expected_df_both)
+expected_tbl_both <- tibble::as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
@@ -32,14 +32,15 @@ expected_x1_tbl_fact <- tibble::tibble(y,
 test_that("catto_dummy: multiple data.frame training columns.", {
 
   both_encoded <- check_x1_x2(catto_dummy, "data.frame")
-  for (m in both_encoded) expect_equal(m, expected_both)
+  for (m in both_encoded) expect_equal(m, expected_df_both)
 
 })
 
 test_that("catto_dummy: multiple tibble training columns.", {
 
   both_encoded <- check_x1_x2(catto_dummy, "tibble")
-  for (m in both_encoded) expect_equal(m, expected_both)
+  # TODO: make sure this returns a tibble
+  for (m in both_encoded) expect_equal(m, expected_df_both)
 
 })
 
