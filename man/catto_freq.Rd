@@ -18,11 +18,9 @@ all character and factor columns are encoded.}
 \code{TRUE}.}
 }
 \value{
-The encoded dataset in a \code{matrix} if all character and
-  factor columns have been encoded, otherwise the encoded dataset in
-  a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-  dataset was provided, a named list is returned holding the encoded
-  training and test datasets.
+The encoded dataset in a \code{data.frame} or \code{tibble},
+  whichever was input.  If a test dataset was provided, a named list
+  is returned holding the encoded training and test datasets.
 }
 \description{
 Frequency encoding

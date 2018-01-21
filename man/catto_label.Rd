@@ -4,8 +4,8 @@
 \alias{catto_label}
 \title{Label encoding}
 \usage{
-catto_label(train, ..., ordering = c("increasing", "decreasing", "observed",
-  "random"), test, seed = 4444, verbose = TRUE)
+catto_label(train, ..., test, ordering = c("increasing", "decreasing",
+  "observed", "random"), verbose = TRUE, seed = 4444)
 }
 \arguments{
 \item{train}{The training data, in a \code{data.frame} or \code{tibble}.}
@@ -13,22 +13,20 @@ catto_label(train, ..., ordering = c("increasing", "decreasing", "observed",
 \item{...}{The columns to be encoded.  If none are specified, then
 all character and factor columns are encoded.}
 
+\item{test}{The test data, in a \code{data.frame} or \code{tibble}.}
+
 \item{ordering}{How should labels be assigned to levels?  Options are
 "increasing", "decreasing", "observed", and "random".}
 
-\item{test}{The test data, in a \code{data.frame} or \code{tibble}.}
-
-\item{seed}{To be used in the future.}
-
 \item{verbose}{Should informative messages be printed?  Defaults to
 \code{TRUE}.}
+
+\item{seed}{To be used in the future.}
 }
 \value{
-The encoded dataset in a \code{matrix} if all character and
-  factor columns have been encoded, otherwise the encoded dataset in
-  a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-  dataset was provided, a named list is returned holding the encoded
-  training and test datasets.
+The encoded dataset in a \code{data.frame} or \code{tibble},
+  whichever was input.  If a test dataset was provided, a named list
+  is returned holding the encoded training and test datasets.
 }
 \description{
 Label encoding

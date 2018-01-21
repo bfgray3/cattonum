@@ -4,7 +4,7 @@
 \alias{catto_dummy}
 \title{Dummy encoding}
 \usage{
-catto_dummy(train, ..., test)
+catto_dummy(train, ..., test, verbose = TRUE)
 }
 \arguments{
 \item{train}{The training data, in a \code{data.frame} or \code{tibble}.}
@@ -13,13 +13,13 @@ catto_dummy(train, ..., test)
 all character and factor columns are encoded.}
 
 \item{test}{The test data, in a \code{data.frame} or \code{tibble}.}
+
+\item{verbose}{To be used in the future.}
 }
 \value{
-The encoded dataset in a \code{matrix} if all character and
-  factor columns have been encoded, otherwise the encoded dataset in
-  a \code{data.frame} or \code{tibble}, whichever was input.  If a test
-  dataset was provided, a named list is returned holding the encoded
-  training and test datasets.
+The encoded dataset in a \code{data.frame} or \code{tibble},
+  whichever was input.  If a test dataset was provided, a named list
+  is returned holding the encoded training and test datasets.
 }
 \description{
 Dummy encoding
