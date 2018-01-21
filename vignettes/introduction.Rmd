@@ -1,7 +1,5 @@
 ---
 title: "Introduction to cattonum"
-author: "Bernie Gray"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to cattonum}
@@ -18,7 +16,9 @@ knitr::opts_chunk$set(
 
 ## Background
 
-## Case Study Setup
+Categorical features often are a key part of many modern datasets in different industries.  When it comes to performing supervised learning on these datasets, tree-based models theoretically (and in practice with certain software, like [h2o](https://cran.r-project.org/web/packages/h2o/index.html)) handle raw categorical features, but most other models do not.  Many of the popular tree-based packages even require all numeric predictors.  There are several other packages that encode categorical features as numeric features, including [CatEncoders](https://cran.r-project.org/web/packages/CatEncoders/index.html), [dummies](https://cran.r-project.org/web/packages/dummies/index.html), [fastDummies](https://cran.r-project.org/web/packages/fastDummies/index.html), [h2o](https://cran.r-project.org/web/packages/h2o/index.html), [makedummies](https://cran.r-project.org/web/packages/makedummies/index.html), and [recipes](https://cran.r-project.org/web/packages/recipes/index.html).  These packages either provide a more limited selection of encoding options and/or are signifantly larger in scope and much more heavyweight.  `cattonum` aims to provide a one-stop-shop for categorical encodings.  Nothing more, nothing less.
+
+## Case study
 
 We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) in the the `flights` dataset using random forests built with `ranger`.
 
@@ -34,7 +34,7 @@ data(flights)
 str(flights)
 ```
 
-There are a lot of flights here and we don't want our model training to take forever, so let's only take a subset of these observations.  To simplify our analysis, we'll analyze only the three airlines with the most flights, only consider flights that were delayed in taking off, and remove some features.
+There are a lot of flights here and we don't want our model training to take forever, so let's only take a subset of these observations.  To simplify our analysis, we'll analyze only the three airlines with the most flights, consider only flights that were delayed in taking off, and remove some features.
 
 ```{r}
 airlines_to_keep <- flights %>%
@@ -49,7 +49,7 @@ flights <- flights %>%
 str(flights)
 ```
 
-In order to get more out of our time features, we'll do a quick transformation using the technique described [here](https://ianlondon.github.io/blog/encoding-cyclical-features-24hour-time/).  Also, `month` and `day` are currently integers, but they are really categorical, so we now turn them into characters (or factors, it doesn't matter for `cattonum`).
+In order to get more out of our time features, we'll do a quick transformation using the technique described [here](https://ianlondon.github.io/blog/encoding-cyclical-features-24hour-time/).  Also, `month` and `day` are currently integers, but they really are categorical, so we now turn them into characters (or factors, it doesn't matter for `cattonum`).  For simplicity and to maintain focus on `cattonum`, simply drop observations with missing values.
 
 ```{r}
 tot_mins <- 24 * 60
@@ -65,10 +65,12 @@ flights <- flights %>%
 str(flights)
 ```
 
-Now we turn to encoding our categorical features.  Consider a comparison between label encoding, mean encoding, and a mix of frequency, label, and mean encoding.  There are a few key points to note about the `catto_*` functions.
+Now we turn to encoding our categorical features.  Consider a comparison between label encoding, mean encoding, and a mix of frequency, label, and mean encoding.  First, note a few key facts about the `catto_*` functions.
 
+* They have three or four main parameters, depending on the function: `train`, `...`, `response`, and `test`.  `train` holds the training data, `...` is where the columns to be encoded are specified (if not supplied, all character and factor columns are encoded), `response` is the name of the response column for `catto_loo` and `catto_mean`, and `test` (if supplied) holds the test data.
+* If the functions are asked to encode all factor and character columns, the encoded data will be returned in a `matrix`; otherwise the data will remain in either a `data.frame` or a `tibble`, whichever was passed.
+* If `test` is not supplied, the functions return a `matrix`, `data.frame`, or `tibble`, as described above.  Otherwise, they return a length-two list holding the relevant encoded datasets with names `train` and `test`.
 * They are designed to work in `dplyr`-style pipelines using `%>%` from `magrittr`.
-*   If the function has encoded all factor and character columns, it will return a `matrix`; otherwise it will return either a `data.frame` or a `tibble`.
 * They can handle data in a `data.frame` or `tibble`, and features can be specified in many different ways like in `dplyr`.  For example, the following are all equivalent for a data frame named `dat` with columns `x1` and `x2`.
 
 ```{r, eval = FALSE}
