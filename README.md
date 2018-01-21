@@ -51,9 +51,7 @@ devtools::install_github("bfgray3/cattonum")
 ``` r
 library(cattonum)
 data(iris)
-encoded_iris <- catto_loo(iris)
-#> `response` not supplied; using first column 'Sepal.Length' as the response variable.
-head(encoded_iris)
+head(catto_loo(iris, response = Sepal.Length))
 #>      Sepal.Length Sepal.Width Petal.Length Petal.Width  Species
 #> [1,]          5.1         3.5          1.4         0.2 5.004082
 #> [2,]          4.9         3.0          1.4         0.2 5.008163

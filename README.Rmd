@@ -55,6 +55,5 @@ devtools::install_github("bfgray3/cattonum")
 ```{r}
 library(cattonum)
 data(iris)
-encoded_iris <- catto_loo(iris)
-head(encoded_iris)
+head(catto_loo(iris, response = Sepal.Length))
 ```
