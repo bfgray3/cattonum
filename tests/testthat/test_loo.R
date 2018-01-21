@@ -4,8 +4,6 @@ context("leave-one-out encoding")
 ### SETUP ###
 #############
 
-library(tibble)
-
 expected_df_both <- data.frame(y = y,
                                x1 = c(24, 8, NA, 2, 16.5, 8.5),
                                x2 = c(38 / 3, 37 / 3, 35 / 3, 16, 8, 7 / 3))
@@ -19,9 +17,11 @@ expected_x1_df_char <- data.frame(y,
                                   x2,
                                   stringsAsFactors = FALSE)
 
-expected_x1_tbl_char <- tibble(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2)
+expected_x1_tbl_char <- tibble::tibble(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2)
 
-expected_x1_tbl_fact <- tibble(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2 = factor(x2))
+expected_x1_tbl_fact <- tibble::tibble(y,
+                                       x1 = c(24, 8, NA, 2, 16.5, 8.5),
+                                       x2 = factor(x2))
 
 encoded_test <- data.frame(y = y[seq_len(5)],
                            x1 = c(NA, NA, 49 / 3, 5, 5),
@@ -64,9 +64,9 @@ test_that("catto_loo: one data.frame training column.", {
 
 })
 
-test_that("catto_loo: one tibble training column.", {
+test_that("catto_loo: one tibble::tibble training column.", {
 
-  one_encoded <- check_x1_resp(catto_loo, "tibble", .resp = resp_name)
+  one_encoded <- check_x1_resp(catto_loo, "tibble::tibble", .resp = resp_name)
   num_tests <- length(one_encoded)
 
   for (i in seq(from = 1, to = num_tests / 2)) {

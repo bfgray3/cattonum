@@ -4,8 +4,6 @@ context("dummy encoding")
 ### SETUP ###
 #############
 
-library(tibble)
-
 expected_df_both <- data.frame(y = y,
                                x1b = c(0, 1, NA, 1, 0, 0),
                                x2d = c(0, 0, 0, 1, 1, 0))
@@ -19,9 +17,13 @@ expected_x1_df_char <- data.frame(y,
                                   x1b = c(0, 1, NA, 1, 0, 0),
                                   stringsAsFactors = FALSE)
 
-expected_x1_tbl_char <- tibble(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
+expected_x1_tbl_char <- tibble::tibble(y,
+                                       x2,
+                                       x1b = c(0, 1, NA, 1, 0, 0))
 
-expected_x1_tbl_fact <- tibble(y, x2 = factor(x2), x1b = c(0, 1, NA, 1, 0, 0))
+expected_x1_tbl_fact <- tibble::tibble(y,
+                                       x2 = factor(x2),
+                                       x1b = c(0, 1, NA, 1, 0, 0))
 
 ###################################
 ### MULTIPLE TRAINING ENCODINGS ###

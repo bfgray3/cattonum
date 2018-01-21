@@ -1,5 +1,3 @@
-library(tibble)
-
 #################
 ### TEST DATA ###
 #################
@@ -12,8 +10,8 @@ x2 <- c("c", "c", "c", "d", "d", "c")
 df_fact <- data.frame(y, x1, x2)
 df_char <- data.frame(y, x1, x2, stringsAsFactors = FALSE)
 
-tbl_fact <- tibble(y, x1 = factor(x1), x2 = factor(x2))
-tbl_char <- tibble(y, x1, x2)
+tbl_fact <- tibble::tibble(y, x1 = factor(x1), x2 = factor(x2))
+tbl_char <- tibble::tibble(y, x1, x2)
 
 test_df <- data.frame(y = y[seq_len(5)],
                       x1 = c(NA, NA, "a", "b", "b"),
