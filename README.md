@@ -3,6 +3,7 @@
 
 # cattonum
 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cattonum)](http://cran.r-project.org/package=cattonum)
 [![Build
 Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=master)](https://travis-ci.org/bfgray3/cattonum)
 [![AppVeyor Build
@@ -33,16 +34,22 @@ features, including (among others):
   - [makedummies](https://cran.r-project.org/package=makedummies)
   - [recipes](https://cran.r-project.org/package=recipes)
 
-The goal of `catto_num` is to be a one-stop shop for all categorical
+The goal of `cattonum` is to be a one-stop shop for all categorical
 encoding needs. Nothing more, nothing less.
 
 ## Installation
 
-`cattonum` can be installed from GitHub with `devtools`.
+The development version of `cattonum` can be installed from GitHub.
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("bfgray3/cattonum")
+```
+
+The latest official release of `cattonum` can be installed from CRAN.
+
+``` r
+install.packages("cattonum")
 ```
 
 ## Usage
