@@ -6,7 +6,7 @@ Categorical features often are a key part of many modern datasets in different i
 
 * local Windows 10 Home install, R 3.4.3
 * ubuntu (on travis-ci), R 3.4.2
-* Windows Server (on AppVeyor), R 3.4.3 Patched (2018-01-19 r74138)
+* Windows Server (on AppVeyor), R 3.4.3 Patched
 
 ## R CMD check results
 
