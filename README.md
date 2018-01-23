@@ -24,15 +24,14 @@ features as numerics. It includes the following:
   - one-hot encoding: `catto_onehot`
 
 There are many existing packages with which to encode categorical
-features, including (among
-    others):
+features, including (among others):
 
-  - [CatEncoders](https://cran.r-project.org/web/packages/CatEncoders/index.html)
-  - [dummies](https://cran.r-project.org/web/packages/dummies/index.html)
-  - [fastDummies](https://cran.r-project.org/web/packages/fastDummies/index.html)
-  - [h2o](https://cran.r-project.org/web/packages/h2o/index.html)
-  - [makedummies](https://cran.r-project.org/web/packages/makedummies/index.html)
-  - [recipes](https://cran.r-project.org/web/packages/recipes/index.html)
+  - [CatEncoders](https://cran.r-project.org/package=CatEncoders)
+  - [dummies](https://cran.r-project.org/package=dummies)
+  - [fastDummies](https://cran.r-project.org/package=fastDummies)
+  - [h2o](https://cran.r-project.org/package=h2o)
+  - [makedummies](https://cran.r-project.org/package=makedummies)
+  - [recipes](https://cran.r-project.org/package=recipes)
 
 The goal of `catto_num` is to be a one-stop shop for all categorical
 encoding needs. Nothing more, nothing less.

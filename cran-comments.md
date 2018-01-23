@@ -10,9 +10,10 @@ Categorical features often are a key part of many modern datasets in different i
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 1 warning | 1 note
 
 * This is a new release.
+* 'qpdf' is needed for checks on size reduction of PDFs.
 
 ## Reverse dependencies
 

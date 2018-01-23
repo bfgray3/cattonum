@@ -4,7 +4,9 @@
 \name{cattonum}
 \alias{cattonum}
 \alias{cattonum-package}
-\title{cattonum: TODO}
+\title{cattonum: Encode Categorical Features}
 \description{
-TODO.
+Functions for dummy encoding, frequency encoding,
+label encoding, leave-one-out encoding, mean encoding,
+and one-hot encoding.
 }
