@@ -113,9 +113,9 @@ dummy_onehot <- function(.enc_type) {
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param verbose To be used in the future.
-#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
-#'   whichever was input.  If a test dataset was provided, a named list
-#'   is returned holding the encoded training and test datasets.
+#' @return The encoded dataset in a \code{data.frame}.  If a test dataset
+#'   was provided, a named list is returned holding the encoded training
+#'   and test datasets.
 #' @examples
 #' catto_onehot(iris, response = Sepal.Length)
 #' @export
@@ -132,9 +132,9 @@ catto_onehot <- dummy_onehot("onehot")
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param verbose To be used in the future.
-#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
-#'   whichever was input.  If a test dataset was provided, a named list
-#'   is returned holding the encoded training and test datasets.
+#' @return The encoded dataset in a \code{data.frame}.  If a test dataset
+#'   was provided, a named list is returned holding the encoded training
+#'   and test datasets.
 #' @examples
 #' catto_dummy(iris, response = Sepal.Length)
 #' @export
