@@ -46,7 +46,6 @@ flights <- flights %>%
              filter(carrier %in% airlines_to_keep, dep_delay > 0) %>%
              select(-c(year, dep_time, sched_dep_time, arr_time, sched_arr_time,
                        arr_delay, flight, tailnum, time_hour))
-str(flights)
 ```
 
 In order to get more out of our time features, we'll do a quick transformation using the technique described [here](https://ianlondon.github.io/blog/encoding-cyclical-features-24hour-time/).  Also, `month` and `day` are currently integers, but they really are categorical, so we now turn them into characters (or factors, it doesn't matter for `cattonum`).  For simplicity and to maintain focus on `cattonum`, simply drop observations with missing values.
@@ -87,14 +86,17 @@ Here we make the encoded datasets.
 ```{r}
 label_encoded <- flights %>%
                    catto_label()
+str(label_encoded)
 
 mean_encoded <- flights %>%
                   catto_mean(response = dep_delay)
+str(mean_encoded)
 
 mix_encoded <- flights %>%
                  catto_freq(dest) %>%
                  catto_label(origin) %>%
                  catto_mean(response = dep_delay)
+str(mix_encoded)
 ```
 
 Now we can finally build the models.  We define a short function `get_oob_error` that builds an untuned random forest and returns the out-of-bag error.
