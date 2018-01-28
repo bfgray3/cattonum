@@ -1,3 +1,7 @@
+## cattonum 0.0.2
+
+* `catto_dummy` and `catto_onehot` now both return a `tibble` when one is passed.
+
 ## cattonum 0.0.1
 
 * This is the first release of `cattonum`.  It currently includes the following encodings:

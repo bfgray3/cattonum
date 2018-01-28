@@ -47,7 +47,7 @@ catto_loo <- function(train,
               response, "' as the response variable.")
     }
   } else {
-    response <- tidyselect::vars_select(nms, !! rlang::enquo(response))
+    response <- tidyselect::vars_select(nms, !! dplyr::enquo(response))
   }
 
   cats <- pick_cols(train, ...)

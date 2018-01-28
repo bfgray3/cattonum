@@ -17,9 +17,9 @@ all character and factor columns are encoded.}
 \item{verbose}{To be used in the future.}
 }
 \value{
-The encoded dataset in a \code{data.frame}.  If a test dataset
-  was provided, a named list is returned holding the encoded training
-  and test datasets.
+The encoded dataset in a \code{data.frame} or \code{tibble},
+  whichever was input.  If a test dataset was provided, a named list
+  is returned holding the encoded training and test datasets.
 }
 \description{
 Dummy encoding

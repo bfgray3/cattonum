@@ -39,8 +39,7 @@ test_that("catto_dummy: multiple data.frame training columns.", {
 test_that("catto_dummy: multiple tibble training columns.", {
 
   both_encoded <- check_x1_x2(catto_dummy, "tibble")
-  # TODO: make sure this returns a tibble
-  for (m in both_encoded) expect_equal(m, expected_df_both)
+  for (m in both_encoded) expect_equal(m, expected_tbl_both)
 
 })
 
@@ -69,11 +68,11 @@ test_that("catto_dummy: one tibble training column.", {
   num_tests <- length(one_encoded)
 
   for (i in seq(from = 1, to = num_tests / 2)) {
-    expect_equal(one_encoded[[i]], expected_x1_df_fact)
+    expect_equal(one_encoded[[i]], expected_x1_tbl_fact)
   }
 
   for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
-    expect_equal(one_encoded[[i]], expected_x1_df_char)
+    expect_equal(one_encoded[[i]], expected_x1_tbl_char)
   }
 
 })

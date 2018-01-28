@@ -64,7 +64,7 @@ df_to_binary <- function(.df, .enc, .cats, .levs = NULL) {
   df_keep <- .df[setdiff(names(.df), .cats)]
   rm(.df)
   df_cat <- model_matrix(df_cat, .enc_type = .enc, .levels = .levs)
-  cbind(df_keep, df_cat)
+  dplyr::bind_cols(df_keep, as.data.frame(df_cat))
 }
 
 ####################
@@ -91,7 +91,6 @@ dummy_onehot <- function(.enc_type) {
       test_expanded <- df_to_binary(test, .enc_type, cats, train_levels)
     }
 
-    # TODO: make sure this returns a tibble if one was passed; doesn't now
     if (! test_also) {
       train_expanded
     } else {
@@ -113,9 +112,9 @@ dummy_onehot <- function(.enc_type) {
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param verbose To be used in the future.
-#' @return The encoded dataset in a \code{data.frame}.  If a test dataset
-#'   was provided, a named list is returned holding the encoded training
-#'   and test datasets.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_onehot(iris, response = Sepal.Length)
 #' @export
@@ -132,9 +131,9 @@ catto_onehot <- dummy_onehot("onehot")
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param verbose To be used in the future.
-#' @return The encoded dataset in a \code{data.frame}.  If a test dataset
-#'   was provided, a named list is returned holding the encoded training
-#'   and test datasets.
+#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   whichever was input.  If a test dataset was provided, a named list
+#'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_dummy(iris, response = Sepal.Length)
 #' @export

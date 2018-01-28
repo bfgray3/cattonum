@@ -14,7 +14,7 @@ BugReports: https://github.com/bfgray3/cattonum/issues
 Encoding: UTF-8
 Depends: R (>= 3.2.0)
 Imports:
-    rlang (>= 0.1.6),
+    dplyr (>= 0.7.0),
     stats,
     tidyselect (>= 0.2.3)
 LazyData: true
