@@ -17,7 +17,7 @@ Categorical features often are a key part of many modern datasets in different i
 
 ## Case study
 
-We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) in the the `flights` dataset using random forests built with `ranger`.
+We'll demonstrate how to use `cattonum` by predicting flight delays (`dep_delay`) in the the `nycflights13::flights` dataset using random forests built with `ranger`.
 
 ```{r}
 library(nycflights13)
