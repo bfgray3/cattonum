@@ -95,4 +95,17 @@ test_that("catto_dummy: one tibble training column.", {
 
 #})
 
+####################
+### MANY COLUMNS ###
+####################
+
+test_that("catto_dummy handles many columns.", {
+
+  wide <- as.data.frame(matrix(c("a", "b"), nrow = 2, ncol = 5e3))
+  expect_silent(encoded_wide <- catto_dummy(wide))
+  expect_equal(dim(wide), dim(encoded_wide))
+
+})
+
+
 ###

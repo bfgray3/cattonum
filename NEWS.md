@@ -1,6 +1,8 @@
 ## cattonum 0.0.2
 
 * `catto_dummy` and `catto_onehot` now both return a `tibble` when one is passed.
+* The following people have contributed to this release:
+    * [@dominickg](https://github.com/dominickg)
 
 ## cattonum 0.0.1
 

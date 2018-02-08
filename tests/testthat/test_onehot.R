@@ -43,9 +43,9 @@ test_that("catto_onehot correctly encodes train data.", {
 
 })
 
-##################
+#################
 ### TEST DATA ###
-##################
+#################
 
 test_that("catto_onehot correctly encodes test data.", {
 
@@ -63,4 +63,15 @@ test_that("catto_onehot correctly encodes test data.", {
 
 })
 
+####################
+### MANY COLUMNS ###
+####################
+
+test_that("catto_onehot handles many columns.", {
+
+  wide <- as.data.frame(matrix(c("a", "b"), nrow = 2, ncol = 5e3))
+  expect_silent(encoded_wide <- catto_onehot(wide))
+  expect_equal(c(nrow(wide), 2 * ncol(wide)), dim(encoded_wide))
+
+})
 ###
