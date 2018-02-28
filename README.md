@@ -1,62 +1,65 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+
+
 # cattonum
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cattonum)](http://cran.r-project.org/package=cattonum)
-[![Build
-Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=master)](https://travis-ci.org/bfgray3/cattonum)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?branch=master&svg=true)](https://ci.appveyor.com/project/bfgray3/cattonum)
-[![Coverage
-status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/cattonum)](http://cran.r-project.org/package=cattonum)
+[![Build Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=master)](https://travis-ci.org/bfgray3/cattonum)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?branch=master&svg=true)](https://ci.appveyor.com/project/bfgray3/cattonum)
+[![Coverage status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=master)
 
 ## Summary
 
-`cattonum` (cat to num) provides different ways to encode categorical
-features as numerics. It includes the following:
+`cattonum` (cat to num) provides different ways to encode categorical features as numerics.  It includes the following:
 
-  - dummy encoding: `catto_dummy`
-  - feature hashing (future)
-  - frequency encoding: `catto_freq`
-  - label encoding: `catto_label`
-  - leave-one-out encoding: `catto_loo`
-  - mean encoding: `catto_mean`
-  - one-hot encoding: `catto_onehot`
+* dummy encoding: `catto_dummy`
+* feature hashing (future)
+* frequency encoding: `catto_freq`
+* label encoding: `catto_label`
+* leave-one-out encoding: `catto_loo`
+* mean encoding: `catto_mean`
+* median encoding: `catto_median`
+* one-hot encoding: `catto_onehot`
 
-There are many existing packages with which to encode categorical
-features, including (among others):
+There are many existing packages with which to encode categorical features, including (among others):
 
-  - [CatEncoders](https://cran.r-project.org/package=CatEncoders)
-  - [dummies](https://cran.r-project.org/package=dummies)
-  - [FeatureHashing](https://CRAN.R-project.org/package=FeatureHashing)
-  - [fastDummies](https://cran.r-project.org/package=fastDummies)
-  - [h2o](https://cran.r-project.org/package=h2o)
-  - [makedummies](https://cran.r-project.org/package=makedummies)
-  - [recipes](https://cran.r-project.org/package=recipes)
-  - [vtreat](https://CRAN.R-project.org/package=vtreat)
+* [CatEncoders](https://cran.r-project.org/package=CatEncoders)
+* [dummies](https://cran.r-project.org/package=dummies)
+* [FeatureHashing](https://CRAN.R-project.org/package=FeatureHashing)
+* [fastDummies](https://cran.r-project.org/package=fastDummies)
+* [h2o](https://cran.r-project.org/package=h2o)
+* [makedummies](https://cran.r-project.org/package=makedummies)
+* [recipes](https://cran.r-project.org/package=recipes)
+* [vtreat](https://CRAN.R-project.org/package=vtreat)
 
-The goal of `cattonum` is to be a one-stop shop for all categorical
-encoding needs. Nothing more, nothing less.
+The goal of `cattonum` is to be a one-stop shop for all categorical encoding needs.  Nothing more, nothing less.
 
 ## Installation
 
 The development version of `cattonum` can be installed from GitHub.
 
-``` r
+
+```r
 # install.packages("devtools")
 devtools::install_github("bfgray3/cattonum")
 ```
 
 The latest official release of `cattonum` can be installed from CRAN.
 
-``` r
+
+```r
 install.packages("cattonum")
 ```
 
 ## Usage
 
-``` r
+
+```r
 library(cattonum)
 data(iris)
 head(catto_loo(iris, response = Sepal.Length))
