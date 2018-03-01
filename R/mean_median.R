@@ -13,40 +13,44 @@ center_labeler <- function(.grouping, .x, .f) {
 ### mean_median ###
 ###################
 
-mean_median <- function(.tr, ..., .r, .te, .fn, .v) {
-  
-  validate_col_types(.tr)
-  test_also <- ! missing(.te)
-  if (test_also) check_train_test(.tr, .te)
-  
-  nms <- names(.tr)
-  
-  if (missing(.r)) {
-    .r <- nms[1L]
-    if (.v) {
-      message("`response` not supplied; using first column '",
-              .r, "' as the response variable.")
+mean_median <- function(.enc_type) {
+
+  function(train, ..., response, test, verbose = TRUE){
+
+    validate_col_types(train)
+    test_also <- ! missing(test)
+    if (test_also) check_train_test(train, test)
+
+    nms <- names(train)
+
+    if (missing(response)) {
+      response <- nms[1L]
+      if (verbose) {
+        message("`response` not supplied; using first column '",
+                response, "' as the response variable.")
+      }
+    } else {
+      response <- tidyselect::vars_select(nms, !! dplyr::enquo(response))
     }
-  } else {
-    .r <- tidyselect::vars_select(nms, !! .r)
+
+    cats <- pick_cols(train, ...)
+
+    center_lkps <- lapply(train[cats],
+                          center_labeler,
+                          .x = train[[response]],
+                          .f = function(...) get(.enc_type)(..., na.rm = TRUE))
+
+    train[cats] <- encode_from_lkp(train[cats], center_lkps)
+
+    if (! test_also) {
+      train
+    } else {
+      test[cats] <- encode_from_lkp(test[cats], center_lkps)
+      list(train = train, test = test)
+    }
+
   }
-  
-  cats <- pick_cols(.tr, ...)
-  
-  center_lkps <- lapply(.tr[cats],
-                        center_labeler,
-                        .x = .tr[[.r]],
-                        .f = function(...) .fn(..., na.rm = TRUE))
-  
-  .tr[cats] <- encode_from_lkp(.tr[cats], center_lkps)
-  
-  if (! test_also) {
-    .tr
-  } else {
-    .te[cats] <- encode_from_lkp(.te[cats], center_lkps)
-    list(train = .tr, test = .te)
-  }
-  
+
 }
 
 ##################
@@ -68,28 +72,7 @@ mean_median <- function(.tr, ..., .r, .te, .fn, .v) {
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
-catto_mean <- function(train,
-                       ...,
-                       response,
-                       test,
-                       verbose = TRUE) {
-
-  if (!missing(response)){
-    mean_median(.tr = train, 
-                ..., 
-                .r = tidyselect::vars_select(names(train), !! dplyr::enquo(response)),
-                .te = test, 
-                .fn = mean, 
-                .v = verbose)
-  } else {
-    mean_median(.tr = train, 
-                ...,
-                .te = test, 
-                .fn = mean, 
-                .v = verbose)
-  }
-  
-}
+catto_mean <- mean_median("mean")
 
 ####################
 ### catto_median ###
@@ -110,27 +93,6 @@ catto_mean <- function(train,
 #' @examples
 #' catto_median(iris, response = Sepal.Length)
 #' @export
-catto_median <- function(train,
-                         ...,
-                         response,
-                         test,
-                         verbose = TRUE) {
-  
-  if (!missing(response)){
-    mean_median(.tr = train, 
-                ..., 
-                .r = tidyselect::vars_select(names(train), !! dplyr::enquo(response)),
-                .te = test, 
-                .fn = median, 
-                .v = verbose)
-  } else {
-    mean_median(.tr = train, 
-                ...,
-                .te = test, 
-                .fn = median, 
-                .v = verbose)
-  }
-  
-}
+catto_median <- mean_median("median")
 
 ###
