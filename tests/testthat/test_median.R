@@ -36,17 +36,17 @@ encoded_test <- data.frame(y = y[seq_len(5)],
 ###################################
 
 test_that("catto_median: multiple data.frame training columns.", {
-  
+
   both_encoded <- check_x1_x2_resp(catto_median, "data.frame", .resp = resp_name)
   for (m in both_encoded) expect_equal(m, expected_df_both)
-  
+
 })
 
 test_that("catto_median: multiple tibble training columns.", {
-  
+
   both_encoded <- check_x1_x2_resp(catto_median, "tibble", .resp = resp_name)
   for (m in both_encoded) expect_equal(m, expected_tbl_both)
-  
+
 })
 
 ##########################
@@ -54,33 +54,33 @@ test_that("catto_median: multiple tibble training columns.", {
 ##########################
 
 test_that("catto_median: one data.frame training column.", {
-  
+
   one_encoded <- check_x1_resp(catto_median, "data.frame", .resp = resp_name)
   num_tests <- length(one_encoded)
-  
+
   for (i in seq(from = 1, to = num_tests / 2)) {
     expect_equal(one_encoded[[i]], expected_x1_df_fact)
   }
-  
+
   for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
     expect_equal(one_encoded[[i]], expected_x1_df_char)
   }
-  
+
 })
 
 test_that("catto_median: one tibble training column.", {
-  
+
   one_encoded <- check_x1_resp(catto_median, "tibble", .resp = resp_name)
   num_tests <- length(one_encoded)
-  
+
   for (i in seq(from = 1, to = num_tests / 2)) {
     expect_equal(one_encoded[[i]], expected_x1_tbl_fact)
   }
-  
+
   for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
     expect_equal(one_encoded[[i]], expected_x1_tbl_char)
   }
-  
+
 })
 
 #################
@@ -88,10 +88,10 @@ test_that("catto_median: one tibble training column.", {
 #################
 
 test_that("catto_median correctly encodes test data.", {
-  
+
   expect_equal(catto_median(df_fact, test = test_df),
                list(train = expected_df_both, test = encoded_test))
-  
+
 })
 
 ###

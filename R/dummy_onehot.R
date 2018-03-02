@@ -14,7 +14,6 @@ make_form <- function(.vars, .enc = c("dummy", "onehot")) {
 ### set_levels ###
 ##################
 
-# TODO: just use `levels<-`
 set_levels <- function(.f, .l) {
   factor(.f, levels = .l)
 }

@@ -13,9 +13,9 @@ center_labeler <- function(.grouping, .x, .f) {
 ### mean_median ###
 ###################
 
-mean_median <- function(.enc_type) {
+mean_median <- function(.center_f) {
 
-  function(train, ..., response, test, verbose = TRUE){
+  function(train, ..., response, test, verbose = TRUE) {
 
     validate_col_types(train)
     test_also <- ! missing(test)
@@ -38,7 +38,7 @@ mean_median <- function(.enc_type) {
     center_lkps <- lapply(train[cats],
                           center_labeler,
                           .x = train[[response]],
-                          .f = function(...) get(.enc_type)(..., na.rm = TRUE))
+                          .f = .center_f)
 
     train[cats] <- encode_from_lkp(train[cats], center_lkps)
 
@@ -72,7 +72,7 @@ mean_median <- function(.enc_type) {
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
-catto_mean <- mean_median("mean")
+catto_mean <- mean_median(function(...) mean(..., na.rm = TRUE))
 
 ####################
 ### catto_median ###
@@ -93,6 +93,6 @@ catto_mean <- mean_median("mean")
 #' @examples
 #' catto_median(iris, response = Sepal.Length)
 #' @export
-catto_median <- mean_median("median")
+catto_median <- mean_median(function(...) median(..., na.rm = TRUE))
 
 ###

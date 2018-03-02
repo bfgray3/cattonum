@@ -22,6 +22,7 @@ features as numerics. It includes the following:
   - label encoding: `catto_label`
   - leave-one-out encoding: `catto_loo`
   - mean encoding: `catto_mean`
+  - median encoding: `catto_median`
   - one-hot encoding: `catto_onehot`
 
 There are many existing packages with which to encode categorical

@@ -4,7 +4,7 @@ Version: 0.0.1.9000
 Title: Encode Categorical Features
 Description: Functions for dummy encoding, frequency encoding,
     label encoding, leave-one-out encoding, mean encoding,
-    and one-hot encoding.
+    median encoding, and one-hot encoding.
 Authors@R: c(person("Bernie",
                     "Gray",
                     email = "bfgray3@gmail.com",
@@ -12,7 +12,7 @@ Authors@R: c(person("Bernie",
              person("Mark",
                     "Roepke",
                     email = "mroepke5@gmail.com",
-                    role = c("ctb")))
+                    role = "ctb"))
 URL: https://github.com/bfgray3/cattonum
 BugReports: https://github.com/bfgray3/cattonum/issues
 Encoding: UTF-8
