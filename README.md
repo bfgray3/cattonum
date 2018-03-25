@@ -10,6 +10,8 @@ Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=master)](https://travi
 Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?branch=master&svg=true)](https://ci.appveyor.com/project/bfgray3/cattonum)
 [![Coverage
 status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=master)
+[![Total
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/cattonum)](https://cran.rstudio.com/web/packages/cattonum/index.html)
 
 ## Summary
 
