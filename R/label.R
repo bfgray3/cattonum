@@ -26,6 +26,28 @@ ordered_labels <- function(.x, .how) {
 
 }
 
+###########################
+### parse_char_ordering ###
+###########################
+
+parse_char_ordering <- function(.ordering) {
+
+  valid_orderings <- c("increasing",
+                       "decreasing",
+                       "observed",
+                       "random")
+
+  if (length(.ordering) == 1) {
+    match.arg(.ordering, choices = valid_orderings)
+  } else {
+    vapply(.ordering,
+           match.arg,
+           character(1),
+           choices = valid_orderings)
+  }
+
+}
+
 ###################
 ### catto_label ###
 ###################
@@ -67,27 +89,15 @@ catto_label <- function(train,
 
   cats <- pick_cols(train, ...)
 
-
-  valid_orderings <- c("increasing",
-                       "decreasing",
-                       "observed",
-                       "random")
-
-  if (missing(ordering)) ordering <- "increasing"
-
-  if (is.list(ordering)) {
-    stopifnot(length(ordering) == length(cats))
-    # check that the levels are good
-  } else {
-    ordering <- if (length(ordering) == 1) {
-                  match.arg(ordering, choices = valid_orderings)
-                } else {
-                  vapply(ordering,
-                         match.arg,
-                         character(1),
-                         choices = valid_orderings)
-                }
-  }
+  ordering <- if (missing(ordering)) {
+                "increasing"
+              } else if (is.list(ordering)) {
+                stopifnot(length(ordering) == length(cats))
+                # check that the levels are good
+                # TODO: change the order of these if statements
+              } else {
+                parse_char_ordering(ordering)
+              }
 
   encoding_lkps <- Map(ordered_labels, .x = train[cats], .how = ordering)
 
