@@ -110,12 +110,14 @@ dummy_onehot <- function(.enc_type) {
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
-#' @param verbose To be used in the future.
+#' @param verbose Should informative messages be printed?  Defaults to
+#'   \code{TRUE} (not yet used).
 #' @return The encoded dataset in a \code{data.frame} or \code{tibble},
-#'   whichever was input.  If a test dataset was provided, a named list
-#'   is returned holding the encoded training and test datasets.
+#'   whichever was input.  If a test dataset was provided, a list with names
+#'   "train" and "test" is returned holding the encoded training and
+#'   test datasets.
 #' @examples
-#' catto_onehot(iris, response = Sepal.Length)
+#' catto_onehot(iris, Sepal.Length)
 #' @export
 catto_onehot <- dummy_onehot("onehot")
 
@@ -129,12 +131,14 @@ catto_onehot <- dummy_onehot("onehot")
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
-#' @param verbose To be used in the future.
+#' @param verbose Should informative messages be printed?  Defaults to
+#'   \code{TRUE} (not yet used).
 #' @return The encoded dataset in a \code{data.frame} or \code{tibble},
-#'   whichever was input.  If a test dataset was provided, a named list
-#'   is returned holding the encoded training and test datasets.
+#'   whichever was input.  If a test dataset was provided, a list with names
+#'   "train" and "test" is returned holding the encoded training and
+#'   test datasets.
 #' @examples
-#' catto_dummy(iris, response = Sepal.Length)
+#' catto_dummy(iris, Sepal.Length)
 #' @export
 catto_dummy <- dummy_onehot("dummy")
 

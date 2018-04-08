@@ -25,7 +25,6 @@ LazyData: true
 License: MIT + file LICENSE
 Suggests:
     covr,
-    dplyr,
     knitr,
     nycflights13,
     ranger,

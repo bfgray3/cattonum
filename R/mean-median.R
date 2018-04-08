@@ -67,8 +67,9 @@ mean_median <- function(.center_f) {
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE}.
 #' @return The encoded dataset in a \code{data.frame} or \code{tibble},
-#'   whichever was input.  If a test dataset was provided, a named list
-#'   is returned holding the encoded training and test datasets.
+#'   whichever was input.  If a test dataset was provided, a list with names
+#'   "train" and "test" is returned holding the encoded training and
+#'   test datasets.
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
@@ -88,8 +89,9 @@ catto_mean <- mean_median(function(...) mean(..., na.rm = TRUE))
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE}.
 #' @return The encoded dataset in a \code{data.frame} or \code{tibble},
-#'   whichever was input.  If a test dataset was provided, a named list
-#'   is returned holding the encoded training and test datasets.
+#'   whichever was input.  If a test dataset was provided, a list with names
+#'   "train" and "test" is returned holding the encoded training and
+#'   test datasets.
 #' @examples
 #' catto_median(iris, response = Sepal.Length)
 #' @export

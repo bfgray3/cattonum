@@ -64,7 +64,8 @@ make_lkp_tables.character <- function(.order, .dat, .seed) {
 }
 
 make_lkp_tables.default <- function(.order) {
-  stop("`make_lkp_tables` can't handle class", class(.order), ".", call. = FALSE)
+  stop("`make_lkp_tables` can't handle class", class(.order), ".",
+       call. = FALSE)
 }
 
 #####################
@@ -87,12 +88,13 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
 #' @param ordering How should labels be assigned to levels?  There are
-#'   three different ways to pass this argument.  First, a length one character
-#'   vector with value "increasing", "decreasing", "observed", or "random"
-#'   will apply that ordering to each column being encoded.  Second, a character
-#'   vector of length greater than one may be passed, specifying one of the above four
-#'   options for each column being encoded.  Finally, a list may be passed specifying
-#'   a user-defined ordering for each column being encoded.
+#'   three different ways to pass this argument.  First, a length one
+#'   character vector with value "increasing", "decreasing", "observed",
+#'   or "random" will apply that ordering to each column being encoded.
+#'   Second, a character vector of length greater than one may be passed,
+#'   specifying one of the above four options for each column being encoded.
+#'   Finally, a list may be passed specifying a user-defined ordering for each
+#'   column being encoded.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE} (not yet used).
 #' @param seed The random seed set before all random ordering encodings
