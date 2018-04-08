@@ -16,10 +16,10 @@ ordering_fun <- function(.method) {
 ### ordered_labels ###
 ######################
 
-ordered_labels <- function(.x, .type) {
+ordered_labels <- function(.x, .how) {
 
   if (is.factor(.x)) .x <- as.character(.x)
-  order_fun <- ordering_fun(.type)
+  order_fun <- ordering_fun(.how)
   ordered_labs <- order_fun(.x)
   data.frame(new_lab = seq_along(ordered_labs),
              row.names = ordered_labs)
@@ -36,8 +36,13 @@ ordered_labels <- function(.x, .type) {
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
 #' @param test The test data, in a \code{data.frame} or \code{tibble}.
-#' @param ordering How should labels be assigned to levels?  Options are
-#'   "increasing", "decreasing", "observed", and "random".
+#' @param ordering How should labels be assigned to levels?  There are
+#'   three different ways to pass this argument.  First, a length one character
+#'   vector with value "increasing", "decreasing", "observed", or "random"
+#'   will apply that ordering to each column being encoded.  Second, a character
+#'   vector of length greater than one may be passed, specifying one of the above four
+#'   options for each column being encoded.  Finally, a list may be passed specifying
+#'   a user-defined ordering for each column being encoded.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   \code{TRUE}.
 #' @param seed To be used in the future.
@@ -50,10 +55,7 @@ ordered_labels <- function(.x, .type) {
 catto_label <- function(train,
                         ...,
                         test,
-                        ordering = c("increasing",
-                                     "decreasing",
-                                     "observed",
-                                     "random"),
+                        ordering,
                         verbose = TRUE,
                         seed = 4444) {
 
@@ -63,11 +65,31 @@ catto_label <- function(train,
 
   nms <- names(train)
 
-  ordering <- match.arg(ordering)
-
   cats <- pick_cols(train, ...)
 
-  encoding_lkps <- lapply(train[cats], ordered_labels, .type = ordering)
+
+  valid_orderings <- c("increasing",
+                       "decreasing",
+                       "observed",
+                       "random")
+
+  if (missing(ordering)) ordering <- "increasing"
+
+  if (is.list(ordering)) {
+    stopifnot(length(ordering) == length(cats))
+    # check that the levels are good
+  } else {
+    ordering <- if (length(ordering) == 1) {
+                  match.arg(ordering, choices = valid_orderings)
+                } else {
+                  vapply(ordering,
+                         match.arg,
+                         character(1),
+                         choices = valid_orderings)
+                }
+  }
+
+  encoding_lkps <- Map(ordered_labels, .x = train[cats], .how = ordering)
 
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 

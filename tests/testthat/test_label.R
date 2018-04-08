@@ -92,14 +92,32 @@ test_that("catto_label correctly encodes train data.", {
 
 })
 
-##################
+#################
 ### TEST DATA ###
-##################
+#################
 
 test_that("catto_label correctly encodes test data.", {
 
   expected <- list(train = incr_df, test = encoded_test)
   expect_equal(catto_label(df_fact, test = test_df), expected)
+
+})
+
+test_that("catto_label handles different column-level encodings.", {
+
+
+
+
+
+  encoded <- catto_label(df_fact, ordering = c("increasing", "decreasing"))
+  expected <- data.frame(y = y,
+                         x1 = c(2, 1, NA, 1, 2, 2),
+                         x2 = c(1, 1, 1, 2, 2, 1))
+
+
+
+  expect_equal(encoded, expected)
+
 
 })
 
