@@ -26,26 +26,35 @@ ordered_labels <- function(.x, .how) {
 
 }
 
-###########################
-### parse_char_ordering ###
-###########################
+######################
+### parse_ordering ###
+######################
 
-parse_char_ordering <- function(.ordering) {
+parse_ordering <- function(.ordering, ...) UseMethod("parse_ordering")
+
+parse_ordering.character <- function(.ordering, .n_cats, ...) {
+
+  stopifnot(is.element(length(.ordering), c(1, .n_cats)))
 
   valid_orderings <- c("increasing",
                        "decreasing",
                        "observed",
                        "random")
 
-  if (length(.ordering) == 1) {
-    match.arg(.ordering, choices = valid_orderings)
-  } else {
-    vapply(.ordering,
-           match.arg,
-           character(1),
-           choices = valid_orderings)
-  }
+  vapply(.ordering,
+         match.arg,
+         character(1),
+         choices = valid_orderings)
 
+}
+
+parse_ordering.list <- function(.ordering, ...) {
+  .ordering
+}
+
+parse_ordering.default <- function(.ordering, ...) {
+  stop("`parse_ordering` can't handle class", class(.ordering), ".",
+       call. = FALSE)
 }
 
 #######################
@@ -58,12 +67,12 @@ make_lkp_tables.list <- function(.order, .dat, ...) {
   Map(lkp_from_list, .ord = .order, .orig_col = .dat)
 }
 
-make_lkp_tables.character <- function(.order, .dat, .seed) {
+make_lkp_tables.character <- function(.order, .dat, .seed, ...) {
   if (any(.order == "random")) set.seed(.seed)
   Map(ordered_labels, .x = .dat, .how = .order)
 }
 
-make_lkp_tables.default <- function(.order) {
+make_lkp_tables.default <- function(.order, ...) {
   stop("`make_lkp_tables` can't handle class", class(.order), ".",
        call. = FALSE)
 }
@@ -119,7 +128,7 @@ lkp_from_list <- function(.ord, .orig_col) {
 catto_label <- function(train,
                         ...,
                         test,
-                        ordering,
+                        ordering = "increasing",
                         verbose = TRUE,
                         seed = 4444) {
 
@@ -131,14 +140,7 @@ catto_label <- function(train,
 
   cats <- pick_cols(train, ...)
 
-  # TODO: make this slicker
-  if (missing(ordering)) {
-    ordering <- "increasing"
-  } else if (is.character(ordering)) {
-    ordering <- parse_char_ordering(ordering)
-  }
-
-  stopifnot(is.element(length(ordering), c(1, length(cats))))
+  ordering <- parse_ordering(ordering, length(cats))
 
   encoding_lkps <- make_lkp_tables(ordering, train[cats], seed)
 
