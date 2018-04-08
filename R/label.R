@@ -48,6 +48,33 @@ parse_char_ordering <- function(.ordering) {
 
 }
 
+#######################
+### make_lkp_tables ###
+#######################
+
+make_lkp_tables <- function(.order, ...) UseMethod("make_lkp_tables")
+
+make_lkp_tables.list <- function(.order, .dat) {
+  Map(lkp_from_list, .ord = .order, .orig_col = .dat)
+}
+
+make_lkp_tables.character <- function(.order, .dat) {
+  Map(ordered_labels, .x = .dat, .how = .order)
+}
+
+make_lkp_tables.default <- function(.order) {
+  stop("`make_lkp_tables` can't handle class", class(.order), ".", call. = FALSE)
+}
+
+#####################
+### lkp_from_list ###
+#####################
+
+lkp_from_list <- function(.ord, .orig_col) {
+  stopifnot(setequal(.ord, stats::na.omit(.orig_col)))
+  data.frame(new_lab = seq_along(.ord), row.names = .ord)
+}
+
 ###################
 ### catto_label ###
 ###################
@@ -73,6 +100,14 @@ parse_char_ordering <- function(.ordering) {
 #'   is returned holding the encoded training and test datasets.
 #' @examples
 #' catto_label(iris, response = Sepal.Length)
+#'
+#' y <- 2 ^ seq(from = 0, to = 5)
+#' x1 <- c("a", "b", NA, "b", "a", "a")
+#' x2 <- c("c", "c", "c", "d", "d", "c")
+#' df_fact <- data.frame(y, x1, x2)
+#'
+#' catto_label(df_fact,
+#'             ordering = list(c("b", "a"), c("c", "d")))
 #' @export
 catto_label <- function(train,
                         ...,
@@ -80,8 +115,6 @@ catto_label <- function(train,
                         ordering,
                         verbose = TRUE,
                         seed = 4444) {
-
-  # TODO: clean this up
 
   validate_col_types(train)
   test_also <- ! missing(test)
@@ -91,22 +124,16 @@ catto_label <- function(train,
 
   cats <- pick_cols(train, ...)
 
+  # TODO: make this slicker
   if (missing(ordering)) {
     ordering <- "increasing"
   } else if (is.character(ordering)) {
     ordering <- parse_char_ordering(ordering)
   }
 
-  # check that the levels are good when a list is passed
   stopifnot(is.element(length(ordering), c(1, length(cats))))
 
-  encoding_lkps <- if (is.list(ordering)) {
-                     lapply(ordering,
-                            function(.ord) data.frame(new_lab = seq_along(.ord),
-                                                      row.names = .ord))
-                   } else {
-                     Map(ordered_labels, .x = train[cats], .how = ordering)
-                   }
+  encoding_lkps <- make_lkp_tables(ordering, train[cats])
 
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 
