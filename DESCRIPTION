@@ -13,6 +13,7 @@ Authors@R: c(person("Bernie",
                     "Roepke",
                     email = "mroepke5@gmail.com",
                     role = "ctb"))
+Maintainer: Bernie Gray <bfgray3@gmail.com>
 URL: https://github.com/bfgray3/cattonum
 BugReports: https://github.com/bfgray3/cattonum/issues
 Encoding: UTF-8

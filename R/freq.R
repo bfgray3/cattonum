@@ -25,7 +25,7 @@ freq_labeler <- function(.grouping) {
 #'   "train" and "test" is returned holding the encoded training and
 #'   test datasets.
 #' @examples
-#' catto_freq(iris, Sepal.Length)
+#' catto_freq(iris)
 #' @export
 catto_freq <-  function(train,
                         ...,

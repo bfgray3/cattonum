@@ -117,7 +117,7 @@ dummy_onehot <- function(.enc_type) {
 #'   "train" and "test" is returned holding the encoded training and
 #'   test datasets.
 #' @examples
-#' catto_onehot(iris, Sepal.Length)
+#' catto_onehot(iris)
 #' @export
 catto_onehot <- dummy_onehot("onehot")
 
@@ -138,7 +138,7 @@ catto_onehot <- dummy_onehot("onehot")
 #'   "train" and "test" is returned holding the encoded training and
 #'   test datasets.
 #' @examples
-#' catto_dummy(iris, Sepal.Length)
+#' catto_dummy(iris)
 #' @export
 catto_dummy <- dummy_onehot("dummy")
 

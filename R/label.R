@@ -104,7 +104,7 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   "train" and "test" is returned holding the encoded training and
 #'   test datasets.
 #' @examples
-#' catto_label(iris, Sepal.Length)
+#' catto_label(iris)
 #'
 #' y <- 2 ^ seq(from = 0, to = 5)
 #' x1 <- c("a", "b", NA, "b", "a", "a")
