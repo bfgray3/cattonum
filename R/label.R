@@ -54,11 +54,12 @@ parse_char_ordering <- function(.ordering) {
 
 make_lkp_tables <- function(.order, ...) UseMethod("make_lkp_tables")
 
-make_lkp_tables.list <- function(.order, .dat) {
+make_lkp_tables.list <- function(.order, .dat, ...) {
   Map(lkp_from_list, .ord = .order, .orig_col = .dat)
 }
 
-make_lkp_tables.character <- function(.order, .dat) {
+make_lkp_tables.character <- function(.order, .dat, .seed) {
+  if (any(.order == "random")) set.seed(.seed)
   Map(ordered_labels, .x = .dat, .how = .order)
 }
 
@@ -93,13 +94,15 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   options for each column being encoded.  Finally, a list may be passed specifying
 #'   a user-defined ordering for each column being encoded.
 #' @param verbose Should informative messages be printed?  Defaults to
-#'   \code{TRUE}.
-#' @param seed To be used in the future.
+#'   \code{TRUE} (not yet used).
+#' @param seed The random seed set before all random ordering encodings
+#'   if there are any.
 #' @return The encoded dataset in a \code{data.frame} or \code{tibble},
-#'   whichever was input.  If a test dataset was provided, a named list
-#'   is returned holding the encoded training and test datasets.
+#'   whichever was input.  If a test dataset was provided, a list with names
+#'   "train" and "test" is returned holding the encoded training and
+#'   test datasets.
 #' @examples
-#' catto_label(iris, response = Sepal.Length)
+#' catto_label(iris, Sepal.Length)
 #'
 #' y <- 2 ^ seq(from = 0, to = 5)
 #' x1 <- c("a", "b", NA, "b", "a", "a")
@@ -108,6 +111,8 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'
 #' catto_label(df_fact,
 #'             ordering = list(c("b", "a"), c("c", "d")))
+#'
+#' catto_label(df_fact, ordering = c("increasing", "decreasing"))
 #' @export
 catto_label <- function(train,
                         ...,
@@ -133,7 +138,7 @@ catto_label <- function(train,
 
   stopifnot(is.element(length(ordering), c(1, length(cats))))
 
-  encoding_lkps <- make_lkp_tables(ordering, train[cats])
+  encoding_lkps <- make_lkp_tables(ordering, train[cats], seed)
 
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 

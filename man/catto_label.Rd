@@ -23,20 +23,22 @@ options for each column being encoded.  Finally, a list may be passed specifying
 a user-defined ordering for each column being encoded.}
 
 \item{verbose}{Should informative messages be printed?  Defaults to
-\code{TRUE}.}
+\code{TRUE} (not yet used).}
 
-\item{seed}{To be used in the future.}
+\item{seed}{The random seed set before all random ordering encodings
+if there are any.}
 }
 \value{
 The encoded dataset in a \code{data.frame} or \code{tibble},
-  whichever was input.  If a test dataset was provided, a named list
-  is returned holding the encoded training and test datasets.
+  whichever was input.  If a test dataset was provided, a list with names
+  "train" and "test" is returned holding the encoded training and
+  test datasets.
 }
 \description{
 Label encoding
 }
 \examples{
-catto_label(iris, response = Sepal.Length)
+catto_label(iris, Sepal.Length)
 
 y <- 2 ^ seq(from = 0, to = 5)
 x1 <- c("a", "b", NA, "b", "a", "a")
@@ -45,4 +47,6 @@ df_fact <- data.frame(y, x1, x2)
 
 catto_label(df_fact,
             ordering = list(c("b", "a"), c("c", "d")))
+
+catto_label(df_fact, ordering = c("increasing", "decreasing"))
 }
