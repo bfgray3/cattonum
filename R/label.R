@@ -81,6 +81,8 @@ catto_label <- function(train,
                         verbose = TRUE,
                         seed = 4444) {
 
+  # TODO: clean this up
+
   validate_col_types(train)
   test_also <- ! missing(test)
   if (test_also) check_train_test(train, test)
@@ -89,17 +91,22 @@ catto_label <- function(train,
 
   cats <- pick_cols(train, ...)
 
-  ordering <- if (missing(ordering)) {
-                "increasing"
-              } else if (is.list(ordering)) {
-                stopifnot(length(ordering) == length(cats))
-                # check that the levels are good
-                # TODO: change the order of these if statements
-              } else {
-                parse_char_ordering(ordering)
-              }
+  if (missing(ordering)) {
+    ordering <- "increasing"
+  } else if (is.character(ordering)) {
+    ordering <- parse_char_ordering(ordering)
+  }
 
-  encoding_lkps <- Map(ordered_labels, .x = train[cats], .how = ordering)
+  # check that the levels are good when a list is passed
+  stopifnot(is.element(length(ordering), c(1, length(cats))))
+
+  encoding_lkps <- if (is.list(ordering)) {
+                     lapply(ordering,
+                            function(.ord) data.frame(new_lab = seq_along(.ord),
+                                                      row.names = .ord))
+                   } else {
+                     Map(ordered_labels, .x = train[cats], .how = ordering)
+                   }
 
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 

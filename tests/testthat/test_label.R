@@ -105,19 +105,25 @@ test_that("catto_label correctly encodes test data.", {
 
 test_that("catto_label handles different column-level encodings.", {
 
-
-
-
-
   encoded <- catto_label(df_fact, ordering = c("increasing", "decreasing"))
   expected <- data.frame(y = y,
                          x1 = c(2, 1, NA, 1, 2, 2),
                          x2 = c(1, 1, 1, 2, 2, 1))
 
-
-
   expect_equal(encoded, expected)
 
+})
+
+
+test_that("catto_label handles user-specified orderings.", {
+
+  encoded <- catto_label(df_fact,
+                         ordering = list(c("b", "a"), c("c", "d")))
+  expected <- data.frame(y = y,
+                         x1 = c(2, 1, NA, 1, 2, 2),
+                         x2 = c(1, 1, 1, 2, 2, 1))
+
+  expect_equal(encoded, expected)
 
 })
 
