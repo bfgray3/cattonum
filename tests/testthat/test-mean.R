@@ -93,5 +93,3 @@ test_that("catto_mean correctly encodes test data.", {
                list(train = expected_df_both, test = encoded_test))
 
 })
-
-###

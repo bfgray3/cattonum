@@ -7,5 +7,3 @@
 #' @docType package
 #' @name cattonum
 NULL
-
-###

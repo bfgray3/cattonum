@@ -52,5 +52,3 @@ catto_freq <-  function(train,
   }
 
 }
-
-###

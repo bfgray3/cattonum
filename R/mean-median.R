@@ -96,5 +96,3 @@ catto_mean <- mean_median(function(...) mean(..., na.rm = TRUE))
 #' catto_median(iris, response = Sepal.Length)
 #' @export
 catto_median <- mean_median(function(...) median(..., na.rm = TRUE))
-
-###

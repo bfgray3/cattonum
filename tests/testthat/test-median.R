@@ -93,5 +93,3 @@ test_that("catto_median correctly encodes test data.", {
                list(train = expected_df_both, test = encoded_test))
 
 })
-
-###

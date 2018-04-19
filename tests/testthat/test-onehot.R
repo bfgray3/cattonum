@@ -74,4 +74,3 @@ test_that("catto_onehot handles many columns.", {
   expect_equal(c(nrow(wide), 2 * ncol(wide)), dim(encoded_wide))
 
 })
-###

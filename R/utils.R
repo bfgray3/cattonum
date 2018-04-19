@@ -99,5 +99,3 @@ expand_lkp <- function(.dat, .lookup_table) {
 encode_from_lkp <- function(.d, .l) {
   Map(expand_lkp, .dat = .d, .lookup_table = .l)
 }
-
-###

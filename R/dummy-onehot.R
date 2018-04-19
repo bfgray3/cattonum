@@ -141,5 +141,3 @@ catto_onehot <- dummy_onehot("onehot")
 #' catto_dummy(iris)
 #' @export
 catto_dummy <- dummy_onehot("dummy")
-
-###

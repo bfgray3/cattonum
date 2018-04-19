@@ -154,5 +154,3 @@ catto_label <- function(train,
   }
 
 }
-
-###

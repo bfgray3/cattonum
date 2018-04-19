@@ -106,6 +106,3 @@ test_that("catto_dummy handles many columns.", {
   expect_equal(dim(wide), dim(encoded_wide))
 
 })
-
-
-###

@@ -126,5 +126,3 @@ test_that("catto_label handles user-specified orderings.", {
   expect_equal(encoded, expected)
 
 })
-
-###

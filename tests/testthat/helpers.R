@@ -120,5 +120,3 @@ check_x1_resp <- function(.encoder, .data_class, .resp) {
        .encoder(char, tidyselect::one_of("x1"), response = .resp))
 
 }
-
-###

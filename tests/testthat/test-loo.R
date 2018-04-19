@@ -89,5 +89,3 @@ test_that("catto_loo correctly encodes test data.", {
                list(train = expected_df_both, test = encoded_test))
 
 })
-
-###

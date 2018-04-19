@@ -67,5 +67,3 @@ catto_loo <- function(train,
   }
 
 }
-
-###
