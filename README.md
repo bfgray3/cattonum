@@ -33,8 +33,8 @@ features, including (among others):
 
   - [CatEncoders](https://cran.r-project.org/package=CatEncoders)
   - [dummies](https://cran.r-project.org/package=dummies)
-  - [FeatureHashing](https://CRAN.R-project.org/package=FeatureHashing)
   - [fastDummies](https://cran.r-project.org/package=fastDummies)
+  - [FeatureHashing](https://CRAN.R-project.org/package=FeatureHashing)
   - [h2o](https://cran.r-project.org/package=h2o)
   - [makedummies](https://cran.r-project.org/package=makedummies)
   - [recipes](https://cran.r-project.org/package=recipes)
