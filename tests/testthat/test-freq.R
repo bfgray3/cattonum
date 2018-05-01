@@ -86,9 +86,9 @@ test_that("catto_freq: one tibble training column.", {
 })
 
 
-##################
+#################
 ### TEST DATA ###
-##################
+#################
 
 test_that("catto_freq correctly encodes test data.", {
 

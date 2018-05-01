@@ -76,24 +76,25 @@ test_that("catto_dummy: one tibble training column.", {
   }
 
 })
+
 #################
 ### TEST DATA ###
 #################
 
-#test_that("catto_dummy correctly encodes test data.", {
+test_that("catto_dummy correctly encodes test data.", {
 
-#  test_df <- data.frame(y = seq_len(3),
-#                        x1 = c("e", NA, "b"),
-#                        x2 = c("c", "d","c"))
+  small_test_df <- data.frame(y = seq_len(3),
+                              x1 = c("e", NA, "b"),
+                              x2 = c("c", "d","c"))
 
-#  expected_test <- data.frame(y = seq_len(3),
-#                              x2 = c("c", "d", "c"),
-#                              x1b = c(NA, NA, 1))
+  expected_test <- data.frame(y = seq_len(3),
+                              x2 = c("c", "d", "c"),
+                              x1b = c(NA, NA, 1))
 
-#  expect_equal(catto_dummy(df_fact, x1, test = test_df),
-#               list(train = expected_x1, test = expected_test))
+  expect_equal(catto_dummy(df_fact, x1, test = small_test_df),
+               list(train = expected_x1_df_fact, test = expected_test))
 
-#})
+})
 
 ####################
 ### MANY COLUMNS ###
