@@ -1,6 +1,6 @@
 Type: Package
 Package: cattonum
-Version: 0.0.1.9000
+Version: 0.0.2
 Title: Encode Categorical Features
 Description: Functions for dummy encoding, frequency encoding,
     label encoding, leave-one-out encoding, mean encoding,

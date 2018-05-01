@@ -115,7 +115,7 @@ lkp_from_list <- function(.ord, .orig_col) {
 #' @examples
 #' catto_label(iris)
 #'
-#' y <- 2 ^ seq(from = 0, to = 5)
+#' y <- 2 ^ 0:5
 #' x1 <- c("a", "b", NA, "b", "a", "a")
 #' x2 <- c("c", "c", "c", "d", "d", "c")
 #' df_fact <- data.frame(y, x1, x2)

@@ -12,6 +12,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?bran
 status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=master)
 [![Total
 Downloads](http://cranlogs.r-pkg.org/badges/grand-total/cattonum)](https://cran.rstudio.com/web/packages/cattonum/index.html)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
 ## Summary
 
@@ -47,8 +48,7 @@ encoding needs. Nothing more, nothing less.
 The development version of `cattonum` can be installed from GitHub.
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("bfgray3/cattonum")
+remotes::install_github("bfgray3/cattonum")
 ```
 
 The latest official release of `cattonum` can be installed from CRAN.
