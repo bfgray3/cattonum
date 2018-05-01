@@ -27,5 +27,5 @@ The encoded dataset in a \code{data.frame} or \code{tibble},
 Frequency encoding
 }
 \examples{
-catto_freq(iris, Sepal.Length)
+catto_freq(iris)
 }

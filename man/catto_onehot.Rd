@@ -27,5 +27,5 @@ The encoded dataset in a \code{data.frame} or \code{tibble},
 One-hot encoding
 }
 \examples{
-catto_onehot(iris, Sepal.Length)
+catto_onehot(iris)
 }

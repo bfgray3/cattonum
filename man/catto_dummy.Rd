@@ -27,5 +27,5 @@ The encoded dataset in a \code{data.frame} or \code{tibble},
 Dummy encoding
 }
 \examples{
-catto_dummy(iris, Sepal.Length)
+catto_dummy(iris)
 }
