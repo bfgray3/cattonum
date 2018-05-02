@@ -3,7 +3,7 @@
 
 # cattonum
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cattonum)](http://cran.r-project.org/package=cattonum)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cattonum)](https://CRAN.R-project.org/package=cattonum)
 [![Build
 Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=master)](https://travis-ci.org/bfgray3/cattonum)
 [![AppVeyor Build
@@ -11,7 +11,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?bran
 [![Coverage
 status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=master)
 [![Total
-Downloads](http://cranlogs.r-pkg.org/badges/grand-total/cattonum)](https://cran.rstudio.com/web/packages/cattonum/index.html)
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/cattonum)](https://CRAN.R-project.org/package=cattonum)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
 ## Summary
