@@ -21,7 +21,8 @@ Depends: R (>= 3.2.0)
 Imports:
     dplyr (>= 0.7.0),
     stats,
-    tidyselect (>= 0.2.3)
+    tidyselect (>= 0.2.3),
+    Rcpp
 LazyData: true
 License: MIT + file LICENSE
 Suggests:
@@ -34,3 +35,5 @@ Suggests:
     tibble
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp
