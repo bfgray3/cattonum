@@ -8,3 +8,4 @@
 ^codecov\.yml$
 ^appveyor\.yml$
 ^LICENSE\.md$
+^revdep$
