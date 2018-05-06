@@ -1,5 +1,9 @@
 #include <Rcpp.h>
 
+/********************
+*** mean_cattonum ***
+********************/
+
 // [[Rcpp::export]]
 double mean_cattonum(const Rcpp::NumericVector& x) {
 
