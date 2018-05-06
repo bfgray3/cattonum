@@ -4,7 +4,7 @@
 
 loo_labeler <- function(.grp, .y) {
   r <- vapply(seq_along(.grp),
-              function(.i) mean(.y[-.i][.grp[-.i] == .grp[.i]], na.rm = TRUE),
+              function(.i) mean_cattonum(.y[-.i][.grp[-.i] == .grp[.i]]),
               numeric(1L))
   replace(r, is.nan(r), NA)
 }

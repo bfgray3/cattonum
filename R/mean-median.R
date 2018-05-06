@@ -73,7 +73,7 @@ mean_median <- function(.center_f) {
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
-catto_mean <- mean_median(function(...) mean(..., na.rm = TRUE))
+catto_mean <- mean_median(mean_cattonum)
 
 ####################
 ### catto_median ###
