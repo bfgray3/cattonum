@@ -34,6 +34,7 @@ test_that("catto_label correctly encodes train data.", {
   for (ordering_method in order_options) {
 
     ### ALL CATEGORICAL COLUMNS ###
+    col <- c("x1", "x2")
 
     label_fact1 <- catto_label(df_fact,
                                ordering = ordering_method)
@@ -47,6 +48,8 @@ test_that("catto_label correctly encodes train data.", {
                                ordering = ordering_method)
     label_fact6 <- catto_label(df_fact, tidyselect::one_of("x1", "x2"),
                                ordering = ordering_method)
+    label_fact7 <- catto_label(df_fact, col,
+                               ordering = ordering_method)
     label_char1 <- catto_label(df_char,
                                ordering = ordering_method)
     label_char2 <- catto_label(df_char, x1, x2,
@@ -59,6 +62,8 @@ test_that("catto_label correctly encodes train data.", {
                                ordering = ordering_method)
     label_char6 <- catto_label(df_char, tidyselect::one_of("x1", "x2"),
                                ordering = ordering_method)
+    label_char7 <- catto_label(df_char, col,
+                               ordering = ordering_method)
 
     expected_df_both <- switch(ordering_method,
                                increasing = incr_df,
@@ -66,8 +71,8 @@ test_that("catto_label correctly encodes train data.", {
                                observed = ,
                                random = order_df)
 
-    result_names <- c(paste0("label_fact", seq_len(6)),
-                      paste0("label_char", seq_len(6)))
+    result_names <- c(paste0("label_fact", seq_len(7)),
+                      paste0("label_char", seq_len(7)))
     char_and_fact <- mget(result_names)
 
     if (ordering_method != "random") {
