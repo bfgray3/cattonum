@@ -71,3 +71,9 @@ head(catto_loo(iris, response = Sepal.Length))
 #> 5          5.0         3.6          1.4         0.2 5.006122
 #> 6          5.4         3.9          1.7         0.4 4.997959
 ```
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of
+Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
+to abide by its terms.

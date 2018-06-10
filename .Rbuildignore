@@ -9,3 +9,4 @@
 ^appveyor\.yml$
 ^LICENSE\.md$
 ^revdep$
+^CODE_OF_CONDUCT\.md$
