@@ -78,7 +78,7 @@ dummy_onehot <- function(.enc_type) {
     test_also <- ! missing(test)
     if (test_also) check_train_test(train, test)
 
-    cats <- pick_cols(train, ...)
+    cats <- pick_cols(train, deparse(substitute(train)), ...)
 
     train_expanded <- df_to_binary(train, .enc_type, cats)
 

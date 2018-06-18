@@ -38,7 +38,7 @@ catto_freq <-  function(train,
 
   nms <- names(train)
 
-  cats <- pick_cols(train, ...)
+  cats <- pick_cols(train, deparse(substitute(train)), ...)
 
   freq_lkps <- lapply(train[cats], freq_labeler)
 

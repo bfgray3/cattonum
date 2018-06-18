@@ -33,7 +33,7 @@ mean_median <- function(.center_f) {
       response <- tidyselect::vars_select(nms, !! dplyr::enquo(response))
     }
 
-    cats <- pick_cols(train, ...)
+    cats <- pick_cols(train, deparse(substitute(train)), ...)
 
     center_lkps <- lapply(train[cats],
                           center_labeler,

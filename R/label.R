@@ -138,7 +138,7 @@ catto_label <- function(train,
 
   nms <- names(train)
 
-  cats <- pick_cols(train, ...)
+  cats <- pick_cols(train, deparse(substitute(train)), ...)
 
   ordering <- parse_ordering(ordering, length(cats))
 

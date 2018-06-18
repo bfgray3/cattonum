@@ -6,8 +6,10 @@ validate_col_types <- function(.df) {
   good_cols <- vapply(.df, good_col_type, logical(1L))
   if (! all(good_cols)) {
     bad_cols <- names(.df)[! good_cols]
+    bad_col_list <- colname_list(bad_cols)
+    error_msg_verb <- if (length(bad_cols) > 1L) " are " else " is "
     stop("All columns must be numeric, character, or factor. ",
-         colname_list(bad_cols), " are not", call. = FALSE)
+         bad_col_list, error_msg_verb, "not.", call. = FALSE)
   }
 }
 
@@ -39,16 +41,15 @@ dots_to_char <- function(...) {
 ### pick_cols ###
 #################
 
-pick_cols <- function(.df, ...) {
+pick_cols <- function(.df, .df_name, ...) {
   if (length(substitute(alist(...))) == 1L) {
     all_cats(.df)
   } else {
     nms <- names(.df)
     col_spec <- dots_to_char(...)
-    df_name <- deparse(substitute(.df))
     bad_cols_error <- function(e) {
-      stop(col_spec, " is not a valid column specification for ",
-           df_name, ".", call. = FALSE)
+      stop("'", col_spec, "' is not a valid column specification for ",
+           .df_name, ".", call. = FALSE)
     }
     tryCatch(tidyselect::vars_select(nms, ...),
              error = bad_cols_error)

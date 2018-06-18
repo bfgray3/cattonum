@@ -50,7 +50,7 @@ catto_loo <- function(train,
     response <- tidyselect::vars_select(nms, !! dplyr::enquo(response))
   }
 
-  cats <- pick_cols(train, ...)
+  cats <- pick_cols(train, deparse(substitute(train)), ...)
 
   if (test_also) {
     # unneccessarily encodes training data with means
