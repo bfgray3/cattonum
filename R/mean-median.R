@@ -73,7 +73,12 @@ mean_median <- function(.center_f) {
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
-catto_mean <- mean_median(mean_cattonum)
+catto_mean <- function(train, ..., response, test, verbose = TRUE) {
+  UseMethod("catto_mean")
+}
+
+#' @export
+catto_mean.data.frame <- mean_median(mean_cattonum)
 
 ####################
 ### catto_median ###
@@ -95,4 +100,9 @@ catto_mean <- mean_median(mean_cattonum)
 #' @examples
 #' catto_median(iris, response = Sepal.Length)
 #' @export
-catto_median <- mean_median(function(...) median(..., na.rm = TRUE))
+catto_median <- function(train, ..., response, test, verbose = TRUE) {
+  UseMethod("catto_median")
+}
+
+#' @export
+catto_median.data.frame <- mean_median(function(...) median(..., na.rm = TRUE))

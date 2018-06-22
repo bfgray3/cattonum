@@ -27,10 +27,18 @@ freq_labeler <- function(.grouping) {
 #' @examples
 #' catto_freq(iris)
 #' @export
-catto_freq <-  function(train,
-                        ...,
-                        test,
-                        verbose = TRUE) {
+catto_freq <- function(train,
+                       ...,
+                       test,
+                       verbose = TRUE) {
+  UseMethod("catto_freq")
+}
+
+#' @export
+catto_freq.data.frame <-  function(train,
+                                   ...,
+                                   test,
+                                   verbose = TRUE) {
 
   validate_col_types(train)
   test_also <- ! missing(test)

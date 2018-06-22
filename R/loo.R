@@ -29,10 +29,19 @@ loo_labeler <- function(.grp, .y) {
 #' catto_loo(iris, response = Sepal.Length)
 #' @export
 catto_loo <- function(train,
-                       ...,
-                       response,
-                       test,
-                       verbose = TRUE) {
+                      ...,
+                      response,
+                      test,
+                      verbose = TRUE) {
+  UseMethod("catto_loo")
+}
+
+#' @export
+catto_loo.data.frame <- function(train,
+                                 ...,
+                                 response,
+                                 test,
+                                 verbose = TRUE) {
 
   validate_col_types(train)
   test_also <- ! missing(test)

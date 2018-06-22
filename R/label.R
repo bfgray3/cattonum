@@ -131,6 +131,16 @@ catto_label <- function(train,
                         ordering = "increasing",
                         verbose = TRUE,
                         seed = 4444) {
+  UseMethod("catto_label")
+}
+
+#' @export
+catto_label.data.frame <- function(train,
+                                   ...,
+                                   test,
+                                   ordering = "increasing",
+                                   verbose = TRUE,
+                                   seed = 4444) {
 
   validate_col_types(train)
   test_also <- ! missing(test)

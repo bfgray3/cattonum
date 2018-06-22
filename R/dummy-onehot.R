@@ -119,7 +119,12 @@ dummy_onehot <- function(.enc_type) {
 #' @examples
 #' catto_onehot(iris)
 #' @export
-catto_onehot <- dummy_onehot("onehot")
+catto_onehot <- function(train, ..., test, verbose = TRUE) {
+  UseMethod("catto_onehot")
+}
+
+#' @export
+catto_onehot.data.frame <- dummy_onehot("onehot")
 
 ###################
 ### catto_dummy ###
@@ -140,4 +145,9 @@ catto_onehot <- dummy_onehot("onehot")
 #' @examples
 #' catto_dummy(iris)
 #' @export
-catto_dummy <- dummy_onehot("dummy")
+catto_dummy <- function(train, ..., test, verbose = TRUE) {
+  UseMethod("catto_dummy")
+}
+
+#' @export
+catto_dummy.data.frame <- dummy_onehot("dummy")
