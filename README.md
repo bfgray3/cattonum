@@ -33,6 +33,7 @@ features, including (among others):
 
   - [CatEncoders](https://cran.r-project.org/package=CatEncoders)
   - [dummies](https://cran.r-project.org/package=dummies)
+  - [embed](https://github.com/tidymodels/embed)
   - [fastDummies](https://cran.r-project.org/package=fastDummies)
   - [FeatureHashing](https://CRAN.R-project.org/package=FeatureHashing)
   - [h2o](https://cran.r-project.org/package=h2o)
