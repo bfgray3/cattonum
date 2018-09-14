@@ -42,7 +42,7 @@ dots_to_char <- function(...) {
 #################
 
 pick_cols <- function(.df, .df_name, ...) {
-  if (length(substitute(alist(...))) == 1L) {
+  if (identical(length(substitute(alist(...))), 1L)) {
     all_cats(.df)
   } else {
     nms <- names(.df)
