@@ -44,7 +44,7 @@ There are many existing packages with which to encode categorical features, incl
 * [recipes](https://cran.r-project.org/package=recipes)
 * [vtreat](https://CRAN.R-project.org/package=vtreat)
 
-The goal of `cattonum` is to be a one-stop shop for all categorical encoding needs.  Nothing more, nothing less.
+The goal of `cattonum` is to be a one-stop shop for all categorical encoding needs.
 
 ## Installation
 

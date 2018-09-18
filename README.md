@@ -42,7 +42,7 @@ features, including (among others):
   - [vtreat](https://CRAN.R-project.org/package=vtreat)
 
 The goal of `cattonum` is to be a one-stop shop for all categorical
-encoding needs. Nothing more, nothing less.
+encoding needs.
 
 ## Installation
 
