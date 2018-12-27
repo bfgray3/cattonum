@@ -21,10 +21,9 @@ knitr::opts_chunk$set(collapse = TRUE,
 
 ## Summary
 
-`cattonum` (cat to num) provides different ways to encode categorical features as numerics.  It includes the following:
+`cattonum` ("cat to num") provides different ways to encode categorical features as numerics.  Its goal is to be a one-stop shop for all categorical encoding needs.  It includes the following:
 
 * dummy encoding: `catto_dummy`
-* feature hashing (future)
 * frequency encoding: `catto_freq`
 * label encoding: `catto_label`
 * leave-one-out encoding: `catto_loo`
@@ -36,14 +35,13 @@ There are many existing packages with which to encode categorical features, incl
 
 * [CatEncoders](https://cran.r-project.org/package=CatEncoders)
 * [dummies](https://cran.r-project.org/package=dummies)
+* [embed](https://github.com/topepo/embed)
 * [fastDummies](https://cran.r-project.org/package=fastDummies)
 * [FeatureHashing](https://CRAN.R-project.org/package=FeatureHashing)
 * [h2o](https://cran.r-project.org/package=h2o)
 * [makedummies](https://cran.r-project.org/package=makedummies)
 * [recipes](https://cran.r-project.org/package=recipes)
 * [vtreat](https://CRAN.R-project.org/package=vtreat)
-
-The goal of `cattonum` is to be a one-stop shop for all categorical encoding needs.  Nothing more, nothing less.
 
 ## Installation
 
