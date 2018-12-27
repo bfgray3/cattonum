@@ -43,7 +43,7 @@ parse_ordering.character <- function(.ordering, .n_cats, ...) {
 
   vapply(.ordering,
          match.arg,
-         character(1),
+         character(1L),
          choices = valid_orderings)
 
 }

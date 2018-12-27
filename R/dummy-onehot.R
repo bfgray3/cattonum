@@ -33,7 +33,7 @@ model_matrix <- function(.df,
   }
   form <- make_form(.cols, .enc_type)
   mf <- stats::model.frame(form, data = .df, na.action = stats::na.pass)
-  if (.enc_type == "onehot") {
+  if (identical(.enc_type, "onehot")) {
     cs <- lapply(.df[.cols], stats::contrasts, contrasts = FALSE)
     mm <- stats::model.matrix(form, mf, contrasts.arg = cs)
   } else {
