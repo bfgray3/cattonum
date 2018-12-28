@@ -34,7 +34,8 @@ Suggests:
     rmarkdown,
     testthat,
     tibble
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 LinkingTo: 
     Rcpp
+Roxygen: list(markdown = TRUE)

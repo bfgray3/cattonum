@@ -106,13 +106,13 @@ dummy_onehot <- function(.enc_type) {
 
 #' One-hot encoding
 #'
-#' @param train The training data, in a \code{data.frame} or \code{tibble}.
+#' @param train The training data, in a `data.frame` or `tibble`.
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
-#' @param test The test data, in a \code{data.frame} or \code{tibble}.
+#' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
-#'   \code{TRUE} (not yet used).
-#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   `TRUE` (not yet used).
+#' @return The encoded dataset in a `data.frame` or `tibble`,
 #'   whichever was input.  If a test dataset was provided, a list with names
 #'   "train" and "test" is returned holding the encoded training and
 #'   test datasets.
@@ -132,13 +132,13 @@ catto_onehot.data.frame <- dummy_onehot("onehot")
 
 #' Dummy encoding
 #'
-#' @param train The training data, in a \code{data.frame} or \code{tibble}.
+#' @param train The training data, in a `data.frame` or `tibble`.
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
-#' @param test The test data, in a \code{data.frame} or \code{tibble}.
+#' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
-#'   \code{TRUE} (not yet used).
-#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#'   `TRUE` (not yet used).
+#' @return The encoded dataset in a `data.frame` or `tibble`,
 #'   whichever was input.  If a test dataset was provided, a list with names
 #'   "train" and "test" is returned holding the encoded training and
 #'   test datasets.
