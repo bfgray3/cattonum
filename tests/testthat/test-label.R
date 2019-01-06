@@ -1,9 +1,5 @@
 context("label encoding")
 
-#############
-### SETUP ###
-#############
-
 incr_df <- data.frame(y = y,
                       x1 = c(2, 1, NA, 1, 2, 2),
                       x2 = c(2, 2, 2, 1, 1, 2))
@@ -16,13 +12,9 @@ order_df <- data.frame(y = y,
                        x1 = c(1, 2, NA, 2, 1, 1),
                        x2 = c(1, 1, 1, 2, 2, 1))
 
-encoded_test <- data.frame(y = y[seq_len(5)],
+encoded_test <- data.frame(y = y[seq(5)],
                            x1 = c(NA, NA, 2, 1, 1),
                            x2 = c(1, NA, NA, 2, 2))
-
-##################
-### TRAIN DATA ###
-##################
 
 test_that("catto_label correctly encodes train data.", {
 
@@ -71,14 +63,14 @@ test_that("catto_label correctly encodes train data.", {
                                observed = ,
                                random = order_df)
 
-    result_names <- c(paste0("label_fact", seq_len(7)),
-                      paste0("label_char", seq_len(7)))
+    result_names <- c(paste0("label_fact", seq(7)),
+                      paste0("label_char", seq(7)))
     char_and_fact <- mget(result_names)
 
     if (ordering_method != "random") {
       for (m in char_and_fact) expect_equal(m, expected_df_both)
     } else {
-      for (j in seq_len(ncol(expected_df_both))) {
+      for (j in seq(ncol(expected_df_both))) {
         expect_equal(sort(m[ , 1], na.last = TRUE),
                      sort(expected_df_both[ , 1], na.last = TRUE))
       }
@@ -96,10 +88,6 @@ test_that("catto_label correctly encodes train data.", {
   }
 
 })
-
-#################
-### TEST DATA ###
-#################
 
 test_that("catto_label correctly encodes test data.", {
 

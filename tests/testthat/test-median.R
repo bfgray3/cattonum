@@ -1,14 +1,12 @@
 context("median encoding")
 
-#############
-### SETUP ###
-#############
+library(tibble)
 
 expected_df_both <- data.frame(y = y,
                                x1 = c(16, 5, NA, 5, 16, 16),
                                x2 = c(3, 3, 3, 12, 12, 3))
 
-expected_tbl_both <- tibble::as_tibble(expected_df_both)
+expected_tbl_both <- as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y,
                                   x1 = c(16, 5, NA, 5, 16, 16),
@@ -19,21 +17,13 @@ expected_x1_df_char <- data.frame(y,
                                   x2,
                                   stringsAsFactors = FALSE)
 
-expected_x1_tbl_char <- tibble::tibble(y,
-                                       x1 = c(16, 5, NA, 5, 16, 16),
-                                       x2)
+expected_x1_tbl_char <- tibble(y, x1 = c(16, 5, NA, 5, 16, 16), x2)
 
-expected_x1_tbl_fact <- tibble::tibble(y,
-                                       x1 = c(16, 5, NA, 5, 16, 16),
-                                       x2 = factor(x2))
+expected_x1_tbl_fact <- tibble(y, x1 = c(16, 5, NA, 5, 16, 16), x2 = factor(x2))
 
-encoded_test <- data.frame(y = y[seq_len(5)],
+encoded_test <- data.frame(y = y[seq(5)],
                            x1 = c(NA, NA, 16, 5, 5),
                            x2 = c(12, NA, NA, 3, 3))
-
-###################################
-### MULTIPLE TRAINING ENCODINGS ###
-###################################
 
 test_that("catto_median: multiple data.frame training columns.", {
 
@@ -48,10 +38,6 @@ test_that("catto_median: multiple tibble training columns.", {
   for (m in both_encoded) expect_equal(m, expected_tbl_both)
 
 })
-
-##########################
-### ONE TRAIN ENCODING ###
-##########################
 
 test_that("catto_median: one data.frame training column.", {
 
@@ -82,10 +68,6 @@ test_that("catto_median: one tibble training column.", {
   }
 
 })
-
-#################
-### TEST DATA ###
-#################
 
 test_that("catto_median correctly encodes test data.", {
 
