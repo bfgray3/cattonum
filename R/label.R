@@ -92,10 +92,10 @@ lkp_from_list <- function(.ord, .orig_col) {
 
 #' Label encoding
 #'
-#' @param train The training data, in a \code{data.frame} or \code{tibble}.
+#' @param train The training data, in a `data.frame` or `tibble`.
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
-#' @param test The test data, in a \code{data.frame} or \code{tibble}.
+#' @param test The test data, in a `data.frame` or `tibble`.
 #' @param ordering How should labels be assigned to levels?  There are
 #'   three different ways to pass this argument.  First, a length one
 #'   character vector with value "increasing", "decreasing", "observed",
@@ -105,10 +105,10 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   Finally, a list may be passed specifying a user-defined ordering for each
 #'   column being encoded.
 #' @param verbose Should informative messages be printed?  Defaults to
-#'   \code{TRUE} (not yet used).
+#'   `TRUE` (not yet used).
 #' @param seed The random seed set before all random ordering encodings
 #'   if there are any.
-#' @return The encoded dataset in a \code{data.frame} or \code{tibble},
+#' @return The encoded dataset in a `data.frame` or `tibble`,
 #'   whichever was input.  If a test dataset was provided, a list with names
 #'   "train" and "test" is returned holding the encoded training and
 #'   test datasets.
