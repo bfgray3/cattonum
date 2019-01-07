@@ -1,14 +1,12 @@
 context("dummy encoding")
 
-#############
-### SETUP ###
-#############
+library(tibble)
 
 expected_df_both <- data.frame(y = y,
                                x1b = c(0, 1, NA, 1, 0, 0),
                                x2d = c(0, 0, 0, 1, 1, 0))
 
-expected_tbl_both <- tibble::as_tibble(expected_df_both)
+expected_tbl_both <- as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
@@ -17,17 +15,9 @@ expected_x1_df_char <- data.frame(y,
                                   x1b = c(0, 1, NA, 1, 0, 0),
                                   stringsAsFactors = FALSE)
 
-expected_x1_tbl_char <- tibble::tibble(y,
-                                       x2,
-                                       x1b = c(0, 1, NA, 1, 0, 0))
+expected_x1_tbl_char <- tibble(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
-expected_x1_tbl_fact <- tibble::tibble(y,
-                                       x2 = factor(x2),
-                                       x1b = c(0, 1, NA, 1, 0, 0))
-
-###################################
-### MULTIPLE TRAINING ENCODINGS ###
-###################################
+expected_x1_tbl_fact <- tibble(y, x2 = factor(x2), x1b = c(0, 1, NA, 1, 0, 0))
 
 test_that("catto_dummy: multiple data.frame training columns.", {
 
@@ -42,10 +32,6 @@ test_that("catto_dummy: multiple tibble training columns.", {
   for (m in both_encoded) expect_equal(m, expected_tbl_both)
 
 })
-
-##########################
-### ONE TRAIN ENCODING ###
-##########################
 
 test_that("catto_dummy: one data.frame training column.", {
 
@@ -77,17 +63,13 @@ test_that("catto_dummy: one tibble training column.", {
 
 })
 
-#################
-### TEST DATA ###
-#################
-
 test_that("catto_dummy correctly encodes test data.", {
 
-  small_test_df <- data.frame(y = seq_len(3),
+  small_test_df <- data.frame(y = seq(3),
                               x1 = c("e", NA, "b"),
                               x2 = c("c", "d","c"))
 
-  expected_test <- data.frame(y = seq_len(3),
+  expected_test <- data.frame(y = seq(3),
                               x2 = c("c", "d", "c"),
                               x1b = c(NA, NA, 1))
 
@@ -96,14 +78,10 @@ test_that("catto_dummy correctly encodes test data.", {
 
 })
 
-####################
-### MANY COLUMNS ###
-####################
-
 test_that("catto_dummy handles many columns.", {
 
   wide <- as.data.frame(matrix(c("a", "b"), nrow = 2, ncol = 5e3))
   expect_silent(encoded_wide <- catto_dummy(wide))
-  expect_equal(dim(wide), dim(encoded_wide))
+  expect_identical(dim(wide), dim(encoded_wide))
 
 })
