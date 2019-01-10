@@ -45,14 +45,10 @@ pick_cols <- function(.df, .df_name, ...) {
   if (identical(length(substitute(alist(...))), 1L)) {
     all_cats(.df)
   } else {
-    nms <- names(.df)
     col_spec <- dots_to_char(...)
-    bad_cols_error <- function(e) {
-      stop("'", col_spec, "' is not a valid column specification for ",
-           .df_name, ".", call. = FALSE)
-    }
-    tryCatch(tidyselect::vars_select(nms, ...),
-             error = bad_cols_error)
+    tryCatch(tidyselect::vars_select(dplyr::tbl_vars(.df), ...),
+             error = function(e) stop("'", col_spec, "' is not a valid column specification for ",
+                                      .df_name, ".", call. = FALSE))
   }
 }
 
