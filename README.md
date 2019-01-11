@@ -13,6 +13,7 @@ status](https://codecov.io/gh/bfgray3/cattonum/branch/master/graph/badge.svg)](h
 [![Total
 Downloads](http://cranlogs.r-pkg.org/badges/grand-total/cattonum)](https://CRAN.R-project.org/package=cattonum)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 
 ## Summary
 
