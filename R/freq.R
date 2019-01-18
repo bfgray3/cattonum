@@ -35,13 +35,12 @@ catto_freq <- function(train,
 }
 
 #' @export
-catto_freq.data.frame <-  function(train,
-                                   ...,
-                                   test,
-                                   verbose = TRUE) {
-
+catto_freq.data.frame <- function(train,
+                                  ...,
+                                  test,
+                                  verbose = TRUE) {
   validate_col_types(train)
-  test_also <- ! missing(test)
+  test_also <- !missing(test)
   if (test_also) check_train_test(train, test)
 
   nms <- names(train)
@@ -52,11 +51,10 @@ catto_freq.data.frame <-  function(train,
 
   train[cats] <- encode_from_lkp(train[cats], freq_lkps)
 
-  if (! test_also) {
+  if (!test_also) {
     train
   } else {
     test[cats] <- encode_from_lkp(test[cats], freq_lkps)
     list(train = train, test = test)
   }
-
 }

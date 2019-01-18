@@ -3,13 +3,12 @@
 ####################
 
 ordering_fun <- function(.method) {
-
   switch(.method,
-         increasing = function(...) ordered_by_freq(..., .decr = FALSE),
-         decreasing = function(...) ordered_by_freq(..., .decr = TRUE),
-         observed = function(...) unique(stats::na.omit(...)),
-         random = function(...) sample(unique(stats::na.omit(...))))
-
+    increasing = function(...) ordered_by_freq(..., .decr = FALSE),
+    decreasing = function(...) ordered_by_freq(..., .decr = TRUE),
+    observed = function(...) unique(stats::na.omit(...)),
+    random = function(...) sample(unique(stats::na.omit(...)))
+  )
 }
 
 ######################
@@ -17,13 +16,13 @@ ordering_fun <- function(.method) {
 ######################
 
 ordered_labels <- function(.x, .how) {
-
   if (is.factor(.x)) .x <- as.character(.x)
   order_fun <- ordering_fun(.how)
   ordered_labs <- order_fun(.x)
-  data.frame(new_lab = seq_along(ordered_labs),
-             row.names = ordered_labs)
-
+  data.frame(
+    new_lab = seq_along(ordered_labs),
+    row.names = ordered_labs
+  )
 }
 
 ######################
@@ -33,19 +32,20 @@ ordered_labels <- function(.x, .how) {
 parse_ordering <- function(.ordering, ...) UseMethod("parse_ordering")
 
 parse_ordering.character <- function(.ordering, .n_cats, ...) {
-
   stopifnot(is.element(length(.ordering), c(1, .n_cats)))
 
-  valid_orderings <- c("increasing",
-                       "decreasing",
-                       "observed",
-                       "random")
+  valid_orderings <- c(
+    "increasing",
+    "decreasing",
+    "observed",
+    "random"
+  )
 
   vapply(.ordering,
-         match.arg,
-         character(1L),
-         choices = valid_orderings)
-
+    match.arg,
+    character(1L),
+    choices = valid_orderings
+  )
 }
 
 parse_ordering.list <- function(.ordering, ...) {
@@ -54,7 +54,8 @@ parse_ordering.list <- function(.ordering, ...) {
 
 parse_ordering.default <- function(.ordering, ...) {
   stop("`parse_ordering` can't handle class", class(.ordering), ".",
-       call. = FALSE)
+    call. = FALSE
+  )
 }
 
 #######################
@@ -74,7 +75,8 @@ make_lkp_tables.character <- function(.order, .dat, .seed, ...) {
 
 make_lkp_tables.default <- function(.order, ...) {
   stop("`make_lkp_tables` can't handle class", class(.order), ".",
-       call. = FALSE)
+    call. = FALSE
+  )
 }
 
 #####################
@@ -114,15 +116,16 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   test datasets.
 #' @examples
 #' catto_label(iris)
-#'
-#' y <- 2 ^ (0:5)
+#' 
+#' y <- 2^(0:5)
 #' x1 <- c("a", "b", NA, "b", "a", "a")
 #' x2 <- c("c", "c", "c", "d", "d", "c")
 #' df_fact <- data.frame(y, x1, x2)
-#'
+#' 
 #' catto_label(df_fact,
-#'             ordering = list(c("b", "a"), c("c", "d")))
-#'
+#'   ordering = list(c("b", "a"), c("c", "d"))
+#' )
+#' 
 #' catto_label(df_fact, ordering = c("increasing", "decreasing"))
 #' @export
 catto_label <- function(train,
@@ -141,9 +144,8 @@ catto_label.data.frame <- function(train,
                                    ordering = "increasing",
                                    verbose = TRUE,
                                    seed = 4444) {
-
   validate_col_types(train)
-  test_also <- ! missing(test)
+  test_also <- !missing(test)
   if (test_also) check_train_test(train, test)
 
   nms <- names(train)
@@ -156,11 +158,10 @@ catto_label.data.frame <- function(train,
 
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 
-  if (! test_also) {
+  if (!test_also) {
     train
   } else {
     test[cats] <- encode_from_lkp(test[cats], encoding_lkps)
     list(train = train, test = test)
   }
-
 }

@@ -3,9 +3,11 @@
 ###################
 
 loo_labeler <- function(.grp, .y) {
-  vapply(seq_along(.grp),
-         function(.i) mean_cattonum(.y[-.i][.grp[-.i] == .grp[.i]]),
-         numeric(1L))
+  vapply(
+    seq_along(.grp),
+    function(.i) mean_cattonum(.y[-.i][.grp[-.i] == .grp[.i]]),
+    numeric(1L)
+  )
 }
 
 #################
@@ -42,9 +44,8 @@ catto_loo.data.frame <- function(train,
                                  response,
                                  test,
                                  verbose = TRUE) {
-
   validate_col_types(train)
-  test_also <- ! missing(test)
+  test_also <- !missing(test)
   if (test_also) check_train_test(train, test)
 
   nms <- names(train)
@@ -52,11 +53,13 @@ catto_loo.data.frame <- function(train,
   if (missing(response)) {
     response <- nms[1L]
     if (verbose) {
-      message("`response` not supplied; using first column '",
-              response, "' as the response variable.")
+      message(
+        "`response` not supplied; using first column '",
+        response, "' as the response variable."
+      )
     }
   } else {
-    response <- tidyselect::vars_select(nms, !! dplyr::enquo(response))
+    response <- tidyselect::vars_select(nms, !!dplyr::enquo(response))
   }
 
   cats <- pick_cols(train, deparse(substitute(train)), ...)
@@ -68,10 +71,9 @@ catto_loo.data.frame <- function(train,
 
   train[cats] <- lapply(train[cats], loo_labeler, .y = train[[response]])
 
-  if (! test_also) {
+  if (!test_also) {
     train
   } else {
     list(train = train, test = test)
   }
-
 }

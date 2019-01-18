@@ -4,12 +4,14 @@
 
 validate_col_types <- function(.df) {
   good_cols <- vapply(.df, good_col_type, logical(1L))
-  if (! all(good_cols)) {
-    bad_cols <- names(.df)[! good_cols]
+  if (!all(good_cols)) {
+    bad_cols <- names(.df)[!good_cols]
     bad_col_list <- colname_list(bad_cols)
     error_msg_verb <- if (length(bad_cols) > 1L) " are " else " is "
     stop("All columns must be numeric, character, or factor. ",
-         bad_col_list, error_msg_verb, "not.", call. = FALSE)
+      bad_col_list, error_msg_verb, "not.",
+      call. = FALSE
+    )
   }
 }
 
@@ -47,8 +49,11 @@ pick_cols <- function(.df, .df_name, ...) {
   } else {
     col_spec <- dots_to_char(...)
     tryCatch(tidyselect::vars_select(dplyr::tbl_vars(.df), ...),
-             error = function(e) stop("'", col_spec, "' is not a valid column specification for ",
-                                      .df_name, ".", call. = FALSE))
+      error = function(e) stop("'", col_spec, "' is not a valid column specification for ",
+          .df_name, ".",
+          call. = FALSE
+        )
+    )
   }
 }
 
@@ -77,7 +82,8 @@ ordered_by_freq <- function(.x, .decr = FALSE) {
 check_train_test <- function(.train, .test) {
   if (!identical(names(.train), names(.test))) {
     stop("`train` and `test` data frames must have the same names.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 }
 
