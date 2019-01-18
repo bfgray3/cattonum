@@ -1,24 +1,17 @@
-######################
-### center_labeler ###
-######################
-
 center_labeler <- function(.grouping, .x, .f) {
   summarized <- stats::ave(.x, .grouping, FUN = .f)
-  non_repeat <- ! (duplicated(.grouping) | is.na(.grouping))
-  data.frame(new_lab = summarized[non_repeat],
-             row.names = .grouping[non_repeat])
+  non_repeat <- !(duplicated(.grouping) | is.na(.grouping))
+  data.frame(
+    new_lab = summarized[non_repeat],
+    row.names = .grouping[non_repeat]
+  )
 }
 
-###################
-### mean_median ###
-###################
 
 mean_median <- function(.center_f) {
-
   function(train, ..., response, test, verbose = TRUE) {
-
     validate_col_types(train)
-    test_also <- ! missing(test)
+    test_also <- !missing(test)
     if (test_also) check_train_test(train, test)
 
     nms <- names(train)
@@ -26,36 +19,34 @@ mean_median <- function(.center_f) {
     if (missing(response)) {
       response <- nms[1L]
       if (verbose) {
-        message("`response` not supplied; using first column '",
-                response, "' as the response variable.")
+        message(
+          "`response` not supplied; using first column '",
+          response, "' as the response variable."
+        )
       }
     } else {
-      response <- tidyselect::vars_select(nms, !! dplyr::enquo(response))
+      response <- tidyselect::vars_select(nms, !!dplyr::enquo(response))
     }
 
     cats <- pick_cols(train, deparse(substitute(train)), ...)
 
     center_lkps <- lapply(train[cats],
-                          center_labeler,
-                          .x = train[[response]],
-                          .f = .center_f)
+      center_labeler,
+      .x = train[[response]],
+      .f = .center_f
+    )
 
     train[cats] <- encode_from_lkp(train[cats], center_lkps)
 
-    if (! test_also) {
+    if (!test_also) {
       train
     } else {
       test[cats] <- encode_from_lkp(test[cats], center_lkps)
       list(train = train, test = test)
     }
-
   }
-
 }
 
-##################
-### catto_mean ###
-##################
 
 #' Mean encoding
 #'
@@ -80,9 +71,6 @@ catto_mean <- function(train, ..., response, test, verbose = TRUE) {
 #' @export
 catto_mean.data.frame <- mean_median(mean_cattonum)
 
-####################
-### catto_median ###
-####################
 
 #' Median encoding
 #'
