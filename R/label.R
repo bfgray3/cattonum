@@ -1,7 +1,3 @@
-####################
-### ordering_fun ###
-####################
-
 ordering_fun <- function(.method) {
   switch(.method,
     increasing = function(...) ordered_by_freq(..., .decr = FALSE),
@@ -11,9 +7,6 @@ ordering_fun <- function(.method) {
   )
 }
 
-######################
-### ordered_labels ###
-######################
 
 ordered_labels <- function(.x, .how) {
   if (is.factor(.x)) .x <- as.character(.x)
@@ -25,14 +18,11 @@ ordered_labels <- function(.x, .how) {
   )
 }
 
-######################
-### parse_ordering ###
-######################
 
 parse_ordering <- function(.ordering, ...) UseMethod("parse_ordering")
 
 parse_ordering.character <- function(.ordering, .n_cats, ...) {
-  stopifnot(is.element(length(.ordering), c(1, .n_cats)))
+  stopifnot(is.element(length(.ordering), c(1L, .n_cats)))
 
   valid_orderings <- c(
     "increasing",
@@ -58,9 +48,6 @@ parse_ordering.default <- function(.ordering, ...) {
   )
 }
 
-#######################
-### make_lkp_tables ###
-#######################
 
 make_lkp_tables <- function(.order, ...) UseMethod("make_lkp_tables")
 
@@ -79,18 +66,12 @@ make_lkp_tables.default <- function(.order, ...) {
   )
 }
 
-#####################
-### lkp_from_list ###
-#####################
 
 lkp_from_list <- function(.ord, .orig_col) {
   stopifnot(setequal(.ord, stats::na.omit(.orig_col)))
   data.frame(new_lab = seq_along(.ord), row.names = .ord)
 }
 
-###################
-### catto_label ###
-###################
 
 #' Label encoding
 #'
@@ -116,16 +97,16 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   test datasets.
 #' @examples
 #' catto_label(iris)
-#' 
+#'
 #' y <- 2^(0:5)
 #' x1 <- c("a", "b", NA, "b", "a", "a")
 #' x2 <- c("c", "c", "c", "d", "d", "c")
 #' df_fact <- data.frame(y, x1, x2)
-#' 
+#'
 #' catto_label(df_fact,
 #'   ordering = list(c("b", "a"), c("c", "d"))
 #' )
-#' 
+#'
 #' catto_label(df_fact, ordering = c("increasing", "decreasing"))
 #' @export
 catto_label <- function(train,

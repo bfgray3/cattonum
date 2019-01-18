@@ -1,7 +1,3 @@
-######################
-### center_labeler ###
-######################
-
 center_labeler <- function(.grouping, .x, .f) {
   summarized <- stats::ave(.x, .grouping, FUN = .f)
   non_repeat <- !(duplicated(.grouping) | is.na(.grouping))
@@ -11,9 +7,6 @@ center_labeler <- function(.grouping, .x, .f) {
   )
 }
 
-###################
-### mean_median ###
-###################
 
 mean_median <- function(.center_f) {
   function(train, ..., response, test, verbose = TRUE) {
@@ -54,9 +47,6 @@ mean_median <- function(.center_f) {
   }
 }
 
-##################
-### catto_mean ###
-##################
 
 #' Mean encoding
 #'
@@ -81,9 +71,6 @@ catto_mean <- function(train, ..., response, test, verbose = TRUE) {
 #' @export
 catto_mean.data.frame <- mean_median(mean_cattonum)
 
-####################
-### catto_median ###
-####################
 
 #' Median encoding
 #'

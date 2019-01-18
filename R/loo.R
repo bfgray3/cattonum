@@ -1,7 +1,3 @@
-###################
-### loo_labeler ###
-###################
-
 loo_labeler <- function(.grp, .y) {
   vapply(
     seq_along(.grp),
@@ -10,9 +6,6 @@ loo_labeler <- function(.grp, .y) {
   )
 }
 
-#################
-### catto_loo ###
-#################
 
 #' Leave-one-out encoding
 #'

@@ -1,7 +1,3 @@
-##########################
-### validate_col_types ###
-##########################
-
 validate_col_types <- function(.df) {
   good_cols <- vapply(.df, good_col_type, logical(1L))
   if (!all(good_cols)) {
@@ -15,33 +11,21 @@ validate_col_types <- function(.df) {
   }
 }
 
-#####################
-### good_col_type ###
-#####################
 
 good_col_type <- function(.x) {
   is.numeric(.x) || is.factor(.x) || is.character(.x)
 }
 
-####################
-### colname_list ###
-####################
 
 colname_list <- function(.nms) {
   paste(paste0("'", .nms, "'"), collapse = ", ")
 }
 
-####################
-### dots_to_char ###
-####################
 
 dots_to_char <- function(...) {
   deparse(substitute(...))
 }
 
-#################
-### pick_cols ###
-#################
 
 pick_cols <- function(.df, .df_name, ...) {
   if (identical(length(substitute(alist(...))), 1L)) {
@@ -57,9 +41,6 @@ pick_cols <- function(.df, .df_name, ...) {
   }
 }
 
-################
-### all_cats ###
-################
 
 all_cats <- function(.df) {
   nms <- names(.df)
@@ -67,17 +48,11 @@ all_cats <- function(.df) {
   nms[cats]
 }
 
-#######################
-### ordered_by_freq ###
-#######################
 
 ordered_by_freq <- function(.x, .decr = FALSE) {
   names(sort(table(.x), decreasing = .decr))
 }
 
-########################
-### check_train_test ###
-########################
 
 check_train_test <- function(.train, .test) {
   if (!identical(names(.train), names(.test))) {
@@ -87,17 +62,11 @@ check_train_test <- function(.train, .test) {
   }
 }
 
-##################
-### expand_lkp ###
-##################
 
 expand_lkp <- function(.dat, .lookup_table) {
   .lookup_table[as.character(.dat), ]
 }
 
-#######################
-### encode_from_lkp ###
-#######################
 
 encode_from_lkp <- function(.d, .l) {
   Map(expand_lkp, .dat = .d, .lookup_table = .l)

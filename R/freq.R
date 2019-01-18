@@ -1,16 +1,9 @@
-####################
-### freq_labeler ###
-####################
-
 freq_labeler <- function(.grouping) {
   results <- as.data.frame(table(.grouping))
   rownames(results) <- results[[".grouping"]]
   results[names(results) != ".grouping"]
 }
 
-##################
-### catto_freq ###
-##################
 
 #' Frequency encoding
 #'

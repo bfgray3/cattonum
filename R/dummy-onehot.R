@@ -1,7 +1,3 @@
-#################
-### make_form ###
-#################
-
 make_form <- function(.vars, .enc = c("dummy", "onehot")) {
   .enc_type <- match.arg(.enc)
   string <- paste(
@@ -12,17 +8,11 @@ make_form <- function(.vars, .enc = c("dummy", "onehot")) {
   stats::as.formula(string)
 }
 
-##################
-### set_levels ###
-##################
 
 set_levels <- function(.f, .l) {
   factor(.f, levels = .l)
 }
 
-####################
-### model_matrix ###
-####################
 
 model_matrix <- function(.df,
                          .enc_type = c("dummy", "onehot"),
@@ -48,17 +38,11 @@ model_matrix <- function(.df,
   mm
 }
 
-####################
-### na_new_levels ##
-####################
 
 na_new_levels <- function(.x, .orig_levels) {
   replace(.x, !is.element(.x, .orig_levels), NA)
 }
 
-####################
-### df_to_binary ###
-####################
 
 df_to_binary <- function(.df, .enc, .cats, .levs = NULL) {
   df_cat <- .df[.cats]
@@ -68,9 +52,6 @@ df_to_binary <- function(.df, .enc, .cats, .levs = NULL) {
   dplyr::bind_cols(df_keep, as.data.frame(df_cat))
 }
 
-####################
-### dummy_onehot ###
-####################
 
 dummy_onehot <- function(.enc_type) {
   function(train, ..., test, verbose = TRUE) {
@@ -99,9 +80,6 @@ dummy_onehot <- function(.enc_type) {
   }
 }
 
-####################
-### catto_onehot ###
-####################
 
 #' One-hot encoding
 #'
@@ -125,9 +103,6 @@ catto_onehot <- function(train, ..., test, verbose = TRUE) {
 #' @export
 catto_onehot.data.frame <- dummy_onehot("onehot")
 
-###################
-### catto_dummy ###
-###################
 
 #' Dummy encoding
 #'
