@@ -1,14 +1,12 @@
 context("mean encoding")
 
-library(tibble)
-
 expected_df_both <- data.frame(
   y = y,
   x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),
   x2 = c(39 / 4, 39 / 4, 39 / 4, 12, 12, 39 / 4)
 )
 
-expected_tbl_both <- as_tibble(expected_df_both)
+expected_tbl_both <- dplyr::as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y,
   x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),
@@ -21,9 +19,9 @@ expected_x1_df_char <- data.frame(y,
   stringsAsFactors = FALSE
 )
 
-expected_x1_tbl_char <- tibble(y, x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3), x2)
+expected_x1_tbl_char <- dplyr::tibble(y, x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3), x2)
 
-expected_x1_tbl_fact <- tibble(y,
+expected_x1_tbl_fact <- dplyr::tibble(y,
   x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),
   x2 = factor(x2)
 )
