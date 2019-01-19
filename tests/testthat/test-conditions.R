@@ -11,10 +11,16 @@ test_that("conditions work correctly.", {
     fixed = TRUE
   )
 
-  foo <- data.frame(a = 1, b = "a")
+  foo <- data.frame(a = 1, b = "e")
+  bar <- data.frame(c = 2, d = "f")
 
   expect_error(catto_label(foo, one_of(x1, x2)),
     regexp = "'one_of(x1, x2)' is not a valid column specification for foo.",
+    fixed = TRUE
+  )
+
+  expect_error(catto_label(foo, b, test = bar),
+    regexp = "`train` and `test` data frames must have the same names.",
     fixed = TRUE
   )
 

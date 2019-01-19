@@ -1,14 +1,12 @@
 context("leave-one-out encoding")
 
-library(tibble)
-
 expected_df_both <- data.frame(
   y = y,
   x1 = c(24, 8, NA, 2, 16.5, 8.5),
   x2 = c(38 / 3, 37 / 3, 35 / 3, 16, 8, 7 / 3)
 )
 
-expected_tbl_both <- as_tibble(expected_df_both)
+expected_tbl_both <- dplyr::as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2)
 
@@ -18,9 +16,9 @@ expected_x1_df_char <- data.frame(y,
   stringsAsFactors = FALSE
 )
 
-expected_x1_tbl_char <- tibble(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2)
+expected_x1_tbl_char <- dplyr::tibble(y, x1 = c(24, 8, NA, 2, 16.5, 8.5), x2)
 
-expected_x1_tbl_fact <- tibble(y,
+expected_x1_tbl_fact <- dplyr::tibble(y,
   x1 = c(24, 8, NA, 2, 16.5, 8.5),
   x2 = factor(x2)
 )

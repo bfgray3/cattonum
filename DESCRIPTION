@@ -32,8 +32,7 @@ Suggests:
     nycflights13,
     ranger,
     rmarkdown,
-    testthat,
-    tibble
+    testthat
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 LinkingTo: 
