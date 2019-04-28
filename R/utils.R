@@ -33,16 +33,14 @@ pick_cols <- function(.df, .df_name, ...) {
   } else {
     col_spec <- dots_to_char(...)
     tryCatch(tidyselect::vars_select(dplyr::tbl_vars(.df), ...),
-      error = message_bad_col_spec
+      error = function(e) {
+        stop(
+          "'", col_spec, "' is not a valid column specification for ", .df_name, ".",
+          call. = FALSE
+        )
+      }
     )
   }
-}
-
-message_bad_col_spec <- function(e) {
-  stop(
-    "'", col_spec, "' is not a valid column specification for ", .df_name, ".",
-    call. = FALSE
-  )
 }
 
 all_cats <- function(.df) {
