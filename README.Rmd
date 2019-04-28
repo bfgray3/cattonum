@@ -5,9 +5,11 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(collapse = TRUE,
-                      comment = "#>",
-                      fig.path = "man/figures/README-")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
 ```
 
 # cattonum
@@ -24,13 +26,13 @@ knitr::opts_chunk$set(collapse = TRUE,
 
 cattonum ("cat to num") provides different ways to encode categorical features as numerics.  Its goal is to be a one-stop shop for all categorical encoding needs.  It includes the following:
 
-* dummy encoding: `catto_dummy`
-* frequency encoding: `catto_freq`
-* label encoding: `catto_label`
-* leave-one-out encoding: `catto_loo`
-* mean encoding: `catto_mean`
-* median encoding: `catto_median`
-* one-hot encoding: `catto_onehot`
+* dummy encoding: `catto_dummy()`
+* frequency encoding: `catto_freq()`
+* label encoding: `catto_label()`
+* leave-one-out encoding: `catto_loo()`
+* mean encoding: `catto_mean()`
+* median encoding: `catto_median()`
+* one-hot encoding: `catto_onehot()`
 
 There are many existing packages with which to encode categorical features, including (among others):
 
@@ -49,7 +51,7 @@ There are many existing packages with which to encode categorical features, incl
 The development version can be installed from GitHub.
 
 ```{r, eval = FALSE}
-remotes::install_github("bfgray3/cattonum")
+remotes::install_github("bfgray3/cattonum", ref = "develop")
 ```
 
 The latest official release can be installed from CRAN.
