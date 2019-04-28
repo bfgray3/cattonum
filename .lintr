@@ -1,0 +1,1 @@
+linters: with_defaults(object_usage_linter = NULL, commas_linter = NULL, multiple_dots_linter = NULL, line_length_linter(90))

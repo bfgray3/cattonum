@@ -29,6 +29,7 @@ License: MIT + file LICENSE
 Suggests:
     covr,
     knitr,
+    lintr,
     nycflights13,
     ranger,
     rmarkdown,
