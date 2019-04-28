@@ -2,13 +2,13 @@ context("frequency encoding")
 
 expected_df_both <- data.frame(
   y = y,
-  x1 = as.integer(c(3, 2, NA, 2, 3, 3)),
+  x1 = c(3L, 2L, NA_integer_, 2L, 3L, 3L),
   x2 = as.integer(c(4, 4, 4, 2, 2, 4))
 )
 
 expected_tbl_both <- dplyr::as_tibble(expected_df_both)
 
-expected_x1_df_fact <- data.frame(y, x1 = as.integer(c(3, 2, NA, 2, 3, 3)), x2)
+expected_x1_df_fact <- data.frame(y, x1 = c(3L, 2L, NA_integer_, 2L, 3L, 3L), x2)
 
 expected_x1_df_char <- data.frame(y,
   x1 = as.integer(c(3, 2, NA, 2, 3, 3)),
@@ -18,7 +18,11 @@ expected_x1_df_char <- data.frame(y,
 
 expected_x1_tbl_char <- dplyr::tibble(y, x1 = as.integer(c(3, 2, NA, 2, 3, 3)), x2)
 
-expected_x1_tbl_fact <- dplyr::tibble(y, x1 = as.integer(c(3, 2, NA, 2, 3, 3)), x2 = factor(x2))
+expected_x1_tbl_fact <- dplyr::tibble(
+  y,
+  x1 = as.integer(c(3, 2, NA, 2, 3, 3)),
+  x2 = factor(x2)
+)
 
 test_df <- data.frame(
   y = y[seq(5)],

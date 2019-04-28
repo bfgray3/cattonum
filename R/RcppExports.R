@@ -4,4 +4,3 @@
 mean_cattonum <- function(x) {
     .Call(`_cattonum_mean_cattonum`, x)
 }
-
