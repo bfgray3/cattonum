@@ -26,16 +26,16 @@ test_that("cattonum_df2() works", {
 
   expect_silent(
     tibble_args <- cattonum_df2(
-      tbl_fact[seq(3),],
-      tbl_fact[seq(3, nrow(tbl_fact)),]
+      tbl_fact[seq(3), ],
+      tbl_fact[seq(3, nrow(tbl_fact)), ]
     )
   )
   expect_s3_class(tibble_args, "cattonum_df2")
   expect_equivalent(
     tibble_args,
     list(
-      tbl_fact[seq(3),],
-      tbl_fact[seq(3, nrow(tbl_fact)),]
+      tbl_fact[seq(3), ],
+      tbl_fact[seq(3, nrow(tbl_fact)), ]
     )
   )
 })

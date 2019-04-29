@@ -13,7 +13,7 @@
 
 # cattonum 0.0.1
 
-* This is the first release of `cattonum`.  It currently includes the following encodings:
+* This is the first release of cattonum.  It currently includes the following encodings:
 
   * dummy encoding: `catto_dummy()`
   * frequency encoding: `catto_freq()`
