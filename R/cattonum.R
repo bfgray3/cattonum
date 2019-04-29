@@ -11,3 +11,6 @@ NULL
 #' @useDynLib cattonum, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
+
+#' @importFrom tibble tibble
+NULL
