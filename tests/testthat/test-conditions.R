@@ -19,7 +19,7 @@ test_that("conditions work correctly.", {
     fixed = TRUE
   )
 
-  expect_error(catto_label(foo, b, test = bar),
+  expect_error(check_train_test(foo, bar),
     regexp = "`train` and `test` data frames must have the same names.",
     fixed = TRUE
   )
