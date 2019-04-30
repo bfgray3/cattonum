@@ -1,5 +1,3 @@
-context("conditions")
-
 test_that("conditions work correctly.", {
   expect_error(
     catto_freq(data.frame(x = c(TRUE, FALSE))),

@@ -29,14 +29,10 @@ check_x1_x2 <- function(.encoder, .data_class, .resp) {
     .encoder(fact, x1, x2),
     .encoder(fact, c(x1, x2)),
     .encoder(fact, c("x1", "x2")),
-    .encoder(fact, tidyselect::one_of(c("x1", "x2"))),
-    .encoder(fact, tidyselect::one_of("x1", "x2")),
     .encoder(char),
     .encoder(char, x1, x2),
     .encoder(char, c(x1, x2)),
-    .encoder(char, c("x1", "x2")),
-    .encoder(char, tidyselect::one_of(c("x1", "x2"))),
-    .encoder(char, tidyselect::one_of("x1", "x2"))
+    .encoder(char, c("x1", "x2"))
   )
 }
 

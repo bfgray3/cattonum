@@ -1,5 +1,3 @@
-context("leave-one-out encoding")
-
 expected_df_both <- data.frame(
   y = y,
   x1 = c(24, 8, NA, 2, 16.5, 8.5),

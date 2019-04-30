@@ -1,5 +1,3 @@
-context("mean encoding")
-
 expected_df_both <- data.frame(
   y = y,
   x1 = c(49 / 3, 5, NA, 5, 49 / 3, 49 / 3),

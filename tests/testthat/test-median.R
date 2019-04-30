@@ -1,5 +1,3 @@
-context("median encoding")
-
 expected_df_both <- data.frame(
   y = y,
   x1 = c(16, 5, NA, 5, 16, 16),

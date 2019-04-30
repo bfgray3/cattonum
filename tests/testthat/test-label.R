@@ -1,5 +1,3 @@
-context("label encoding")
-
 incr_df <- data.frame(
   y = y,
   x1 = c(2, 1, NA, 1, 2, 2),

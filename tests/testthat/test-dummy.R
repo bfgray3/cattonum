@@ -1,5 +1,3 @@
-context("dummy encoding")
-
 expected_df_both <- data.frame(
   y = y,
   x1b = c(0, 1, NA, 1, 0, 0),
@@ -10,7 +8,8 @@ expected_tbl_both <- as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
-expected_x1_df_char <- data.frame(y,
+expected_x1_df_char <- data.frame(
+  y,
   x2,
   x1b = c(0, 1, NA, 1, 0, 0),
   stringsAsFactors = FALSE

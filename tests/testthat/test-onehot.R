@@ -1,5 +1,3 @@
-context("one-hot encoding")
-
 y <- 2 ^ seq(from = 0, to = 4)
 x1 <- c("a", "b", NA, "b", "a")
 x2 <- c("c", "c", "c", "d", "d")
