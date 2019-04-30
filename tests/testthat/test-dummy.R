@@ -6,7 +6,7 @@ expected_df_both <- data.frame(
   x2d = c(0, 0, 0, 1, 1, 0)
 )
 
-expected_tbl_both <- dplyr::as_tibble(expected_df_both)
+expected_tbl_both <- as_tibble(expected_df_both)
 
 expected_x1_df_fact <- data.frame(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
@@ -16,9 +16,9 @@ expected_x1_df_char <- data.frame(y,
   stringsAsFactors = FALSE
 )
 
-expected_x1_tbl_char <- dplyr::tibble(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
+expected_x1_tbl_char <- tibble(y, x2, x1b = c(0, 1, NA, 1, 0, 0))
 
-expected_x1_tbl_fact <- dplyr::tibble(y, x2 = factor(x2), x1b = c(0, 1, NA, 1, 0, 0))
+expected_x1_tbl_fact <- tibble(y, x2 = factor(x2), x1b = c(0, 1, NA, 1, 0, 0))
 
 test_that("catto_dummy: multiple data.frame training columns.", {
   both_encoded <- check_x1_x2(catto_dummy, "data.frame")

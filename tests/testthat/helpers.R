@@ -6,8 +6,8 @@ x2 <- c("c", "c", "c", "d", "d", "c")
 df_fact <- data.frame(y, x1, x2)
 df_char <- data.frame(y, x1, x2, stringsAsFactors = FALSE)
 
-tbl_fact <- dplyr::tibble(y, x1 = factor(x1), x2 = factor(x2))
-tbl_char <- dplyr::tibble(y, x1, x2)
+tbl_fact <- tibble(y, x1 = factor(x1), x2 = factor(x2))
+tbl_char <- tibble(y, x1, x2)
 
 test_df <- data.frame(
   y = y[seq(5)],
