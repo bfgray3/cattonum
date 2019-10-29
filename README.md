@@ -15,6 +15,15 @@ Downloads](http://cranlogs.r-pkg.org/badges/grand-total/cattonum)](https://cran.
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
 
+## Special note
+
+I am currently looking for someone who would be interested in becoming
+the official maintainer of the package. Advanced skill in R or previous
+package development experience is not necessary. I will be able to help
+out with code review, etc. Please comment on [this
+issue](https://github.com/bfgray3/cattonum/issues/40) if you are
+interested.
+
 ## Summary
 
 cattonum (“cat to num”) provides different ways to encode categorical
