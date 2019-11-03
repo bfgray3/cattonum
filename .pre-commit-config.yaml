@@ -1,0 +1,20 @@
+repos:
+    # TODO: make sure no tabs or CRLF
+-   repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.0.0.9016
+    hooks:
+    -   id: no-browser-statement
+    -   id: parsable-R
+    -   id: readme-rmd-rendered
+    -   id: style-files
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-merge-conflict
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: detect-private-key
+    -   id: no-commit-to-branch
+    -   id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]

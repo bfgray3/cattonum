@@ -1,5 +1,5 @@
 ^\.lintr$
-^.*\.Rproj$
+^cattonum\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 .Rprofile
@@ -11,3 +11,4 @@
 ^LICENSE\.md$
 ^revdep$
 ^\.github$
+^\.pre-commit-config.yaml$
