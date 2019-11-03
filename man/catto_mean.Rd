@@ -4,7 +4,7 @@
 \alias{catto_mean}
 \title{Mean encoding}
 \usage{
-catto_mean(train, ..., response, test, verbose = TRUE)
+catto_mean(train, ..., response = NULL, test = NULL, verbose = TRUE)
 }
 \arguments{
 \item{train}{The training data, in a \code{data.frame} or \code{tibble}.}

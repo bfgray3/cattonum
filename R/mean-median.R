@@ -18,7 +18,7 @@ mean_median <- function(.center_f) {
 
     nms <- names(train)
 
-    if (is.null(response)) {
+    if (is.null(quote(response))) { # hack
       response <- nms[1L]
       if (verbose) {
         message(

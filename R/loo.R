@@ -43,7 +43,7 @@ catto_loo.data.frame <- function(train,
 
   nms <- names(train)
 
-  if (is.null(response)) {
+  if (is.null(quote(response))) { # hack
     response <- nms[1L]
     if (verbose) {
       message(
