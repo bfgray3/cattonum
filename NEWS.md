@@ -1,6 +1,9 @@
 # cattonum (development version)
 
+* TODO
 * Added constructors `cattonum_df()` and `cattonum_df2()`.
+* TODO: note about not using `missing()` anymore, `NULL` instead.
+* ...
 
 # cattonum 0.0.2
 

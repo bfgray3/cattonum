@@ -34,16 +34,16 @@ catto_loo <- function(train,
 #' @export
 catto_loo.data.frame <- function(train,
                                  ...,
-                                 response,
-                                 test,
+                                 response = NULL,
+                                 test = NULL,
                                  verbose = TRUE) {
   validate_col_types(train)
-  test_also <- !missing(test)
+  test_also <- !is.null(test)
   if (test_also) check_train_test(train, test)
 
   nms <- names(train)
 
-  if (missing(response)) {
+  if (is.null(response)) {
     response <- nms[1L]
     if (verbose) {
       message(

@@ -9,14 +9,14 @@ center_labeler <- function(.grouping, .x, .f) {
 
 
 mean_median <- function(.center_f) {
-  function(train, ..., response, test, verbose = TRUE) {
+  function(train, ..., response = NULL, test = NULL, verbose = TRUE) {
     validate_col_types(train)
-    test_also <- !missing(test)
+    test_also <- !is.null(test)
     if (test_also) check_train_test(train, test)
 
     nms <- names(train)
 
-    if (missing(response)) {
+    if (is.null(response)) {
       response <- nms[1L]
       if (verbose) {
         message(

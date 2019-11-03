@@ -30,10 +30,10 @@ catto_freq <- function(train,
 #' @export
 catto_freq.data.frame <- function(train,
                                   ...,
-                                  test,
+                                  test = NULL,
                                   verbose = TRUE) {
   validate_col_types(train)
-  test_also <- !missing(test)
+  test_also <- !is.null(test)
   if (test_also) check_train_test(train, test)
 
   cats <- pick_cols(train, deparse(substitute(train)), ...)
