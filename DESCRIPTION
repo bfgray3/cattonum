@@ -23,7 +23,7 @@ Imports:
     dplyr (>= 0.7.0),
     stats,
     tibble,
-    tidyselect (>= 0.2.3),
+    tidyselect (>= 0.2.5),
     Rcpp
 LazyData: true
 License: MIT + file LICENSE
@@ -37,6 +37,6 @@ Suggests:
     testthat
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
-LinkingTo: 
+LinkingTo:
     Rcpp
 Roxygen: list(markdown = TRUE)
