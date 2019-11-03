@@ -1,3 +1,5 @@
+# TODO: more flexibility for NA handling? i.e. don't automatically remove?
+
 center_labeler <- function(.grouping, .x, .f) {
   summarized <- stats::ave(.x, .grouping, FUN = .f)
   non_repeat <- !(duplicated(.grouping) | is.na(.grouping))
@@ -64,7 +66,7 @@ mean_median <- function(.center_f) {
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
-catto_mean <- function(train, ..., response, test, verbose = TRUE) {
+catto_mean <- function(train, ..., response = NULL, test = NULL, verbose = TRUE) {
   UseMethod("catto_mean")
 }
 
@@ -88,7 +90,7 @@ catto_mean.data.frame <- mean_median(mean_cattonum)
 #' @examples
 #' catto_median(iris, response = Sepal.Length)
 #' @export
-catto_median <- function(train, ..., response, test, verbose = TRUE) {
+catto_median <- function(train, ..., response = NULL, test = NULL, verbose = TRUE) {
   UseMethod("catto_median")
 }
 

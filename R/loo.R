@@ -25,8 +25,8 @@ loo_labeler <- function(.grp, .y) {
 #' @export
 catto_loo <- function(train,
                       ...,
-                      response,
-                      test,
+                      response = NULL,
+                      test = NULL,
                       verbose = TRUE) {
   UseMethod("catto_loo")
 }
