@@ -36,8 +36,6 @@ catto_freq.data.frame <- function(train,
   test_also <- !missing(test)
   if (test_also) check_train_test(train, test)
 
-  nms <- names(train)
-
   cats <- pick_cols(train, deparse(substitute(train)), ...)
 
   freq_lkps <- lapply(train[cats], freq_labeler)
