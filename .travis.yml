@@ -1,12 +1,14 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-warnings_are_errors: true
-sudo: false
 cache: packages
-r_packages:
-  - covr
-  - lintr
-after_success:
-  - R CMD INSTALL $PKG_TARBALL
-  - Rscript -e 'covr::codecov()'
+
+matrix:
+  include:
+  - r: devel
+  - r: release
+    after_success:
+    - Rscript -e 'covr::codecov()'
+  - r: oldrel
+  - r: 3.4
+  - r: 3.3

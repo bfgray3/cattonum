@@ -1,12 +1,5 @@
 # Contributor Code of Conduct
 
-## TL;DR;
-
-Respect all contributors and users of this project.  Any negativity,
-condescension, toxicity, attacks, or criticism will result in an immediate block.
-
-## Full code
-
 As contributors and maintainers of this project, we pledge to respect all people who 
 contribute through reporting issues, posting feature requests, updating documentation,
 submitting pull requests or patches, and other activities.
@@ -28,5 +21,5 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 opening an issue or contacting one or more of the project maintainers.
 
 This Code of Conduct is adapted from the Contributor Covenant 
-(http://contributor-covenant.org), version 1.0.0, available at 
-http://contributor-covenant.org/version/1/0/0/
+(https://www.contributor-covenant.org), version 1.0.0, available at 
+https://contributor-covenant.org/version/1/0/0/.

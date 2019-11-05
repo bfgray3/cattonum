@@ -15,9 +15,9 @@ knitr::opts_chunk$set(
 # cattonum
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/cattonum)](https://cran.r-project.org/package=cattonum)
-[![Build Status](https://travis-ci.org/bfgray3/cattonum.svg?branch=develop)](https://travis-ci.org/bfgray3/cattonum)
+[![Travis build status](https://travis-ci.org/bfgray3/cattonum.svg?branch=develop)](https://travis-ci.org/bfgray3/cattonum)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?branch=develop&svg=true)](https://ci.appveyor.com/project/bfgray3/cattonum)
-[![Coverage status](https://codecov.io/gh/bfgray3/cattonum/branch/develop/graph/badge.svg)](https://codecov.io/github/bfgray3/cattonum?branch=develop)
+[![Codecov test coverage](https://codecov.io/gh/bfgray3/cattonum/branch/develop/graph/badge.svg)](https://codecov.io/gh/bfgray3/cattonum?branch=develop)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/cattonum)](https://cran.r-project.org/package=cattonum)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](http://choosealicense.com/licenses/mit/)
@@ -74,5 +74,6 @@ head(catto_loo(iris, response = Sepal.Length))
 
 ## Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+Please note that the 'cattonum' project is released with a
+[Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
