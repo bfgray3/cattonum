@@ -43,7 +43,7 @@ catto_loo.data.frame <- function(train,
 
   nms <- names(train)
 
-  if (is.null(quote(response))) { # hack
+  if (rlang::quo_is_null(enquo_response <- dplyr::enquo(response))) {
     response <- nms[1L]
     if (verbose) {
       message(
@@ -52,13 +52,13 @@ catto_loo.data.frame <- function(train,
       )
     }
   } else {
-    response <- tidyselect::vars_select(nms, !!dplyr::enquo(response))
+    response <- tidyselect::vars_select(nms, !!enquo_response)
   }
 
   cats <- pick_cols(train, deparse(substitute(train)), ...)
 
   if (test_also) {
-    # unneccessarily encodes training data with means
+    # FIXME: unneccessarily encodes training data with means
     test <- catto_mean(train, cats, response = response, test = test)[["test"]]
   }
 

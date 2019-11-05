@@ -18,7 +18,7 @@ mean_median <- function(.center_f) {
 
     nms <- names(train)
 
-    if (is.null(quote(response))) { # hack
+    if (rlang::quo_is_null(enquo_response <- dplyr::enquo(response))) {
       response <- nms[1L]
       if (verbose) {
         message(
@@ -27,12 +27,13 @@ mean_median <- function(.center_f) {
         )
       }
     } else {
-      response <- tidyselect::vars_select(nms, !!dplyr::enquo(response))
+      response <- tidyselect::vars_select(nms, !!enquo_response)
     }
 
     cats <- pick_cols(train, deparse(substitute(train)), ...)
 
-    center_lkps <- lapply(train[cats],
+    center_lkps <- lapply(
+      train[cats],
       center_labeler,
       .x = train[[response]],
       .f = .center_f
