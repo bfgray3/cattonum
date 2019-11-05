@@ -1,3 +1,5 @@
+# TODO: more flexibility for NA handling? i.e. don't automatically remove?
+
 center_labeler <- function(.grouping, .x, .f) {
   summarized <- stats::ave(.x, .grouping, FUN = .f)
   non_repeat <- !(duplicated(.grouping) | is.na(.grouping))
@@ -9,14 +11,14 @@ center_labeler <- function(.grouping, .x, .f) {
 
 
 mean_median <- function(.center_f) {
-  function(train, ..., response, test, verbose = TRUE) {
+  function(train, ..., response = NULL, test = NULL, verbose = TRUE) {
     validate_col_types(train)
-    test_also <- !missing(test)
+    test_also <- !is.null(test)
     if (test_also) check_train_test(train, test)
 
     nms <- names(train)
 
-    if (missing(response)) {
+    if (rlang::quo_is_null(enquo_response <- dplyr::enquo(response))) {
       response <- nms[1L]
       if (verbose) {
         message(
@@ -25,12 +27,13 @@ mean_median <- function(.center_f) {
         )
       }
     } else {
-      response <- tidyselect::vars_select(nms, !!dplyr::enquo(response))
+      response <- tidyselect::vars_select(nms, !!enquo_response)
     }
 
     cats <- pick_cols(train, deparse(substitute(train)), ...)
 
-    center_lkps <- lapply(train[cats],
+    center_lkps <- lapply(
+      train[cats],
       center_labeler,
       .x = train[[response]],
       .f = .center_f
@@ -64,7 +67,7 @@ mean_median <- function(.center_f) {
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
-catto_mean <- function(train, ..., response, test, verbose = TRUE) {
+catto_mean <- function(train, ..., response = NULL, test = NULL, verbose = TRUE) {
   UseMethod("catto_mean")
 }
 
@@ -88,7 +91,7 @@ catto_mean.data.frame <- mean_median(mean_cattonum)
 #' @examples
 #' catto_median(iris, response = Sepal.Length)
 #' @export
-catto_median <- function(train, ..., response, test, verbose = TRUE) {
+catto_median <- function(train, ..., response = NULL, test = NULL, verbose = TRUE) {
   UseMethod("catto_median")
 }
 

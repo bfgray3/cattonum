@@ -24,7 +24,8 @@ Imports:
     stats,
     tibble,
     tidyselect (>= 0.2.5),
-    Rcpp
+    Rcpp,
+    rlang (>= 0.4.0)
 LazyData: true
 License: MIT + file LICENSE
 Suggests:

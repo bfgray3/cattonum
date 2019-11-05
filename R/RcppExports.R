@@ -2,5 +2,5 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 mean_cattonum <- function(x) {
-    .Call(`_cattonum_mean_cattonum`, x)
+  .Call(`_cattonum_mean_cattonum`, x)
 }

@@ -4,7 +4,7 @@
 \alias{catto_loo}
 \title{Leave-one-out encoding}
 \usage{
-catto_loo(train, ..., response, test, verbose = TRUE)
+catto_loo(train, ..., response = NULL, test = NULL, verbose = TRUE)
 }
 \arguments{
 \item{train}{The training data, in a \code{data.frame} or \code{tibble}.}

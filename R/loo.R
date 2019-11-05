@@ -25,8 +25,8 @@ loo_labeler <- function(.grp, .y) {
 #' @export
 catto_loo <- function(train,
                       ...,
-                      response,
-                      test,
+                      response = NULL,
+                      test = NULL,
                       verbose = TRUE) {
   UseMethod("catto_loo")
 }
@@ -34,16 +34,16 @@ catto_loo <- function(train,
 #' @export
 catto_loo.data.frame <- function(train,
                                  ...,
-                                 response,
-                                 test,
+                                 response = NULL,
+                                 test = NULL,
                                  verbose = TRUE) {
   validate_col_types(train)
-  test_also <- !missing(test)
+  test_also <- !is.null(test)
   if (test_also) check_train_test(train, test)
 
   nms <- names(train)
 
-  if (missing(response)) {
+  if (rlang::quo_is_null(enquo_response <- dplyr::enquo(response))) {
     response <- nms[1L]
     if (verbose) {
       message(
@@ -52,13 +52,13 @@ catto_loo.data.frame <- function(train,
       )
     }
   } else {
-    response <- tidyselect::vars_select(nms, !!dplyr::enquo(response))
+    response <- tidyselect::vars_select(nms, !!enquo_response)
   }
 
   cats <- pick_cols(train, deparse(substitute(train)), ...)
 
   if (test_also) {
-    # unneccessarily encodes training data with means
+    # FIXME: unneccessarily encodes training data with means
     test <- catto_mean(train, cats, response = response, test = test)[["test"]]
   }
 

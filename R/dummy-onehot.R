@@ -54,9 +54,9 @@ df_to_binary <- function(.df, .enc, .cats, .levs = NULL) {
 
 
 dummy_onehot <- function(.enc_type) {
-  function(train, ..., test, verbose = TRUE) {
+  function(train, ..., test = NULL, verbose = TRUE) {
     validate_col_types(train)
-    test_also <- !missing(test)
+    test_also <- !is.null(test)
     if (test_also) check_train_test(train, test)
 
     cats <- pick_cols(train, deparse(substitute(train)), ...)
