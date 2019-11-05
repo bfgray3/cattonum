@@ -1,33 +1,33 @@
 Type: Package
 Package: cattonum
-Version: 0.0.2.9000
 Title: Encode Categorical Features
-Description: Functions for dummy encoding, frequency encoding,
-    label encoding, leave-one-out encoding, mean encoding,
-    median encoding, and one-hot encoding.
-Authors@R: c(person("Bernie",
-                    "Gray",
-                    email = "bfgray3@gmail.com",
-                    role = c("aut", "cre"),
-                    comment = c(ORCID = "0000-0001-9190-6032")),
-             person("Mark",
-                    "Roepke",
-                    email = "mroepke5@gmail.com",
-                    role = "ctb"))
+Version: 0.0.2.9000
+Authors@R:
+    c(person(given = "Bernie",
+             family = "Gray",
+             role = c("aut", "cre"),
+             email = "bfgray3@gmail.com",
+             comment = c(ORCID = "0000-0001-9190-6032")),
+      person(given = "Mark",
+             family = "Roepke",
+             role = "ctb",
+             email = "mroepke5@gmail.com"))
 Maintainer: Bernie Gray <bfgray3@gmail.com>
+Description: Functions for dummy encoding, frequency encoding,
+    label encoding, leave-one-out encoding, mean encoding, median
+    encoding, and one-hot encoding.
+License: MIT + file LICENSE
 URL: https://github.com/bfgray3/cattonum
 BugReports: https://github.com/bfgray3/cattonum/issues
-Encoding: UTF-8
-Depends: R (>= 3.2.0)
+Depends:
+    R (>= 3.2.0)
 Imports:
     dplyr (>= 0.7.0),
+    Rcpp,
+    rlang (>= 0.4.0),
     stats,
     tibble,
-    tidyselect (>= 0.2.5),
-    Rcpp,
-    rlang (>= 0.4.0)
-LazyData: true
-License: MIT + file LICENSE
+    tidyselect (>= 0.2.5)
 Suggests:
     covr,
     knitr,
@@ -36,8 +36,11 @@ Suggests:
     ranger,
     rmarkdown,
     testthat
-RoxygenNote: 6.1.1
-VignetteBuilder: knitr
 LinkingTo:
     Rcpp
+VignetteBuilder:
+    knitr
+Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
