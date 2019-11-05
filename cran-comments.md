@@ -4,9 +4,10 @@ Added a new function and expanded the capabilities of another, among other small
 
 ## Test environments
 
-* local Windows 10 Home install, R 3.5.0
-* ubuntu (on travis-ci), R 3.5.0
-* Windows Server (on AppVeyor), R 3.5.0 (currently failing but I believe this is due to AppVeyor-specific problems with R 3.5.0; package succeeds locally on my Windows machine)
+* local: darwin15.6.0-3.6.1
+* travis: 3.1, 3.2, 3.3, oldrel, release, devel
+* r-hub: windows-x86_64-devel, ubuntu-gcc-release, fedora-clang-devel
+* win-builder: windows-x86_64-devel
 
 ## R CMD check results
 
