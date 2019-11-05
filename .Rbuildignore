@@ -12,3 +12,6 @@
 ^revdep$
 ^\.github$
 ^\.pre-commit-config.yaml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
