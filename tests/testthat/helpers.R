@@ -1,7 +1,7 @@
 library(tibble)
 
 resp_name <- "y"
-y <- 2 ^ seq(from = 0, to = 5)
+y <- 2^seq(from = 0, to = 5)
 x1 <- c("a", "b", NA, "b", "a", "a")
 x2 <- c("c", "c", "c", "d", "d", "c")
 
