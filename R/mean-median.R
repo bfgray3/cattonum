@@ -18,7 +18,7 @@ mean_median <- function(.center_f) {
 
     nms <- names(train)
 
-    if (rlang::quo_is_null(enquo_response <- dplyr::enquo(response))) {
+    if (rlang::quo_is_null(enquo_response <- rlang::enquo(response))) {
       response <- nms[1L]
       if (verbose) {
         message(
