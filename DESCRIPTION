@@ -35,6 +35,7 @@ Suggests:
     nycflights13,
     ranger,
     rmarkdown,
+    roxygen2,
     testthat
 LinkingTo:
     Rcpp
