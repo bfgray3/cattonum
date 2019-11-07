@@ -5,7 +5,7 @@ Added a new function and expanded the capabilities of another, among other small
 ## Test environments
 
 * local: darwin15.6.0-3.6.1
-* travis: 3.1, 3.2, 3.3, oldrel, release, devel
+* travis: 3.3, 3.4, oldrel, release, devel
 * r-hub: windows-x86_64-devel, ubuntu-gcc-release, fedora-clang-devel
 * win-builder: windows-x86_64-devel
 

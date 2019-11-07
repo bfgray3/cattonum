@@ -28,7 +28,7 @@ dots_to_char <- function(...) {
 
 
 pick_cols <- function(.df, .df_name, ...) {
-  if (identical(length(substitute(alist(...))), 1L)) {
+  if (identical(length(substitute(alist(...))), 1L)) { # FIXME: has to be a better way
     all_cats(.df)
   } else {
     col_spec <- dots_to_char(...)
