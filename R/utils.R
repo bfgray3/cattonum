@@ -1,5 +1,5 @@
 validate_col_types <- function(.df) {
-  good_cols <- vapply(.df, good_col_type, logical(1L))
+  good_cols <- vapply(.df, is_cat_or_num, logical(1L))
   if (!all(good_cols)) {
     bad_cols <- names(.df)[!good_cols]
     bad_col_list <- colname_list(bad_cols)
@@ -12,8 +12,8 @@ validate_col_types <- function(.df) {
 }
 
 
-good_col_type <- function(.x) {
-  is.numeric(.x) || is.factor(.x) || is.character(.x)
+is_cat_or_num <- function(.x) {
+  is.numeric(.x) || is.factor(.x) || is.character(.x) || is.logical(.x)
 }
 
 

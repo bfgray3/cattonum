@@ -5,6 +5,10 @@
 * TODO: note about not using `missing()` anymore, `NULL` instead.
 * ...
 
+# cattonum 0.0.3
+
+* Logicals are now treated as a a two-level factor
+
 # cattonum 0.0.2
 
 * `catto_label()` can now encode different columns with different orderings and encode columns with user-specified orderings.
