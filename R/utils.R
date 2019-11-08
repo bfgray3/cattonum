@@ -4,7 +4,7 @@ validate_col_types <- function(.df) {
     bad_cols <- names(.df)[!good_cols]
     bad_col_list <- colname_list(bad_cols)
     error_msg_verb <- if (length(bad_cols) > 1L) " are " else " is "
-    stop("All columns must be numeric, character, or factor. ",
+    stop("All columns must be numeric, character, logical, or factor. ",
       bad_col_list, error_msg_verb, "not.",
       call. = FALSE
     )
