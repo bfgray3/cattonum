@@ -1,11 +1,7 @@
 #include <Rcpp.h>
 
-/********************
-*** mean_cattonum ***
-********************/
-
 // [[Rcpp::export]]
-double mean_cattonum(const Rcpp::NumericVector& x) {
+double mean_cattonum(const Rcpp::NumericVector &x) {
 
   int nonmissing_n = 0, tot_n = x.size();
   double s = NA_REAL;
@@ -17,13 +13,11 @@ double mean_cattonum(const Rcpp::NumericVector& x) {
 
     ++nonmissing_n;
 
-    if (! Rcpp::NumericVector::is_na(s))
+    if (!Rcpp::NumericVector::is_na(s))
       s += x[i];
     else
       s = x[i];
-
   }
 
   return s / nonmissing_n;
-
 }
