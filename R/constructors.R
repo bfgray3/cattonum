@@ -34,8 +34,10 @@ cattonum_df2 <- function(train = NULL, test = NULL) {
     cattonum_df2_constructor(.x = train, .y = test)
   } else if (!is.null(train) && is.null(test)) {
     # TODO: should test have same names as train here?
-    # tibble if train is a tibble?
-    cattonum_df2_constructor(.x = train, .y = data.frame())
+    cattonum_df2_constructor(
+      .x = train,
+      .y = if (!is_tibble(train)) data.frame() else tibble()
+    )
   } else if (is.null(train) && is.null(test)) {
     cattonum_df2_constructor(.x = data.frame(), .y = data.frame())
   } else {

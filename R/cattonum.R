@@ -12,5 +12,5 @@ NULL
 #' @importFrom Rcpp sourceCpp
 NULL
 
-#' @importFrom tibble tibble
+#' @importFrom tibble tibble is_tibble
 NULL

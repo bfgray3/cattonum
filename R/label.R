@@ -31,7 +31,8 @@ parse_ordering.character <- function(.ordering, .n_cats, ...) {
     "random"
   )
 
-  vapply(.ordering,
+  vapply(
+    .ordering,
     match.arg,
     character(1L),
     choices = valid_orderings
@@ -43,7 +44,8 @@ parse_ordering.list <- function(.ordering, ...) {
 }
 
 parse_ordering.default <- function(.ordering, ...) {
-  stop("`parse_ordering` can't handle class", class(.ordering), ".",
+  stop(
+    "`parse_ordering` can't handle class", class(.ordering), ".",
     call. = FALSE
   )
 }
@@ -91,10 +93,8 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   `TRUE` (not yet used).
 #' @param seed The random seed set before all random ordering encodings
 #'   if there are any.
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_label(iris)
 #'
@@ -140,9 +140,9 @@ catto_label.data.frame <- function(train,
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 
   if (!test_also) {
-    train
+    cattonum_df(train)
   } else {
     test[cats] <- encode_from_lkp(test[cats], encoding_lkps)
-    list(train = train, test = test)
+    cattonum_df2(train = train, test = test)
   }
 }
