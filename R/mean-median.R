@@ -72,7 +72,9 @@ catto_mean <- function(train, ..., response = NULL, test = NULL, verbose = TRUE)
 }
 
 #' @export
+# nolint start
 catto_mean.data.frame <- mean_median(mean_cattonum)
+# nolint end
 
 
 #' Median encoding
@@ -96,4 +98,6 @@ catto_median <- function(train, ..., response = NULL, test = NULL, verbose = TRU
 }
 
 #' @export
+# nolint start
 catto_median.data.frame <- mean_median(function(...) median(..., na.rm = TRUE))
+# nolint end

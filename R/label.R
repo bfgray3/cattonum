@@ -119,7 +119,9 @@ catto_label <- function(train,
 }
 
 #' @export
+# nolint start
 catto_label.data.frame <- function(train,
+                                   # nolint end
                                    ...,
                                    test = NULL,
                                    ordering = "increasing",

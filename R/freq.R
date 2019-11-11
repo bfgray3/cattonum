@@ -28,7 +28,9 @@ catto_freq <- function(train,
 }
 
 #' @export
+# nolint start
 catto_freq.data.frame <- function(train,
+                                  # nolint end
                                   ...,
                                   test = NULL,
                                   verbose = TRUE) {

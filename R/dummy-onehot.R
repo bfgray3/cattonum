@@ -101,7 +101,9 @@ catto_onehot <- function(train, ..., test, verbose = TRUE) {
 }
 
 #' @export
+# nolint start
 catto_onehot.data.frame <- dummy_onehot("onehot")
+# nolint end
 
 
 #' Dummy encoding
@@ -124,4 +126,6 @@ catto_dummy <- function(train, ..., test, verbose = TRUE) {
 }
 
 #' @export
+# nolint start
 catto_dummy.data.frame <- dummy_onehot("dummy")
+# nolint end

@@ -32,7 +32,9 @@ catto_loo <- function(train,
 }
 
 #' @export
+# nolint start
 catto_loo.data.frame <- function(train,
+                                 # nolint end
                                  ...,
                                  response = NULL,
                                  test = NULL,
