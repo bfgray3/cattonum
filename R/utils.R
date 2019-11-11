@@ -47,7 +47,7 @@ pick_cols <- function(.df, .df_name, ...) {
 
 all_cats <- function(.df) {
   nms <- names(.df)
-  # TODO: is_cat()
+  # TODO: make an is_cat function
   cats <- vapply(.df, Negate(is.numeric), logical(1L))
   nms[cats]
 }
