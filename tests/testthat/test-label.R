@@ -83,7 +83,9 @@ test_that("catto_label correctly encodes train data.", {
     expected_df_both <- switch(ordering_method,
       increasing = incr_df,
       decreasing = decr_df,
+      # nolint start
       observed = ,
+      # nolint end
       random = order_df
     )
 

@@ -1,0 +1,16 @@
+> summary(cattonum_df(head(iris)))
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width    
+ Min.   :4.600   Min.   :3.000   Min.   :1.300   Min.   :0.2000  
+ 1st Qu.:4.750   1st Qu.:3.125   1st Qu.:1.400   1st Qu.:0.2000  
+ Median :4.950   Median :3.350   Median :1.400   Median :0.2000  
+ Mean   :4.950   Mean   :3.383   Mean   :1.450   Mean   :0.2333  
+ 3rd Qu.:5.075   3rd Qu.:3.575   3rd Qu.:1.475   3rd Qu.:0.2000  
+ Max.   :5.400   Max.   :3.900   Max.   :1.700   Max.   :0.4000  
+       Species 
+ setosa    :6  
+ versicolor:0  
+ virginica :0  
+               
+               
+               
+

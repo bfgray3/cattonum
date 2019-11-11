@@ -1,0 +1,27 @@
+> summary(cattonum_df2(head(iris), tail(iris)))
+$train
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width    
+ Min.   :4.600   Min.   :3.000   Min.   :1.300   Min.   :0.2000  
+ 1st Qu.:4.750   1st Qu.:3.125   1st Qu.:1.400   1st Qu.:0.2000  
+ Median :4.950   Median :3.350   Median :1.400   Median :0.2000  
+ Mean   :4.950   Mean   :3.383   Mean   :1.450   Mean   :0.2333  
+ 3rd Qu.:5.075   3rd Qu.:3.575   3rd Qu.:1.475   3rd Qu.:0.2000  
+ Max.   :5.400   Max.   :3.900   Max.   :1.700   Max.   :0.4000  
+       Species 
+ setosa    :6  
+ versicolor:0  
+ virginica :0  
+               
+               
+               
+
+$test
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species 
+ Min.   :5.900   Min.   :2.500   Min.   :5.000   Min.   :1.800   setosa    :0  
+ 1st Qu.:6.225   1st Qu.:3.000   1st Qu.:5.125   1st Qu.:1.925   versicolor:0  
+ Median :6.400   Median :3.000   Median :5.200   Median :2.150   virginica :6  
+ Mean   :6.383   Mean   :3.033   Mean   :5.267   Mean   :2.133                 
+ 3rd Qu.:6.650   3rd Qu.:3.225   3rd Qu.:5.350   3rd Qu.:2.300                 
+ Max.   :6.700   Max.   :3.400   Max.   :5.700   Max.   :2.500                 
+
+

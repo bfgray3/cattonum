@@ -7,6 +7,7 @@ repos:
     -   id: parsable-R
     -   id: readme-rmd-rendered
     -   id: style-files
+        exclude: '^R/RcppExports\.R'
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.4.0
     hooks:
@@ -14,7 +15,9 @@ repos:
     -   id: check-merge-conflict
     -   id: check-yaml
     -   id: end-of-file-fixer
+        exclude: '^tests/testthat/test-.+\.txt|R/RcppExports\.R$'
     -   id: detect-private-key
     -   id: no-commit-to-branch
     -   id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
+        exclude: '^tests/testthat/test-.+\.txt|R/RcppExports\.R$'
