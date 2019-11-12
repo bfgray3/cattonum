@@ -4,8 +4,7 @@
 \alias{catto_label}
 \title{Label encoding}
 \usage{
-catto_label(train, ..., test, ordering = "increasing", verbose = TRUE,
-  seed = 4444)
+catto_label(train, ..., test, ordering = "increasing", verbose = TRUE)
 }
 \arguments{
 \item{train}{The training data, in a \code{data.frame} or \code{tibble}.}
@@ -26,9 +25,6 @@ column being encoded.}
 
 \item{verbose}{Should informative messages be printed?  Defaults to
 \code{TRUE} (not yet used).}
-
-\item{seed}{The random seed set before all random ordering encodings
-if there are any.}
 }
 \value{
 The encoded dataset in a \code{cattonum_df} if no test dataset was
