@@ -3,9 +3,11 @@ validate_col_types <- function(.df) {
   if (!all(good_cols)) {
     bad_cols <- names(.df)[!good_cols]
     bad_col_list <- colname_list(bad_cols)
-    error_msg_verb <- if (length(bad_cols) > 1L) " are " else " is "
-    stop("All columns must be numeric, character, or factor. ",
-      bad_col_list, error_msg_verb, "not.",
+    stop(
+      "All columns must be numeric, character, or factor. ",
+      bad_col_list,
+      if (length(bad_cols) > 1L) " are " else " is ",
+      "not.",
       call. = FALSE
     )
   }
@@ -45,6 +47,7 @@ pick_cols <- function(.df, .df_name, ...) {
 
 all_cats <- function(.df) {
   nms <- names(.df)
+  # TODO: make an is_cat function
   cats <- vapply(.df, Negate(is.numeric), logical(1L))
   nms[cats]
 }
@@ -57,7 +60,8 @@ ordered_by_freq <- function(.x, .decr = FALSE) {
 
 check_train_test <- function(.train, .test) {
   if (!identical(names(.train), names(.test))) {
-    stop("`train` and `test` data frames must have the same names.",
+    stop(
+      "`train` and `test` data frames must have the same names.",
       call. = FALSE
     )
   }

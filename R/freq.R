@@ -13,10 +13,8 @@ freq_labeler <- function(.grouping) {
 #' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   `TRUE` (not yet used).
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_freq(iris)
 #' @export
@@ -45,9 +43,9 @@ catto_freq.data.frame <- function(train,
   train[cats] <- encode_from_lkp(train[cats], freq_lkps)
 
   if (!test_also) {
-    train
+    cattonum_df(train)
   } else {
     test[cats] <- encode_from_lkp(test[cats], freq_lkps)
-    list(train = train, test = test)
+    cattonum_df2(train = train, test = test)
   }
 }

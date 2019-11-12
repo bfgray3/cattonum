@@ -73,9 +73,9 @@ dummy_onehot <- function(.enc_type) {
     }
 
     if (!test_also) {
-      train_expanded
+      cattonum_df(train_expanded)
     } else {
-      list(train = train_expanded, test = test_expanded)
+      cattonum_df2(train = train_expanded, test = test_expanded)
     }
   }
 }
@@ -89,10 +89,8 @@ dummy_onehot <- function(.enc_type) {
 #' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   `TRUE` (not yet used).
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_onehot(iris)
 #' @export
@@ -114,10 +112,8 @@ catto_onehot.data.frame <- dummy_onehot("onehot")
 #' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   `TRUE` (not yet used).
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_dummy(iris)
 #' @export

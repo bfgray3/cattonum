@@ -1,5 +1,3 @@
-context("label encoding")
-
 incr_df <- data.frame(
   y = y,
   x1 = c(2, 1, NA, 1, 2, 2),
@@ -24,7 +22,7 @@ encoded_test <- data.frame(
   x2 = c(1, NA, NA, 2, 2)
 )
 
-test_that("catto_label correctly encodes train data.", {
+test_that("catto_label() correctly encodes train data.", {
   order_options <- c(
     "increasing",
     "decreasing",
@@ -49,13 +47,7 @@ test_that("catto_label correctly encodes train data.", {
     label_fact4 <- catto_label(df_fact, c("x1", "x2"),
       ordering = ordering_method
     )
-    label_fact5 <- catto_label(df_fact, tidyselect::one_of(c("x1", "x2")),
-      ordering = ordering_method
-    )
-    label_fact6 <- catto_label(df_fact, tidyselect::one_of("x1", "x2"),
-      ordering = ordering_method
-    )
-    label_fact7 <- catto_label(df_fact, col,
+    label_fact5 <- catto_label(df_fact, col,
       ordering = ordering_method
     )
     label_char1 <- catto_label(df_char,
@@ -70,17 +62,12 @@ test_that("catto_label correctly encodes train data.", {
     label_char4 <- catto_label(df_char, c("x1", "x2"),
       ordering = ordering_method
     )
-    label_char5 <- catto_label(df_char, tidyselect::one_of(c("x1", "x2")),
-      ordering = ordering_method
-    )
-    label_char6 <- catto_label(df_char, tidyselect::one_of("x1", "x2"),
-      ordering = ordering_method
-    )
-    label_char7 <- catto_label(df_char, col,
+    label_char5 <- catto_label(df_char, col,
       ordering = ordering_method
     )
 
-    expected_df_both <- switch(ordering_method,
+    expected_df_both <- switch(
+      ordering_method,
       increasing = incr_df,
       decreasing = decr_df,
       # nolint start
@@ -90,13 +77,13 @@ test_that("catto_label correctly encodes train data.", {
     )
 
     result_names <- c(
-      paste0("label_fact", seq(7)),
-      paste0("label_char", seq(7))
+      paste0("label_fact", seq(5)),
+      paste0("label_char", seq(5))
     )
     char_and_fact <- mget(result_names)
 
     if (ordering_method != "random") {
-      for (m in char_and_fact) expect_equal(m, expected_df_both)
+      for (m in char_and_fact) expect_equal(m, cattonum_df(expected_df_both))
     } else {
       for (j in seq(ncol(expected_df_both))) {
         expect_equal(
@@ -109,22 +96,16 @@ test_that("catto_label correctly encodes train data.", {
     ### SUBSET OF CATEGORICAL COLUMNS ###
 
     expected_x1_only <- data.frame(y = y, x1 = c(2, 1, NA, 1, 2, 2), x2 = x2)
-    char_and_bare <- list(
-      catto_label(df_fact, "x1"),
-      catto_label(df_fact, x1),
-      catto_label(df_fact, tidyselect::one_of("x1"))
-    )
-
-    for (result in char_and_bare) expect_equal(result, expected_x1_only)
+    expect_equal(catto_label(df_fact, "x1"), cattonum_df(expected_x1_only))
   }
 })
 
-test_that("catto_label correctly encodes test data.", {
-  expected <- list(train = incr_df, test = encoded_test)
+test_that("catto_label() correctly encodes test data.", {
+  expected <- cattonum_df2(train = incr_df, test = encoded_test)
   expect_equal(catto_label(df_fact, test = test_df), expected)
 })
 
-test_that("catto_label handles different column-level encodings.", {
+test_that("catto_label() handles different column-level encodings.", {
   encoded <- catto_label(df_fact, ordering = c("increasing", "decreasing"))
   expected <- data.frame(
     y = y,
@@ -132,11 +113,11 @@ test_that("catto_label handles different column-level encodings.", {
     x2 = c(1, 1, 1, 2, 2, 1)
   )
 
-  expect_equal(encoded, expected)
+  expect_equal(encoded, cattonum_df(expected))
 })
 
 
-test_that("catto_label handles user-specified orderings.", {
+test_that("catto_label() handles user-specified orderings.", {
   encoded <- catto_label(df_fact,
     ordering = list(c("b", "a"), c("c", "d"))
   )
@@ -146,5 +127,5 @@ test_that("catto_label handles user-specified orderings.", {
     x2 = c(1, 1, 1, 2, 2, 1)
   )
 
-  expect_equal(encoded, expected)
+  expect_equal(encoded, cattonum_df(expected))
 })
