@@ -17,6 +17,14 @@ test_df <- data.frame(
   x2 = c("d", NA, NA, "c", "c")
 )
 
+df_logi <- data.frame(
+  y = 2^seq(from = 0, to = 5),
+  x1 = c(TRUE, TRUE, FALSE, FALSE, FALSE, TRUE),
+  x2 = c(TRUE, TRUE, NA, FALSE, FALSE, TRUE)
+)
+
+tbl_logi <- as_tibble(df_logi)
+
 check_x1_x2 <- function(.encoder, .data_class, .resp) {
   if (.data_class == "data.frame") {
     fact <- df_fact
