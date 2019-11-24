@@ -75,48 +75,24 @@ test_that("catto_mean correctly encodes test data.", {
   )
 })
 
-test_that("catto_mean: correctly encodes data.frame with logicals.", {
-  df_logi <- data.frame(
-    y = 2^seq(from = 0, to = 5),
-    x1 = c(T, T, T, F, F, F),
-    x2 = c(T, T, T, NA, F, F)
-  )
-
-  x1v1 <- sum(2^seq(from = 0, to = 2)) / 3
-  x1v2 <- sum(2^seq(from = 3, to = 5)) / 3
-
-  x2v1 <- sum(2^seq(from = 0, to = 2)) / 3
-  x2v2 <- sum(2^seq(from = 4, to = 5)) / 2
-
+test_that("catto_mean() correctly encodes data.frame with logicals.", {
   df_logi_expected <- data.frame(
     y = 2^seq(from = 0, to = 5),
-    x1 = c(x1v1, x1v1, x1v1, x1v2, x1v2, x1v2),
-    x2 = c(x2v1, x2v1, x2v1, NA, x2v2, x2v2)
+    x1 = c(35 / 3, 35 / 3, 28 / 3, 28 / 3, 28 / 3, 35 / 3),
+    x2 = c(35 / 3, 35 / 3, NA, 12, 12, 35 / 3)
   )
 
   expect_equal(
     catto_mean(df_logi, response = "y"),
-    df_logi_expected
+    cattonum_df(df_logi_expected)
   )
 })
 
-test_that("catto_mean: correctly encodes tibble with logicals.", {
-  tbl_logi <- tibble(
-    y = 2^seq(from = 0, to = 5),
-    x1 = c(T, T, T, F, F, F),
-    x2 = c(T, T, T, NA, F, F)
-  )
-
-  x1v1 <- sum(2^seq(from = 0, to = 2)) / 3
-  x1v2 <- sum(2^seq(from = 3, to = 5)) / 3
-
-  x2v1 <- sum(2^seq(from = 0, to = 2)) / 3
-  x2v2 <- sum(2^seq(from = 4, to = 5)) / 2
-
+test_that("catto_mean() correctly encodes tibble with logicals.", {
   tbl_logi_expected <- tibble(
     y = 2^seq(from = 0, to = 5),
-    x1 = c(x1v1, x1v1, x1v1, x1v2, x1v2, x1v2),
-    x2 = c(x2v1, x2v1, x2v1, NA, x2v2, x2v2)
+    x1 = c(35 / 3, 35 / 3, 28 / 3, 28 / 3, 28 / 3, 35 / 3),
+    x2 = c(35 / 3, 35 / 3, NA, 12, 12, 35 / 3)
   )
 
   expect_equal(
