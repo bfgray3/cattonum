@@ -82,6 +82,7 @@ test_that("catto_dummy() handles many columns.", {
 
 test_that("catto_dummy: logicals in data.frame training columns.", {
   df_logi_expected <- data.frame(
+    y = y,
     x1TRUE = c(1, 1, 0, 0, 0, 1),
     x2TRUE = c(1, 1, NA, 0, 0, 1)
   )
@@ -93,11 +94,12 @@ test_that("catto_dummy: logicals in data.frame training columns.", {
 
 test_that("catto_dummy: logicals in tibble training columns.", {
   tbl_logi_expected <- tibble(
+    y = y,
     x1TRUE = c(1, 1, 0, 0, 0, 1),
     x2TRUE = c(1, 1, NA, 0, 0, 1)
   )
   expect_equal(
     catto_dummy(tbl_logi),
-    tbl_logi_expected
+    cattonum_df(tbl_logi_expected)
   )
 })

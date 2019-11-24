@@ -18,7 +18,7 @@ test_df <- data.frame(
 )
 
 df_logi <- data.frame(
-  y = 2^seq(from = 0, to = 5),
+  y = y,
   x1 = c(TRUE, TRUE, FALSE, FALSE, FALSE, TRUE),
   x2 = c(TRUE, TRUE, NA, FALSE, FALSE, TRUE)
 )
