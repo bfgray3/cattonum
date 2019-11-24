@@ -1,7 +1,6 @@
 context("conditions")
 
 test_that("conditions work correctly.", {
-
   foo <- data.frame(a = 1, b = "e")
   bar <- data.frame(c = 2, d = "f")
 
