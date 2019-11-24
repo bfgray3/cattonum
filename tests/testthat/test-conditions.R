@@ -1,17 +1,6 @@
 context("conditions")
 
 test_that("conditions work correctly.", {
-  expect_error(
-    catto_freq(data.frame(x = c(TRUE, FALSE))),
-    regexp = "All columns must be numeric, character, or factor. 'x' is not.",
-    fixed = TRUE
-  )
-
-  expect_error(
-    catto_freq(data.frame(x = c(TRUE, FALSE), y = c(TRUE, FALSE))),
-    regexp = "All columns must be numeric, character, or factor. 'x', 'y' are not.",
-    fixed = TRUE
-  )
 
   foo <- data.frame(a = 1, b = "e")
   bar <- data.frame(c = 2, d = "f")

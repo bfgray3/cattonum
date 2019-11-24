@@ -74,3 +74,53 @@ test_that("catto_mean correctly encodes test data.", {
     cattonum_df2(train = expected_df_both, test = encoded_test)
   )
 })
+
+test_that("catto_mean: correctly encodes data.frame with logicals.", {
+  df_logi <- data.frame(
+    y = 2^seq(from = 0, to = 5),
+    x1 = c(TRUE, TRUE, FALSE, FALSE, FALSE, TRUE),
+    x2 = c(TRUE, TRUE, NA, FALSE, FALSE, TRUE)
+  )
+
+  x1v1 <- sum(2^seq(from = 0, to = 2)) / 3
+  x1v2 <- sum(2^seq(from = 3, to = 5)) / 3
+
+  x2v1 <- sum(2^seq(from = 0, to = 2)) / 3
+  x2v2 <- sum(2^seq(from = 4, to = 5)) / 2
+
+  df_logi_expected <- data.frame(
+    y = 2^seq(from = 0, to = 5),
+    x1 = c(x1v1, x1v1, x1v1, x1v2, x1v2, x1v2),
+    x2 = c(x2v1, x2v1, x2v1, NA, x2v2, x2v2)
+  )
+
+  expect_equal(
+    catto_mean(df_logi, response = "y"),
+    cattonum_df(df_logi_expected)
+  )
+})
+
+test_that("catto_mean: correctly encodes tibble with logicals.", {
+  tbl_logi <- tibble(
+    y = 2^seq(from = 0, to = 5),
+    x1 = c(TRUE, TRUE, FALSE, FALSE, FALSE, TRUE),
+    x2 = c(TRUE, TRUE, NA, FALSE, FALSE, TRUE)
+  )
+
+  x1v1 <- sum(2^seq(from = 0, to = 2)) / 3
+  x1v2 <- sum(2^seq(from = 3, to = 5)) / 3
+
+  x2v1 <- sum(2^seq(from = 0, to = 2)) / 3
+  x2v2 <- sum(2^seq(from = 4, to = 5)) / 2
+
+  tbl_logi_expected <- tibble(
+    y = 2^seq(from = 0, to = 5),
+    x1 = c(x1v1, x1v1, x1v1, x1v2, x1v2, x1v2),
+    x2 = c(x2v1, x2v1, x2v1, NA, x2v2, x2v2)
+  )
+
+  expect_equal(
+    catto_mean(tbl_logi, response = "y"),
+    tbl_logi_expected
+  )
+})
