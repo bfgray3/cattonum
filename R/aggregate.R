@@ -1,6 +1,6 @@
 # TODO: more flexibility for NA handling? i.e. don't automatically remove?
 
-center_labeler <- function(.grouping, .x, .f) {
+aggregate_labeler <- function(.grouping, .x, .f) {
   summarized <- stats::ave(.x, .grouping, FUN = .f)
   non_repeat <- !(duplicated(.grouping) | is.na(.grouping))
   data.frame(
@@ -25,7 +25,12 @@ center_labeler <- function(.grouping, .x, .f) {
 #' @examples
 #' catto_aggregate(iris, aggregate_fun = max, response = Sepal.Length)
 #' @export
-catto_aggregate <- function(train, ..., aggregate_fun, response = NULL, test = NULL, verbose = TRUE) {
+catto_aggregate <- function(train,
+                            ...,
+                            aggregate_fun,
+                            response = NULL,
+                            test = NULL,
+                            verbose = TRUE) {
   UseMethod("catto_aggregate")
 }
 
@@ -55,7 +60,7 @@ catto_aggregate.data.frame <- function(train, ..., aggregate_fun, response = NUL
 
   center_lkps <- lapply(
     train[cats],
-    center_labeler,
+    aggregate_labeler,
     .x = train[[response]],
     .f = aggregate_fun
   )
