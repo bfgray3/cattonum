@@ -31,7 +31,8 @@ parse_ordering.character <- function(.ordering, .n_cats, ...) {
     "random"
   )
 
-  vapply(.ordering,
+  vapply(
+    .ordering,
     match.arg,
     character(1L),
     choices = valid_orderings
@@ -43,7 +44,8 @@ parse_ordering.list <- function(.ordering, ...) {
 }
 
 parse_ordering.default <- function(.ordering, ...) {
-  stop("`parse_ordering` can't handle class", class(.ordering), ".",
+  stop(
+    "`parse_ordering` can't handle class", class(.ordering), ".",
     call. = FALSE
   )
 }
@@ -55,8 +57,7 @@ make_lkp_tables.list <- function(.order, .dat, ...) {
   Map(lkp_from_list, .ord = .order, .orig_col = .dat)
 }
 
-make_lkp_tables.character <- function(.order, .dat, .seed, ...) {
-  if (any(.order == "random")) set.seed(.seed)
+make_lkp_tables.character <- function(.order, .dat, ...) {
   Map(ordered_labels, .x = .dat, .how = .order)
 }
 
@@ -89,12 +90,8 @@ lkp_from_list <- function(.ord, .orig_col) {
 #'   column being encoded.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   `TRUE` (not yet used).
-#' @param seed The random seed set before all random ordering encodings
-#'   if there are any.
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_label(iris)
 #'
@@ -113,18 +110,18 @@ catto_label <- function(train,
                         ...,
                         test,
                         ordering = "increasing",
-                        verbose = TRUE,
-                        seed = 4444) {
+                        verbose = TRUE) {
   UseMethod("catto_label")
 }
 
 #' @export
+# nolint start
 catto_label.data.frame <- function(train,
+                                   # nolint end
                                    ...,
                                    test = NULL,
                                    ordering = "increasing",
-                                   verbose = TRUE,
-                                   seed = 4444) {
+                                   verbose = TRUE) {
   validate_col_types(train)
   test_also <- !is.null(test)
   if (test_also) check_train_test(train, test)
@@ -133,14 +130,14 @@ catto_label.data.frame <- function(train,
 
   ordering <- parse_ordering(ordering, length(cats))
 
-  encoding_lkps <- make_lkp_tables(ordering, train[cats], seed)
+  encoding_lkps <- make_lkp_tables(ordering, train[cats])
 
   train[cats] <- encode_from_lkp(train[cats], encoding_lkps)
 
   if (!test_also) {
-    train
+    cattonum_df(train)
   } else {
     test[cats] <- encode_from_lkp(test[cats], encoding_lkps)
-    list(train = train, test = test)
+    cattonum_df2(train = train, test = test)
   }
 }

@@ -53,13 +53,15 @@ features, including (among others):
 
 ## Installation
 
-The development version can be installed from GitHub.
+The development version can be installed from the `develop` branch on
+GitHub, which is the default branch.
 
 ``` r
 remotes::install_github("bfgray3/cattonum", ref = "develop")
 ```
 
-The latest official release can be installed from CRAN.
+The latest official release can be installed from
+[CRAN](https://CRAN.R-project.org/package=cattonum).
 
 ``` r
 install.packages("cattonum")
@@ -82,6 +84,6 @@ head(catto_loo(iris, response = Sepal.Length))
 
 ## Code of Conduct
 
-Please note that the ‘cattonum’ project is released with a [Contributor
-Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
-project, you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](.github/CODE_OF_CONDUCT.md). By contributing, you agree to
+abide by its terms.

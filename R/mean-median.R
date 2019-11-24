@@ -42,10 +42,10 @@ mean_median <- function(.center_f) {
     train[cats] <- encode_from_lkp(train[cats], center_lkps)
 
     if (!test_also) {
-      train
+      cattonum_df(train)
     } else {
       test[cats] <- encode_from_lkp(test[cats], center_lkps)
-      list(train = train, test = test)
+      cattonum_df2(train = train, test = test)
     }
   }
 }
@@ -60,10 +60,8 @@ mean_median <- function(.center_f) {
 #' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   `TRUE`.
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_mean(iris, response = Sepal.Length)
 #' @export
@@ -72,7 +70,10 @@ catto_mean <- function(train, ..., response = NULL, test = NULL, verbose = TRUE)
 }
 
 #' @export
+# NOTE: tibbles and cattonum_dfs will dispatch here
+# nolint start
 catto_mean.data.frame <- mean_median(mean_cattonum)
+# nolint end
 
 
 #' Median encoding
@@ -84,10 +85,8 @@ catto_mean.data.frame <- mean_median(mean_cattonum)
 #' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   `TRUE`.
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_median(iris, response = Sepal.Length)
 #' @export
@@ -96,4 +95,7 @@ catto_median <- function(train, ..., response = NULL, test = NULL, verbose = TRU
 }
 
 #' @export
+# NOTE: tibbles and cattonum_dfs will dispatch here
+# nolint start
 catto_median.data.frame <- mean_median(function(...) median(..., na.rm = TRUE))
+# nolint end

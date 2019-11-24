@@ -16,10 +16,8 @@ loo_labeler <- function(.grp, .y) {
 #' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
 #'   `TRUE`.
-#' @return The encoded dataset in a `data.frame` or `tibble`,
-#'   whichever was input.  If a test dataset was provided, a list with names
-#'   "train" and "test" is returned holding the encoded training and
-#'   test datasets.
+#' @return The encoded dataset in a `cattonum_df` if no test dataset was
+#'   provided, and the encoded datasets in a `cattonum_df2` otherwise.
 #' @examples
 #' catto_loo(iris, response = Sepal.Length)
 #' @export
@@ -32,7 +30,9 @@ catto_loo <- function(train,
 }
 
 #' @export
+# nolint start
 catto_loo.data.frame <- function(train,
+                                 # nolint end
                                  ...,
                                  response = NULL,
                                  test = NULL,
@@ -65,8 +65,8 @@ catto_loo.data.frame <- function(train,
   train[cats] <- lapply(train[cats], loo_labeler, .y = train[[response]])
 
   if (!test_also) {
-    train
+    cattonum_df(train)
   } else {
-    list(train = train, test = test)
+    cattonum_df2(train = train, test = test)
   }
 }

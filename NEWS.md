@@ -1,5 +1,6 @@
 # cattonum (development version)
 
+* `catto_label()` no longer has a `seed` argument.  Users must now set their own seeds outside of cattonum functions.
 * TODO
 * Added constructors `cattonum_df()` and `cattonum_df2()`.
 * TODO: note about not using `missing()` anymore, `NULL` instead.

@@ -33,7 +33,11 @@ cattonum_df2 <- function(train = NULL, test = NULL) {
     check_train_test(.train = train, .test = test)
     cattonum_df2_constructor(.x = train, .y = test)
   } else if (!is.null(train) && is.null(test)) {
-    cattonum_df2_constructor(.x = train, .y = data.frame())
+    # TODO: should test have same names as train here?
+    cattonum_df2_constructor(
+      .x = train,
+      .y = if (!is_tibble(train)) data.frame() else tibble()
+    )
   } else if (is.null(train) && is.null(test)) {
     cattonum_df2_constructor(.x = data.frame(), .y = data.frame())
   } else {
