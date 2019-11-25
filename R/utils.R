@@ -12,8 +12,11 @@ validate_col_types <- function(.df) {
 }
 
 
+is_cat <- function(.x) is.factor(.x) || is.character(.x) || is.logical(.x)
+
+
 is_cat_or_num <- function(.x) {
-  is.numeric(.x) || is.factor(.x) || is.character(.x) || is.logical(.x)
+  is.numeric(.x) || is_cat(.x)
 }
 
 
@@ -45,8 +48,7 @@ pick_cols <- function(.df, .df_name, ...) {
 
 all_cats <- function(.df) {
   nms <- names(.df)
-  # TODO: make an is_cat function
-  cats <- vapply(.df, Negate(is.numeric), logical(1L))
+  cats <- vapply(.df, is_cat, logical(1L))
   nms[cats]
 }
 

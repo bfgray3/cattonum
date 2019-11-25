@@ -5,6 +5,7 @@
 * Added constructors `cattonum_df()` and `cattonum_df2()`.
 * TODO: note about not using `missing()` anymore, `NULL` instead.
 * Logicals are now treated as a a two-level factor (@bcbeidel, #6).
+* Added `catto_aggregate()`.
 
 # cattonum 0.0.2
 
