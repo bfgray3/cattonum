@@ -30,6 +30,7 @@ I am currently looking for someone who would be interested in becoming the offic
 
 cattonum ("cat to num") provides different ways to encode categorical features as numerics.  Its goal is to be a one-stop shop for all categorical encoding needs.  It includes the following:
 
+* aggregate function encoding: `catto_aggregate()`
 * dummy encoding: `catto_dummy()`
 * frequency encoding: `catto_freq()`
 * label encoding: `catto_label()`

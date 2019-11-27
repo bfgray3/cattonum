@@ -30,6 +30,7 @@ cattonum (“cat to num”) provides different ways to encode categorical
 features as numerics. Its goal is to be a one-stop shop for all
 categorical encoding needs. It includes the following:
 
+  - aggregate function encoding: `catto_aggregate()`
   - dummy encoding: `catto_dummy()`
   - frequency encoding: `catto_freq()`
   - label encoding: `catto_label()`
@@ -73,6 +74,7 @@ install.packages("cattonum")
 library(cattonum)
 data(iris)
 head(catto_loo(iris, response = Sepal.Length))
+#> # A cattonum_df with the following data:
 #>   Sepal.Length Sepal.Width Petal.Length Petal.Width  Species
 #> 1          5.1         3.5          1.4         0.2 5.004082
 #> 2          4.9         3.0          1.4         0.2 5.008163
