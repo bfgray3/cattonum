@@ -1,11 +1,13 @@
-# cattonum (development version)
+# cattonum (0.0.3)
 
 * `catto_label()` no longer has a `seed` argument.  Users must now set their own seeds outside of cattonum functions.
-* TODO
-* Added constructors `cattonum_df()` and `cattonum_df2()`.
-* TODO: note about not using `missing()` anymore, `NULL` instead.
+* Added constructors `cattonum_df()` and `cattonum_df2()`, as well as `print()` and `summary()` methods for classes `cattonum_df` and `cattonum_df2`.
+* The `catto_*()` functions now default the parameter `test` to `NULL` instead of checking `missing()`.
+* The `catto_*()` functions are now generics and return an object of class `cattonum_df` or `cattonum_df2`.
 * Logicals are now treated as a a two-level factor (@bcbeidel, #6).
 * Added `catto_aggregate()`.
+* The following people have contributed to this release:
+    * [@bcbeidel](https://github.com/bcbeidel)
 
 # cattonum 0.0.2
 
