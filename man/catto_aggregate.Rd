@@ -13,7 +13,9 @@ catto_aggregate(train, ..., aggregate_fun, response = NULL,
 \item{...}{The columns to be encoded.  If none are specified, then
 all character and factor columns are encoded.}
 
-\item{aggregate_fun}{TODO}
+\item{aggregate_fun}{The aggregate function to be applied to the response
+variable for the rows belonging to the relevant level of the categorical
+predictor.  Takes a vector and returns a length one vector.}
 
 \item{response}{The response variable used to calculate aggregate summaries.}
 

@@ -15,7 +15,9 @@ aggregate_labeler <- function(.grouping, .x, .f) {
 #' @param train The training data, in a `data.frame` or `tibble`.
 #' @param ... The columns to be encoded.  If none are specified, then
 #'   all character and factor columns are encoded.
-#' @param aggregate_fun TODO
+#' @param aggregate_fun The aggregate function to be applied to the response
+#'   variable for the rows belonging to the relevant level of the categorical
+#'   predictor.  Takes a vector and returns a length one vector.
 #' @param response The response variable used to calculate aggregate summaries.
 #' @param test The test data, in a `data.frame` or `tibble`.
 #' @param verbose Should informative messages be printed?  Defaults to
