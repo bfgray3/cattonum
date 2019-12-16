@@ -1,4 +1,4 @@
-# cattonum (0.0.3)
+# cattonum 0.0.3
 
 * `catto_label()` no longer has a `seed` argument.  Users must now set their own seeds outside of cattonum functions.
 * Added constructors `cattonum_df()` and `cattonum_df2()`, as well as `print()` and `summary()` methods for classes `cattonum_df` and `cattonum_df2`.
