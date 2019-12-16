@@ -9,7 +9,7 @@
 
 ## Test environments
 
-* TODO: local: darwin15.6.0-3.6.1
+* local: x86_64-apple-darwin15.6.0 (64-bit)
 * appveyor: Windows Server 2012 R2 x64 (build 9600)
 * travis: 3.3, 3.4, oldrel, release, devel
 * TODO: r-hub: windows-x86_64-devel, ubuntu-gcc-release, fedora-clang-devel
@@ -22,4 +22,4 @@ TODO: R CMD check results
 
 ## Reverse dependencies
 
-TODO: There are no reverse dependencies.
+There are no reverse dependencies.
