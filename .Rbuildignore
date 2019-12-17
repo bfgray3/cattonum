@@ -16,3 +16,4 @@
 ^docs$
 ^pkgdown$
 ^\.covrignore$
+^CRAN-RELEASE$
