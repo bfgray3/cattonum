@@ -35,7 +35,9 @@ pick_cols <- function(.df, .df_name, ...) {
     all_cats(.df)
   } else {
     col_spec <- dots_to_char(...)
-    tryCatch(tidyselect::vars_select(dplyr::tbl_vars(.df), ...),
+    tryCatch(
+      # FIXME: major hack!
+      names(tidyselect::eval_select(rlang::expr(c(...)), data = head(.df, 1))),
       error = function(e) {
         stop(
           "'", col_spec, "' is not a valid column specification for ", .df_name, ".",
@@ -45,6 +47,7 @@ pick_cols <- function(.df, .df_name, ...) {
     )
   }
 }
+
 
 all_cats <- function(.df) {
   nms <- names(.df)

@@ -1,12 +1,14 @@
 context("conditions")
 
+# TODO: test dplyr/tidyselect syntax better here and everywhere
+
 test_that("conditions work correctly.", {
   foo <- data.frame(a = 1, b = "e")
   bar <- data.frame(c = 2, d = "f")
 
   expect_error(
-    catto_label(foo, one_of(x1, x2)),
-    regexp = "'one_of(x1, x2)' is not a valid column specification for foo.",
+    catto_label(foo, all_of(x1)),
+    regexp = "'all_of(x1)' is not a valid column specification for foo.",
     fixed = TRUE
   )
 
