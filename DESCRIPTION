@@ -22,13 +22,13 @@ BugReports: https://github.com/bfgray3/cattonum/issues
 Depends:
     R (>= 3.3.0)
 Imports:
-    dplyr (>= 0.7.0),
+    dplyr (>= 0.7.8),
     purrr,
     Rcpp,
-    rlang (>= 0.4.0),
+    rlang (>= 0.4.2),
     stats,
     tibble,
-    tidyselect (>= 0.2.5)
+    tidyselect (>= 1.0.0)
 Suggests:
     covr,
     knitr,
