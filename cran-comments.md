@@ -1,11 +1,6 @@
 ## Release summary
 
-* `catto_label()` no longer has a `seed` argument.  Users must now set their own seeds outside of cattonum functions.
-* Added constructors `cattonum_df()` and `cattonum_df2()`, as well as `print()` and `summary()` methods for classes `cattonum_df` and `cattonum_df2`.
-* The `catto_*()` functions now default the parameter `test` to `NULL` instead of checking `missing()`.
-* The `catto_*()` functions are now generics and return an object of class `cattonum_df` or `cattonum_df2`.
-* Logicals are now treated as a a two-level factor (@bcbeidel, #6).
-* Added `catto_aggregate()`.
+This is a maintenance release due to a change in dependency {tidyselect}.  There are no user-facing changes.
 
 ## Test environments
 
