@@ -4,10 +4,8 @@
 # cattonum
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cattonum)](https://cran.r-project.org/package=cattonum)
-[![Travis build
-status](https://travis-ci.org/bfgray3/cattonum.svg?branch=develop)](https://travis-ci.org/bfgray3/cattonum)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/bfgray3/cattonum?branch=develop&svg=true)](https://ci.appveyor.com/project/bfgray3/cattonum)
+[![R build
+status](https://github.com/bfgray3/cattonum/workflows/R-CMD-check/badge.svg)](https://github.com/bfgray3/cattonum)
 [![Codecov test
 coverage](https://codecov.io/gh/bfgray3/cattonum/branch/develop/graph/badge.svg)](https://codecov.io/gh/bfgray3/cattonum?branch=develop)
 [![Total
