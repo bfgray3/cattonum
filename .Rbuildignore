@@ -1,13 +1,11 @@
 ^\.lintr$
 ^cattonum\.Rproj$
 ^\.Rproj\.user$
-^\.travis\.yml$
 .Rprofile
 ^cran-comments\.md$
 ^README\.Rmd$
 ^README-.*\.png$
 ^codecov\.yml$
-^appveyor\.yml$
 ^LICENSE\.md$
 ^revdep$
 ^\.github$
