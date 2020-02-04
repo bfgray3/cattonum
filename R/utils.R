@@ -37,7 +37,9 @@ pick_cols <- function(.df, .df_name, ...) {
     col_spec <- dots_to_char(...)
     tryCatch(
       # FIXME: major hack!
-      names(tidyselect::eval_select(rlang::expr(c(...)), data = head(.df, 1))),
+      names(
+        tidyselect::eval_select(rlang::expr(c(...)), .df[1L, , drop = FALSE])
+      ),
       error = function(e) {
         stop(
           "'", col_spec, "' is not a valid column specification for ", .df_name, ".",
