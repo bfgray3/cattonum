@@ -4,8 +4,14 @@
 \alias{catto_aggregate}
 \title{Aggregate function encoding}
 \usage{
-catto_aggregate(train, ..., aggregate_fun, response = NULL,
-  test = NULL, verbose = TRUE)
+catto_aggregate(
+  train,
+  ...,
+  aggregate_fun,
+  response = NULL,
+  test = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{train}{The training data, in a \code{data.frame} or \code{tibble}.}

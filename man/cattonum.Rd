@@ -3,7 +3,6 @@
 \docType{package}
 \name{cattonum}
 \alias{cattonum}
-\alias{cattonum-package}
 \title{cattonum: Encode Categorical Features}
 \description{
 Functions for dummy encoding, frequency encoding,

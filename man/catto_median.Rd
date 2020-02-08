@@ -4,8 +4,7 @@
 \alias{catto_median}
 \title{Median encoding}
 \usage{
-catto_median(train, ..., response = NULL, test = NULL,
-  verbose = TRUE)
+catto_median(train, ..., response = NULL, test = NULL, verbose = TRUE)
 }
 \arguments{
 \item{train}{The training data, in a \code{data.frame} or \code{tibble}.}
