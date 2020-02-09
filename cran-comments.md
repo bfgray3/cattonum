@@ -6,7 +6,7 @@ This is a maintenance release due to a change in dependency {tidyselect}.  There
 
 * local: macOS Mojave 10.14.6
 * GitHub Actions: windows-latest, macOS-latest, ubuntu-16.04
-* r-hub: TODO
+* r-hub: x86_64-pc-linux-gnu (64-bit)
 
 ## R CMD check results
 
