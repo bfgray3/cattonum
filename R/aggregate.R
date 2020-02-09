@@ -1,3 +1,9 @@
+# this is a hack to stop the false positive note
+# Namespace in Imports field not imported from: 'purrr'
+#' @importFrom purrr partial
+NULL
+
+
 # TODO: more flexibility for NA handling? i.e. don't automatically remove?
 
 aggregate_labeler <- function(.grouping, .x, .f) {
@@ -99,7 +105,7 @@ catto_mean <- function(train, ..., response = NULL, test = NULL, verbose = TRUE)
 #' @export
 # NOTE: tibbles and cattonum_dfs will dispatch here
 # nolint start
-catto_mean.data.frame <- purrr::partial(catto_aggregate, aggregate_fun = mean_cattonum)
+catto_mean.data.frame <- partial(catto_aggregate, aggregate_fun = mean_cattonum)
 # nolint end
 
 
@@ -124,7 +130,7 @@ catto_median <- function(train, ..., response = NULL, test = NULL, verbose = TRU
 #' @export
 # NOTE: tibbles and cattonum_dfs will dispatch here
 # nolint start
-catto_median.data.frame <- purrr::partial(
+catto_median.data.frame <- partial(
   # nolint end
   catto_aggregate,
   aggregate_fun = function(...) median(..., na.rm = TRUE)
