@@ -57,11 +57,11 @@ test_that("catto_median(): one tibble training column.", {
   num_tests <- length(one_encoded)
 
   for (i in seq(from = 1, to = num_tests / 2)) {
-    expect_equal(one_encoded[[i]], expected_x1_tbl_fact)
+    expect_equivalent(one_encoded[[i]], expected_x1_tbl_fact)
   }
 
   for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
-    expect_equal(one_encoded[[i]], expected_x1_tbl_char)
+    expect_equivalent(one_encoded[[i]], expected_x1_tbl_char)
   }
 })
 
