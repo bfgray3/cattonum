@@ -21,7 +21,7 @@ License: MIT + file LICENSE
 URL: https://github.com/bfgray3/cattonum
 BugReports: https://github.com/bfgray3/cattonum/issues
 Depends:
-    R (>= 3.3.0)
+    R (>= 3.4.0)
 Imports:
     dplyr (>= 1.0.0),
     purrr,
