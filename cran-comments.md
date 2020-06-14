@@ -10,9 +10,12 @@ This release has no changes to functionality.  Minimum versions for R and some d
 
 ## R CMD check results
 
-TODO
-R CMD check results
-0 errors | 0 warnings | 0 notes
+── R CMD check results ───────────────────────────────────── cattonum 0.0.5 ────
+Duration: 1m 26.8s
+
+0 errors ✓ | 0 warnings ✓ | 0 notes ✓
+
+R CMD check succeeded
 
 ## Reverse dependencies
 
