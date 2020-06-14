@@ -1,6 +1,6 @@
 # cattonum 0.0.5
 
-* TODO
+* This release has no changes to functionality.  Minimum versions for R and some dependencies have been increased, a `packageStartupMessage` has been added, and some tests have been updated.
 
 # cattonum 0.0.4
 
