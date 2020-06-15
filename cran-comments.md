@@ -6,7 +6,7 @@ This release has no changes to functionality.  Minimum versions for R and some d
 
 * local: macOS Catalina 10.15.5
 * GitHub Actions: windows-latest, macOS-latest, ubuntu-16.04
-* r-hub: x86_64-pc-linux-gnu (64-bit) TODO
+* r-hub: Debian Linux, R-devel, GCC ASAN/UBSAN; Windows Server 2008 R2 SP1, R-devel, 32/64 bit; Ubuntu Linux 16.04 LTS, R-release, GCC; Fedora Linux, R-devel, clang, gfortran
 
 ## R CMD check results
 

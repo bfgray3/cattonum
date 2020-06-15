@@ -14,7 +14,7 @@ Authors@R:
              email = "mroepke5@gmail.com"))
 Maintainer: Bernie Gray <bfgray3@gmail.com>
 Description: Functions and S3 classes for the following
-    methods of encoding categorial features as numerics:
+    methods of encoding categorical features as numerics:
     aggregate, dummy, frequency, label, leave-one-out,
     mean, median, and one-hot.
 License: MIT + file LICENSE
