@@ -1,3 +1,9 @@
+# cattonum 0.0.5
+
+* This release has no changes to functionality.  Minimum versions for R and some dependencies have been increased, a `packageStartupMessage` has been added, and some tests have been updated.
+* The following peple have contributed to this release:
+    * [romainfrancois](https://github.com/romainfrancois)
+
 # cattonum 0.0.4
 
 * This is a maintenance release due to a change in a dependency.  There are no user-facing changes.

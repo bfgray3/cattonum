@@ -14,3 +14,10 @@ NULL
 
 #' @importFrom tibble tibble is_tibble
 NULL
+
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage(
+    "cattonum is seeking a new maintainer; please respond if interested",
+    ": https://github.com/bfgray3/cattonum/issues/40"
+  )
+}

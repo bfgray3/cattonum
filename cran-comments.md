@@ -1,19 +1,22 @@
 ## Release summary
 
-This is a maintenance release due to a change in dependency {tidyselect}.  There are no user-facing changes.
+This release has no changes to functionality.  Minimum versions for R and some dependencies have been increased, a `packageStartupMessage` has been added, and some tests have been updated.
 
 ## Test environments
 
-* local: macOS Mojave 10.14.6
+* local: macOS Catalina 10.15.5
 * GitHub Actions: windows-latest, macOS-latest, ubuntu-16.04
-    * The Windows build is erroring with `vignette builder 'knitr' not found` but I believe this is unrelated to cattonum.  This is not happening in other test environments and {knitr} is in `Suggests` in `DESCRIPTION`.
-* r-hub: x86_64-pc-linux-gnu (64-bit)
+* r-hub: Debian Linux, R-devel, GCC ASAN/UBSAN; Windows Server 2008 R2 SP1, R-devel, 32/64 bit; Ubuntu Linux 16.04 LTS, R-release, GCC; Fedora Linux, R-devel, clang, gfortran
 
 ## R CMD check results
 
-R CMD check results
-0 errors | 0 warnings | 0 notes
+── R CMD check results ───────────────────────────────────── cattonum 0.0.5 ────
+Duration: 1m 26.8s
+
+0 errors ✓ | 0 warnings ✓ | 0 notes ✓
+
+R CMD check succeeded
 
 ## Reverse dependencies
 
-There are no reverse dependencies.
+There are no reverse dependencies according to `revdepcheck::revdep_check()` on 2020-06-14.

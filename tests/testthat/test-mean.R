@@ -60,11 +60,11 @@ test_that("catto_mean: one tibble training column.", {
   num_tests <- length(one_encoded)
 
   for (i in seq(from = 1, to = num_tests / 2)) {
-    expect_equal(one_encoded[[i]], expected_x1_tbl_fact)
+    expect_equivalent(one_encoded[[i]], expected_x1_tbl_fact)
   }
 
   for (i in seq(from = num_tests / 2 + 1, to = num_tests)) {
-    expect_equal(one_encoded[[i]], expected_x1_tbl_char)
+    expect_equivalent(one_encoded[[i]], expected_x1_tbl_char)
   }
 })
 
@@ -95,7 +95,7 @@ test_that("catto_mean() correctly encodes tibble with logicals.", {
     x2 = c(35 / 3, 35 / 3, NA, 12, 12, 35 / 3)
   )
 
-  expect_equal(
+  expect_equivalent(
     catto_mean(tbl_logi, response = "y"),
     tbl_logi_expected
   )
