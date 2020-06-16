@@ -1,7 +1,7 @@
 Type: Package
 Package: cattonum
 Title: Encode Categorical Features
-Version: 0.0.5
+Version: 0.0.5.9000
 Authors@R:
     c(person(given = "Bernie",
              family = "Gray",
