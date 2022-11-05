@@ -133,5 +133,5 @@ catto_median <- function(train, ..., response = NULL, test = NULL, verbose = TRU
 catto_median.data.frame <- partial(
   # nolint end
   catto_aggregate,
-  aggregate_fun = function(...) median(..., na.rm = TRUE)
+  aggregate_fun = function(...) stats::median(..., na.rm = TRUE)
 )
